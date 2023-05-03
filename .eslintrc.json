@@ -1,3 +1,37 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:react-perf/all",
+    "standard-react",
+    "next",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "unknown",
+          ["internal", "sibling", "parent"],
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      { "fixStyle": "separate-type-imports" }
+    ],
+    "react-perf/jsx-no-new-function-as-prop": "off",
+    "react-perf/jsx-no-new-object-as-prop": "off",
+    "react-perf/jsx-no-new-array-as-prop": "off",
+    "no-unused-vars": "off"
+  },
+  "plugins": ["@typescript-eslint"]
 }
