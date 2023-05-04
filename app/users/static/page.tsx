@@ -1,8 +1,11 @@
-"use client";
+'use client';
 
-import { api, User } from "../../../utils/api";
-import { useSearchParams, useSelectedLayoutSegments } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSearchParams, useSelectedLayoutSegments } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { api } from '../../../utils/api';
+
+import type { User } from '../../../utils/api';
 
 const StaticPage = () => {
   const [users, setUsers] = useState<[User[], number]>([[], 0]);
@@ -13,7 +16,7 @@ const StaticPage = () => {
 
   useEffect(() => {
     (async () => {
-      setUsers(await api.users("StaticPage"));
+      setUsers(await api.users('StaticPage'));
     })();
   }, []);
 
