@@ -3,6 +3,9 @@ import '@picocss/pico/css/pico.min.css';
 import './globals.css';
 import React from 'react';
 
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+
 import { FetchState } from '@/app/components/FetchState';
 
 export const metadata = {
