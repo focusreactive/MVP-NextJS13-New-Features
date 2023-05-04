@@ -4,7 +4,7 @@ import { sleep } from '../../../../utils/sleep';
 import { api } from '../../../../utils/api';
 
 // export async function generateStaticParams() {
-//   // const posts = await api.posts();
+//   // const [posts] = await api.posts();
 //
 //   // return posts.map((post) => ({
 //   //   id: post.id,
