@@ -36,24 +36,31 @@ type Post = {
 };
 
 // const url = "https://jsonplaceholder.typicode.com"
-const url = "http://localhost:4000";
+const url = 'http://localhost:3000/api';
 
 export const api = {
   post: async (id: string) => {
-    const result = (await fetch(`${url}/posts/${id}`).then((r) => r.json())) as { counter: number; data: Post };
-    console.log("post", id, result.counter);
-    return result.data;
+    const result = (await fetch(`${url}/posts/${id}`).then((r) =>
+      r.json(),
+    )) as { counter: number; data: Post };
+    console.log('post', id, result.counter);
+    return [result.data, result.counter] as [Post, number];
   },
 
   posts: async () => {
-    const result = (await fetch(`${url}/posts`).then((r) => r.json())) as { counter: number; data: Post[] };
-    console.log("posts", result.counter);
-    return result.data;
+    const result = (await fetch(`${url}/posts`).then((r) => r.json())) as {
+      counter: number;
+      data: Post[];
+    };
+    console.log('posts', result.counter);
+    return [result.data, result.counter] as [Post[], number];
   },
 
   user: async (id: string) => {
-    const result = (await fetch(`${url}/users/${id}`).then((r) => r.json())) as { counter: number; data: User };
-    console.log("user", id, result.counter);
+    const result = (await fetch(`${url}/users/${id}`).then((r) =>
+      r.json(),
+    )) as { counter: number; data: User };
+    console.log('user', id, result.counter);
     return [result.data, result.counter] as [User, number];
   },
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { api } from '../../utils/api';
 
 const PostsPage = async () => {
-  const posts = await api.posts();
+  const [posts] = await api.posts();
 
   return (
     <div className={'flashing-border'}>

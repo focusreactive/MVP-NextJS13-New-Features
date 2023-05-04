@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { api } from '../../../utils/api';
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
-  const post = await api.post(params.id);
+  const [post] = await api.post(params.id);
 
   return (
     <div>
