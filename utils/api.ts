@@ -18,17 +18,24 @@ const updateState = (path: string | null, logs: Record<string, number>) => {
 const triggerSubscribers = () => {
   Object.values(subscribers).forEach((fn) => fn());
 };
-const fetchData = async (url: string) => {
-  const result = await fetch(`${API_URL}${url}`).then((r) => r.json());
+const fetchData = async (url: string, options?: RequestInit) => {
+  const result = await fetch(`${API_URL}${url}`, options).then((r) => r.json());
   updateState(url, result.logs);
   triggerSubscribers();
-  return { data: result.data, counter: result.counter };
+  return { data: result?.data, counter: result?.counter };
 };
 
 export const api = {
-  post: async (id: string) => {
-    const result = await fetchData(`/posts/${id}`);
-    return [result.data, result.counter] as [Post, number];
+  post: async (id: string, options?: RequestInit) => {
+    let updatedId = id;
+
+    if (id === 'random') {
+      updatedId = String(Math.round(Math.random() * 100));
+    }
+
+    const result = await fetchData(`/posts/${updatedId}`, options);
+
+    return [result?.data, result?.counter] as [Post, number];
   },
 
   posts: async () => {

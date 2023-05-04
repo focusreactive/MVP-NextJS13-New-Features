@@ -1,10 +1,13 @@
 body {
     width: 100vw;
     height: 100vh;
+    padding: 20px;
 }
 
 .main-container {
     display: flex;
+    gap: 20px;
+
 }
 
 .docs {
@@ -16,6 +19,7 @@ body {
 }
 
 .flashing-border {
+    margin: 0 auto;
     position: relative;
     border: 5px solid #323335;
     transition: all 0.2s;

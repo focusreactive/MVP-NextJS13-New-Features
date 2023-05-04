@@ -23,7 +23,7 @@ export default function RootLayout({
       <head />
 
       <body>
-        <div className={'flashing-border'}>
+        <div>
           <small className={'layout-label'}>root layout</small>
 
           <nav>

@@ -20,7 +20,9 @@ http
     //   return res.end();
     // }
 
-    const result = await fetch(url).then((r) => r.json());
+    const result = await fetch(url, { cache: 'no-store' }).then((r) =>
+      r.json().catch(console.error),
+    );
 
     res.end(JSON.stringify({ counter, data: result, logs }));
   })

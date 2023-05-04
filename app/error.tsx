@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect } from 'react';
 
 export const Error = ({
@@ -15,17 +16,46 @@ export const Error = ({
   }, [error]);
 
   return (
-    <div className={'flashing-border'}>
-      <h2>Something went wrong</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <html lang="en">
+      <head />
+
+      <body>
+        <div>
+          <small className={'layout-label'}>root layout</small>
+
+          <nav>
+            <ul>
+              <li>
+                <Link href={'/'}>Home</Link>
+              </li>
+              <li>
+                <Link href={'/posts'}>Posts</Link>
+              </li>
+              <li>
+                <Link href={'/users/list'}>Users</Link>
+              </li>
+              <li>
+                <Link href={'/users/static'}>Users Static</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <main className="main-container">
+            <div className={'flashing-border'}>
+              <h2>Something went wrong</h2>
+              <button
+                onClick={
+                  // Attempt to recover by trying to re-render the segment
+                  () => reset()
+                }
+              >
+                Try again
+              </button>
+            </div>
+          </main>
+        </div>
+      </body>
+    </html>
   );
 };
 
