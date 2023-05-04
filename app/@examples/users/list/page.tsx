@@ -1,16 +1,19 @@
-import Link from "next/link";
-import { api } from "../../../utils/api";
+import Link from 'next/link';
+
+import { api } from '../../../../utils/api';
 
 const UsersPage = async (props: any) => {
-  const [users, counter] = await api.users("UsersPage");
-  const [_, counter2] = await api.user("1");
-  console.log({counter, counter2})
+  const [users, counter] = await api.users('UsersPage');
+  const [_, counter2] = await api.user('1');
+  console.log({ counter, counter2 });
 
   return (
     <div>
       {users.map(({ id, name }) => (
         <article key={id}>
-          <h3>{name} {counter}</h3>
+          <h3>
+            {name} {counter}
+          </h3>
 
           <nav aria-label="breadcrumb">
             <ul>

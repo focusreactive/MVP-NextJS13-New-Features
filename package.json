@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.3.0",
+    "@next/mdx": "^13.3.4",
     "@picocss/pico": "^1.5.10",
     "@types/node": "18.16.3",
     "@types/react": "18.2.0",
