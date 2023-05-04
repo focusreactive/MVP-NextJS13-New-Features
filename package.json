@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "add-docs": "node scripts/addDummyDocs.js",
-    "server": "node server"
+    "server": "node server",
+    "format-code": "npx prettier 'app/**/*.{js,ts,tsx,mdx,json}' --write"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",

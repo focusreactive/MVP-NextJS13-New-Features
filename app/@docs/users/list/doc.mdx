@@ -1,6 +1,36 @@
+```js
+import Link from 'next/link';
 
-# Hello, Next.js!
-created for example at /home/wsl/projects/nextjs13-mvp/app/@docs/users/list/page.tsx
+import { api } from '../../../../utils/api';
 
-You can import and use React components in MDX files.
-      
+const UsersPage = async (props: any) => {
+  const [users, counter] = await api.users('UsersPage');
+  const [_, counter2] = await api.user('1');
+  console.log({ counter, counter2 });
+
+  return (
+    <div>
+      {users.map(({ id, name }) => (
+        <article key={id}>
+          <h3>
+            {name} {counter}
+          </h3>
+
+          <nav aria-label="breadcrumb">
+            <ul>
+              <li>
+                <Link href={`/users/${id}`}>Profile</Link>
+              </li>
+              <li>
+                <Link href={`/users/${id}/posts`}>Posts</Link>
+              </li>
+            </ul>
+          </nav>
+        </article>
+      ))}
+    </div>
+  );
+};
+
+export default UsersPage;
+```
