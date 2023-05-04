@@ -32,26 +32,28 @@ async function addDummyDocs() {
         console.error(error);
       }
 
-      fs.writeFileSync(
-        newPath,
-        `
-import Doc from './doc.mdx';
+      if (!fs.existsSync(newPath)) {
+        fs.writeFileSync(
+          newPath,
+          `
+  import Doc from './doc.mdx';
+  
+  export default function Page() {
+    return <Doc />;
+  }
+          `,
+        );
 
-export default function Page() {
-  return <Doc />;
-}
+        fs.writeFileSync(
+          newPath.replace('page.tsx', 'doc.mdx'),
+          `
+  # Hello, Next.js!
+  created for example at ${newPath}
+  
+  You can import and use React components in MDX files.
         `,
-      );
-
-      fs.writeFileSync(
-        newPath.replace('page.tsx', 'doc.mdx'),
-        `
-# Hello, Next.js!
-created for example at ${newPath}
-
-You can import and use React components in MDX files.
-      `,
-      );
+        );
+      }
     });
   } catch (error) {
     console.log(error);
