@@ -1,75 +1,54 @@
-export interface Geo {
-  lat: string;
-  lng: string;
-}
+import type { Post, User } from '@/app/global';
 
-export interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
-}
+const API_URL = 'http://localhost:4000';
 
-export interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
-}
+export const state: Record<string, { calls: number; realCalls: number }> = {};
+export const subscribers: Record<string, () => void> = {};
+const updateState = (path: string | null, logs: Record<string, number>) => {
+  if (path) {
+    if (!state[path]) state[path] = { calls: 0, realCalls: 0 };
+    state[path].calls += 1;
+  }
 
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
-}
-
-type Post = {
-  id: string;
-  userId: string;
-  title: string;
-  body: string;
+  Object.entries(logs).forEach(([url, count]) => {
+    if (!state[url]) state[url] = { calls: 0, realCalls: 0 };
+    state[url].realCalls += count;
+  });
 };
-
-// const url = "https://jsonplaceholder.typicode.com"
-const url = 'http://localhost:3000/api';
+const triggerSubscribers = () => {
+  Object.values(subscribers).forEach((fn) => fn());
+};
+const fetchData = async (url: string) => {
+  const result = await fetch(`${API_URL}${url}`).then((r) => r.json());
+  updateState(url, result.logs);
+  triggerSubscribers();
+  return { data: result.data, counter: result.counter };
+};
 
 export const api = {
   post: async (id: string) => {
-    const result = (await fetch(`${url}/posts/${id}`).then((r) =>
-      r.json(),
-    )) as { counter: number; data: Post };
-    console.log('post', id, result.counter);
+    const result = await fetchData(`/posts/${id}`);
     return [result.data, result.counter] as [Post, number];
   },
 
   posts: async () => {
-    const result = (await fetch(`${url}/posts`).then((r) => r.json())) as {
-      counter: number;
-      data: Post[];
-    };
-    console.log('posts', result.counter);
+    const result = await fetchData('/posts');
     return [result.data, result.counter] as [Post[], number];
   },
 
   user: async (id: string) => {
-    const result = (await fetch(`${url}/users/${id}`).then((r) =>
-      r.json(),
-    )) as { counter: number; data: User };
-    console.log('user', id, result.counter);
+    const result = await fetchData(`/users/${id}`);
     return [result.data, result.counter] as [User, number];
   },
 
   users: async (id: string) => {
-    const result = (await fetch(`${url}/users`).then((r) => r.json())) as {
-      counter: number;
-      data: User[];
-    };
-    console.log(`users from ${id}`, result.counter);
+    const result = await fetchData('/users');
     return [result.data, result.counter] as [User[], number];
+  },
+
+  updateLogs: async () => {
+    const result = await fetch(`${API_URL}/logs`).then((r) => r.json());
+    updateState(null, result.logs);
+    triggerSubscribers();
   },
 };

@@ -3,6 +3,8 @@ import '@picocss/pico/css/pico.min.css';
 import './globals.css';
 import React from 'react';
 
+import { FetchState } from '@/app/components/FetchState';
+
 export const metadata = {
   title: '...',
 };
@@ -42,10 +44,12 @@ export default function RootLayout({
           </nav>
 
           <main className="main-container">
-            <div className="docs">{docs}</div>
             <div className="examples">{examples}</div>
+            <div className="docs">{docs}</div>
           </main>
         </div>
+
+        <FetchState />
       </body>
     </html>
   );

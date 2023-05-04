@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "del": "rm -rf test",
-    "add-docs": "node scripts/addDummyDocs.js"
+    "add-docs": "node scripts/addDummyDocs.js",
+    "server": "node server"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
