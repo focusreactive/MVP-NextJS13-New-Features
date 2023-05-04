@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/api/cron",
+            "path": "server/server.js",
             "schedule": "* * * * *"
         }
     ]
