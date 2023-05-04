@@ -1,8 +1,0 @@
-{
-    "crons": [
-        {
-            "path": "server/server.js",
-            "schedule": "*/10 * * * *"
-        }
-    ]
-}
