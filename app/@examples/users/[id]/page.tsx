@@ -16,7 +16,7 @@ import { api } from '../../../../utils/api';
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
 
-  console.log({user});
+  console.log({ user });
 
   return (
     <div>

@@ -1,0 +1,69 @@
+### Component code
+
+```js
+import Link from 'next/link';
+
+import { api } from '@/utils/api';
+
+const PostPage = async () => {
+  const [post] = await api.post('random', { cache: 'no-store' });
+
+  return (
+    <div>
+      <article>
+        <h2>{post.title}</h2>
+
+        <p>{post.body}</p>
+
+        <Link href={`/users/${post.userId}`} className={'secondary'}>
+          Author Page
+        </Link>
+      </article>
+    </div>
+  );
+};
+
+export default PostPage;
+```
+
+### api
+
+```js
+export const api = {
+  post: async (id: string, options?: RequestInit) => {
+    let updatedId = id;
+
+    if (id === 'random') {
+      updatedId = String(Math.round(Math.random() * 100));
+    }
+
+    const result = await fetchData(`/posts/${updatedId}`, options);
+
+    return [result?.data, result?.counter] as [Post, number];
+  },
+
+  posts: async () => {
+    const result = await fetchData('/posts');
+    return [result.data, result.counter] as [Post[], number];
+  },
+
+  user: async (id: string) => {
+    const result = await fetchData(`/users/${id}`);
+    return [result.data, result.counter] as [User, number];
+  },
+
+  users: async (id: string) => {
+    const result = await fetchData('/users');
+    return [result.data, result.counter] as [User[], number];
+  },
+
+  updateLogs: async () => {
+    const logs = await proxyFetch.fetch(`/logs`);
+
+    updateState(null, logs);
+    triggerSubscribers();
+
+    return logs;
+  },
+};
+```

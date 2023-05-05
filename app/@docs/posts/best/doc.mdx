@@ -1,9 +1,10 @@
+```js
 import Link from 'next/link';
 
-import { api } from '@/utils/api';
+import { api } from '../../../../utils/api';
 
-const PostPage = async () => {
-  const [post] = await api.post('random', { cache: 'no-store' });
+const PostPage = async ({ params }: { params: { id: string } }) => {
+  const [post] = await api.post(params.id);
 
   return (
     <div>
@@ -21,3 +22,4 @@ const PostPage = async () => {
 };
 
 export default PostPage;
+```
