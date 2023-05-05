@@ -1,4 +1,4 @@
-import proxyFetch from './proxyFetch';
+import { proxyFetch } from './proxyFetch';
 
 import type { Post, User } from '@/app/global';
 
@@ -22,7 +22,7 @@ const triggerSubscribers = () => {
 };
 
 const fetchData = async (url: string, options?: RequestInit) => {
-  const result = await proxyFetch(url, options);
+  const result = await proxyFetch.fetch(url, options);
 
   updateState(url, result.logs);
   triggerSubscribers();
@@ -58,10 +58,11 @@ export const api = {
   },
 
   updateLogs: async () => {
-    const result = await proxyFetch(`/logs`);
-    console.log(result);
+    const logs = await proxyFetch.fetch(`/logs`);
 
-    updateState(null, result.logs);
+    updateState(null, logs);
     triggerSubscribers();
+
+    return logs;
   },
 };

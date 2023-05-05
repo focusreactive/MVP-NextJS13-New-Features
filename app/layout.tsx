@@ -7,12 +7,13 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 import { FetchState } from '@/app/components/FetchState';
+import { api } from '@/utils/api';
 
 export const metadata = {
   title: '...',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   docs,
   examples,
@@ -21,6 +22,8 @@ export default function RootLayout({
   docs: React.ReactNode;
   examples: React.ReactNode;
 }) {
+  const state: Record<string, number> = await api.updateLogs();
+
   return (
     <html lang="en">
       <head />
@@ -51,8 +54,41 @@ export default function RootLayout({
             <div className="docs">{docs}</div>
           </main>
         </div>
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            padding: '8px 14px',
+            margin: 20,
+            border: '1px solid',
+            fontFamily: 'monospace',
+            '--font-size': '14px',
+          }}
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>URL</th>
+                {/*<th>Total calls</th>*/}
+                <th>API calls</th>
+              </tr>
+            </thead>
 
-        <FetchState />
+            <tbody>
+              {Object.entries(state).map(([key, value]) => {
+                return (
+                  <tr key={key}>
+                    <td>{key}</td>
+                    {/*<td>{value.calls}</td>*/}
+                    <td>{value}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {/* <FetchState /> */}
       </body>
     </html>
   );
