@@ -4,7 +4,7 @@ import React, { useReducer } from 'react';
 
 import { api, state, subscribers } from '@/utils/api';
 
-export const FetchState = () => {
+export const RequestsCounter = () => {
   const [_, forceUpdate] = useReducer((x) => !x, true);
 
   React.useEffect(() => {
@@ -18,14 +18,15 @@ export const FetchState = () => {
         position: 'fixed',
         top: 0,
         right: 0,
-        padding: '8px 14px',
-        margin: 20,
-        border: '1px solid',
+        margin: 10,
+        border: '1px solid #d9d9d9',
         fontFamily: 'monospace',
         '--font-size': '14px',
+        borderRadius: '4px',
+        background: 'white',
       }}
     >
-      <table>
+      <table style={{ margin: 0 }}>
         <thead>
           <tr>
             <th>URL</th>
@@ -36,6 +37,8 @@ export const FetchState = () => {
 
         <tbody>
           {Object.entries(state).map(([key, value]) => {
+            if (key === '/logs') return null;
+
             return (
               <tr key={key}>
                 <td>{key}</td>
