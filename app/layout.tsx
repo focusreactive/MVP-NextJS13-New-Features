@@ -6,8 +6,8 @@ import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { RequestsCounter } from '@/app/components/RequestsCounter';
 import { api } from '@/utils/api';
+import { RequestsCounter } from '@/components/RequestsCounter';
 
 export const metadata = {
   title: '...',
