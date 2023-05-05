@@ -27,17 +27,18 @@ export const RequestsCounter = ({
         </thead>
 
         <tbody>
-          {Object.entries(state).map(([key, value]) => {
-            if (key === '/logs') return null;
+          {state &&
+            Object.entries(state).map(([key, value]) => {
+              if (key === '/logs') return null;
 
-            return (
-              <tr key={key}>
-                <td>{key}</td>
-                {/*<td>{value.calls}</td>*/}
-                <td>{value}</td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={key}>
+                  <td>{key}</td>
+                  {/*<td>{value.calls}</td>*/}
+                  <td>{value}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
