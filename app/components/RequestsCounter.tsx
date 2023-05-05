@@ -1,17 +1,8 @@
-'use client';
-
-import React, { useReducer } from 'react';
-
-import { api, state, subscribers } from '@/utils/api';
-
-export const RequestsCounter = () => {
-  const [_, forceUpdate] = useReducer((x) => !x, true);
-
-  React.useEffect(() => {
-    subscribers['FetchState'] = forceUpdate;
-    api.updateLogs();
-  }, []);
-
+export const RequestsCounter = ({
+  state,
+}: {
+  state: Record<string, number>;
+}) => {
   return (
     <div
       style={{
@@ -43,7 +34,7 @@ export const RequestsCounter = () => {
               <tr key={key}>
                 <td>{key}</td>
                 {/*<td>{value.calls}</td>*/}
-                <td>{value.realCalls}</td>
+                <td>{value}</td>
               </tr>
             );
           })}
