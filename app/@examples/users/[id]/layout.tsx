@@ -10,7 +10,7 @@ const UserLayout = async ({
   const [user, counter] = await api.user(params.id);
 
   return (
-    <div className={'flashing-border'}>
+    <div className={'rerender-indicator'}>
       <small className={'layout-label'}>/users/[id] layout</small>
 
       <h2 className={'animate-character'}>

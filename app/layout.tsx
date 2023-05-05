@@ -6,14 +6,13 @@ import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { FetchState } from '@/app/components/FetchState';
-import { api } from '@/utils/api';
+import { RequestsCounter } from '@/app/components/RequestsCounter';
 
 export const metadata = {
   title: '...',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
   docs,
   examples,
@@ -22,16 +21,12 @@ export default async function RootLayout({
   docs: React.ReactNode;
   examples: React.ReactNode;
 }) {
-  const state: Record<string, number> = await api.updateLogs();
-
   return (
     <html lang="en">
       <head />
 
-      <body>
+      <body className={'rerender-indicator'}>
         <div>
-          <small className={'layout-label'}>root layout</small>
-
           <nav>
             <ul>
               <li>
@@ -54,41 +49,8 @@ export default async function RootLayout({
             <div className="docs">{docs}</div>
           </main>
         </div>
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            padding: '8px 14px',
-            margin: 20,
-            border: '1px solid',
-            fontFamily: 'monospace',
-            '--font-size': '14px',
-          }}
-        >
-          <table>
-            <thead>
-              <tr>
-                <th>URL</th>
-                {/*<th>Total calls</th>*/}
-                <th>API calls</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {Object.entries(state).map(([key, value]) => {
-                return (
-                  <tr key={key}>
-                    <td>{key}</td>
-                    {/*<td>{value.calls}</td>*/}
-                    <td>{value}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        {/* <FetchState /> */}
+        <RequestsCounter />
       </body>
     </html>
   );
