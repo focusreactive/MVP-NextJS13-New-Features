@@ -41,7 +41,7 @@ export const Error = ({
           </nav>
 
           <main className="main-container">
-            <div className={'flashing-border'}>
+            <div className={'rerender-indicator'}>
               <h2>Something went wrong</h2>
               <button
                 onClick={

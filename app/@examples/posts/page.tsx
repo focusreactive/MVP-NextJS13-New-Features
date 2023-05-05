@@ -6,7 +6,7 @@ const PostsPage = async () => {
   const [posts] = await api.posts();
 
   return (
-    <div className={'flashing-border'}>
+    <div className={'rerender-indicator'}>
       <h2>All Posts</h2>
 
       {posts.slice(0, 5).map(({ id, userId, title, body }) => (

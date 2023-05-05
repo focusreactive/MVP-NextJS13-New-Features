@@ -6,7 +6,7 @@ import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { FetchState } from '@/app/components/FetchState';
+import { RequestsCounter } from '@/app/components/RequestsCounter';
 
 export const metadata = {
   title: '...',
@@ -25,10 +25,8 @@ export default function RootLayout({
     <html lang="en">
       <head />
 
-      <body>
+      <body className={'rerender-indicator'}>
         <div>
-          <small className={'layout-label'}>root layout</small>
-
           <nav>
             <ul>
               <li>
@@ -52,7 +50,7 @@ export default function RootLayout({
           </main>
         </div>
 
-        <FetchState />
+        <RequestsCounter />
       </body>
     </html>
   );

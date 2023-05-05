@@ -1,6 +1,6 @@
 const HomePage = () => {
   return (
-    <div className={'flashing-border'}>
+    <div className={'rerender-indicator'}>
       <h1>Home Page</h1>
     </div>
   );

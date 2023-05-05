@@ -6,7 +6,7 @@ const UsersLayout = async ({ children }: React.PropsWithChildren) => {
   const [users, counter] = await api.users('UsersLayout');
 
   return (
-    <div className={'flashing-border'}>
+    <div className={'rerender-indicator'}>
       <small className={'layout-label'}>/users layout</small>
 
       <h2>
