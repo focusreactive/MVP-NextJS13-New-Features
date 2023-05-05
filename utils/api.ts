@@ -1,9 +1,10 @@
-import type { Post, User } from '@/app/global';
+import proxyFetch from './proxyFetch';
 
-const API_URL = 'http://localhost:4000';
+import type { Post, User } from '@/app/global';
 
 export const state: Record<string, { calls: number; realCalls: number }> = {};
 export const subscribers: Record<string, () => void> = {};
+
 const updateState = (path: string | null, logs: Record<string, number>) => {
   if (path) {
     if (!state[path]) state[path] = { calls: 0, realCalls: 0 };
@@ -15,11 +16,14 @@ const updateState = (path: string | null, logs: Record<string, number>) => {
     state[url].realCalls += count;
   });
 };
+
 const triggerSubscribers = () => {
   Object.values(subscribers).forEach((fn) => fn());
 };
+
 const fetchData = async (url: string, options?: RequestInit) => {
-  const result = await fetch(`${API_URL}${url}`, options).then((r) => r.json());
+  const result = await proxyFetch(url, options);
+
   updateState(url, result.logs);
   triggerSubscribers();
   return { data: result?.data, counter: result?.counter };
@@ -54,7 +58,9 @@ export const api = {
   },
 
   updateLogs: async () => {
-    const result = await fetch(`${API_URL}/logs`).then((r) => r.json());
+    const result = await proxyFetch(`/logs`);
+    console.log(result);
+
     updateState(null, result.logs);
     triggerSubscribers();
   },
