@@ -1,7 +1,7 @@
 const HomePage = () => {
   return (
     <div className={'rerender-indicator'}>
-      <h1>Home Page</h1>
+      <h1>Home Page examples</h1>
     </div>
   );
 };
