@@ -11,10 +11,12 @@ const updateState = (path: string | null, logs: Record<string, number>) => {
     state[path].calls += 1;
   }
 
-  Object.entries(logs).forEach(([url, count]) => {
-    if (!state[url]) state[url] = { calls: 0, realCalls: 0 };
-    state[url].realCalls += count;
-  });
+  if (logs) {
+    Object.entries(logs).forEach(([url, count]) => {
+      if (!state[url]) state[url] = { calls: 0, realCalls: 0 };
+      state[url].realCalls += count;
+    });
+  }
 };
 
 const triggerSubscribers = () => {

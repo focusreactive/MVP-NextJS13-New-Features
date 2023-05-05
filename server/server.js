@@ -6,6 +6,9 @@ http
   .createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Content-Type', 'application/json');
+
+    console.log(req.url);
+
     try {
       if (req.url.includes('/logs')) {
         res.end(JSON.stringify({ logs }));
