@@ -1,7 +1,7 @@
 ```js
 import Link from 'next/link';
 
-import { api } from '../../../../utils/api';
+import { api } from './api';
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);

@@ -1,12 +1,10 @@
-```js
 import Link from 'next/link';
 
-import { api } from '../../../../utils/api';
+import { api } from '@/utils/api';
 
 const UsersPage = async (props: any) => {
   const [users, counter] = await api.users('UsersPage');
   const [_, counter2] = await api.user('1');
-  console.log({ counter, counter2 });
 
   return (
     <div>
@@ -33,4 +31,3 @@ const UsersPage = async (props: any) => {
 };
 
 export default UsersPage;
-```

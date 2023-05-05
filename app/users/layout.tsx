@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { api } from '../../utils/api';
+import { api } from '@/utils/api';
 
 const UsersLayout = async ({ children }: React.PropsWithChildren) => {
   const [users, counter] = await api.users('UsersLayout');

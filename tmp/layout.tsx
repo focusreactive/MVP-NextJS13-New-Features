@@ -15,8 +15,12 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  docs,
+  examples,
 }: {
   children: React.ReactNode;
+  docs: React.ReactNode;
+  examples: React.ReactNode;
 }) {
   const logs = await api.updateLogs();
 
@@ -44,7 +48,8 @@ export default async function RootLayout({
           </nav>
 
           <main className="main-container">
-            {children}
+            <div className="examples">{examples}</div>
+            <div className="docs">{docs}</div>
           </main>
         </div>
 
