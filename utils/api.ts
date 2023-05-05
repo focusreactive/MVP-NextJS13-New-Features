@@ -39,6 +39,10 @@ export const api = {
       updatedId = String(Math.round(Math.random() * 100));
     }
 
+    if (id === 'best') {
+      updatedId = String(99);
+    }
+
     const result = await fetchData(`/posts/${updatedId}`, options);
 
     return [result?.data, result?.counter] as [Post, number];
