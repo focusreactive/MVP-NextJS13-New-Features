@@ -6,7 +6,7 @@ export const RequestsCounter = () => {
   const [state, setState] = useState<Record<string, number>>({});
 
   const update = async () =>
-    fetch('http://localhost:3000/api/logs')
+    fetch(`${window.location.origin}/api/logs`)
       .then((r) => r.json())
       .then(setState);
 
@@ -15,7 +15,7 @@ export const RequestsCounter = () => {
   useEffect(() => {
     const timer = setTimeout(
       async () =>
-        fetch('http://localhost:3000/api/logs')
+        fetch(`${window.location.origin}/api/logs`)
           .then((r) => r.json())
           .then(setState),
       1000,
