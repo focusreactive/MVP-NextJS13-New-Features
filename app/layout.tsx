@@ -6,14 +6,13 @@ import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { api } from '@/utils/api';
 import { RequestsCounter } from '@/components/RequestsCounter';
 
 export const metadata = {
-  title: '...',
+  title: 'Homepage',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
   docs,
   examples,
@@ -22,8 +21,6 @@ export default async function RootLayout({
   docs: React.ReactNode;
   examples: React.ReactNode;
 }) {
-  const logs = await api.updateLogs();
-
   return (
     <html lang="en">
       <head />
@@ -53,7 +50,7 @@ export default async function RootLayout({
           </main>
         </div>
 
-        <RequestsCounter state={logs} />
+        <RequestsCounter />
       </body>
     </html>
   );

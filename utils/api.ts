@@ -24,7 +24,7 @@ const triggerSubscribers = () => {
 };
 
 const fetchData = async (url: string, options?: RequestInit) => {
-  const result = await proxyFetch.fetch(url, options);
+  const result = await proxyFetch.fetch(url, options).catch(console.error);
 
   updateState(url, result.logs);
   triggerSubscribers();

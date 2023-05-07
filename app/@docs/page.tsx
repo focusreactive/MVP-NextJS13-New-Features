@@ -3,6 +3,10 @@ import structure from 'public/assets/folder_structure.png';
 
 import Doc from './doc.mdx';
 
+export const metadata = {
+  title: 'Homepage docs',
+};
+
 const HomePage = () => {
   return (
     <div className={'rerender-indicator'}>

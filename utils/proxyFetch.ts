@@ -1,7 +1,8 @@
-export const proxyFetch = (() => {
-  const logs: any = {};
+import { read, save } from './handleState';
 
+export const proxyFetch = (() => {
   async function proxy(url: string, options?: RequestInit) {
+    const logs = await read();
     const counter = (logs[url] = (logs[url] || 0) + 1);
 
     try {
@@ -13,12 +14,14 @@ export const proxyFetch = (() => {
       const result = await fetch(apiHost, options);
       const data = await result.json();
 
+      save(logs);
+
       return { counter, data, logs };
     } catch (error) {
       console.error(error);
+    } finally {
+      return { counter, data: [], logs };
     }
-
-    return { counter, data: [], logs };
   }
 
   return {

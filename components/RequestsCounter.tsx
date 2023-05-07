@@ -1,8 +1,28 @@
-export const RequestsCounter = ({
-  state,
-}: {
-  state: Record<string, number>;
-}) => {
+'use client';
+
+import { useEffect, useState } from 'react';
+
+export const RequestsCounter = () => {
+  const [state, setState] = useState<Record<string, number>>({});
+
+  const update = async () =>
+    fetch('http://localhost:3000/api/logs')
+      .then((r) => r.json())
+      .then(setState);
+
+  // TODO: choose how to update
+
+  useEffect(() => {
+    const timer = setTimeout(
+      async () =>
+        fetch('http://localhost:3000/api/logs')
+          .then((r) => r.json())
+          .then(setState),
+      1000,
+    );
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
       style={{
@@ -17,6 +37,7 @@ export const RequestsCounter = ({
         background: 'white',
       }}
     >
+      <button onClick={update}>Refresh</button>
       <table style={{ margin: 0 }}>
         <thead>
           <tr>
@@ -29,7 +50,7 @@ export const RequestsCounter = ({
         <tbody>
           {state &&
             Object.entries(state).map(([key, value]) => {
-              if (key === '/logs') return null;
+              // if (key === '/logs') return null;
 
               return (
                 <tr key={key}>
