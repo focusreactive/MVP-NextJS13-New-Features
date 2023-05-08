@@ -1,25 +1,22 @@
-```js
-import Link from 'next/link';
-
 import { api } from '@/utils/api';
+import { BackLink } from '@/components/BackLink';
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
 
   return (
-    <div>
+    <dialog open>
       <article>
-        <h2>{post.title}</h2>
+        <header>
+          <h3 style={{ marginBottom: 0 }}>{post.title}</h3>
+        </header>
 
         <p>{post.body}</p>
 
-        <Link href={`/users/${post.userId}`} className={'secondary'}>
-          Author Page
-        </Link>
+        <BackLink />
       </article>
-    </div>
+    </dialog>
   );
 };
 
 export default PostPage;
-```

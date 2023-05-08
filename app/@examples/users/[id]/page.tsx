@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { sleep } from '../../../../utils/sleep';
-import { api } from '../../../../utils/api';
+import { sleep } from '@/utils/sleep';
+import { api } from '@/utils/api';
 
 // export async function generateStaticParams() {
 //   // const [posts] = await api.posts();
@@ -19,8 +19,6 @@ export const metadata = {
 
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
-
-  console.log({ user });
 
   return (
     <div>

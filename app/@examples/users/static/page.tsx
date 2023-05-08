@@ -3,7 +3,7 @@
 // import { useSearchParams, useSelectedLayoutSegments } from 'next/navigation';
 // import { useEffect, useState } from 'react';
 
-// import { api } from '../../../../utils/api';
+// import { api } from '@/utils/api';
 
 // import type { User } from '@/app/global';
 

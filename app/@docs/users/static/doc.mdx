@@ -4,9 +4,9 @@
 import { useSearchParams, useSelectedLayoutSegments } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { api } from '../../../../utils/api';
+import { api } from '@/utils/api';
 
-import type { User } from '../../../../utils/api';
+import type { User } from '@/utils/api';
 
 const StaticPage = () => {
   const [users, setUsers] = useState<[User[], number]>([[], 0]);

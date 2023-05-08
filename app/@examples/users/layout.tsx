@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { api } from '../../../utils/api';
+import { api } from '@/utils/api';
 
-const UsersLayout = async ({ children }: React.PropsWithChildren) => {
-  const [users, counter] = await api.users('UsersLayout');
+const UsersLayout = async ({
+  children,
+  modal,
+}: React.PropsWithChildren & { modal: React.ReactNode }) => {
+  const [users, counter] = await api.users();
 
   return (
     <div className={'rerender-indicator'}>
@@ -14,6 +17,8 @@ const UsersLayout = async ({ children }: React.PropsWithChildren) => {
       </h2>
 
       {children}
+
+      {modal}
     </div>
   );
 };
