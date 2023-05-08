@@ -2,24 +2,32 @@
 
 import { useEffect, useState } from 'react';
 
+import Loader from './Loader/Loader';
+
 export const RequestsCounter = () => {
   const [state, setState] = useState<Record<string, number>>({});
+  const [loadingData, setLoadingData] = useState(false);
 
-  const update = async () =>
+  const update = () => {
+    setLoadingData(true);
+
     fetch(`${window.location.origin}/api/logs`)
       .then((r) => r.json())
-      .then(setState);
+      .then(setState)
+      .then(() => setLoadingData(false));
+  };
 
   // TODO: choose how to update
 
   useEffect(() => {
-    const timer = setTimeout(
-      async () =>
-        fetch(`${window.location.origin}/api/logs`)
-          .then((r) => r.json())
-          .then(setState),
-      1000,
-    );
+    const timer = setTimeout(() => {
+      setLoadingData(true);
+
+      fetch(`${window.location.origin}/api/logs`)
+        .then((r) => r.json())
+        .then(setState)
+        .then(() => setLoadingData(false));
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,18 +46,20 @@ export const RequestsCounter = () => {
       }}
     >
       <button onClick={update}>Refresh</button>
-      <table style={{ margin: 0 }}>
-        <thead>
-          <tr>
-            <th>URL</th>
-            {/*<th>Total calls</th>*/}
-            <th>API calls</th>
-          </tr>
-        </thead>
+      {loadingData ? (
+        <Loader />
+      ) : (
+        <table style={{ margin: 0 }}>
+          <thead>
+            <tr>
+              <th>URL</th>
+              {/*<th>Total calls</th>*/}
+              <th>API calls</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {state &&
-            Object.entries(state).map(([key, value]) => {
+          <tbody>
+            {Object.entries(state).map(([key, value]) => {
               // if (key === '/logs') return null;
 
               return (
@@ -60,8 +70,9 @@ export const RequestsCounter = () => {
                 </tr>
               );
             })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
