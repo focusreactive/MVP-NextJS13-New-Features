@@ -3,8 +3,6 @@ import '@picocss/pico/css/pico.min.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { RequestsCounter } from '@/components/RequestsCounter';
-
 export const metadata = {
   title: 'Homepage',
 };
@@ -19,7 +17,7 @@ export default function RootLayout({
   examples: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       <nav>
         <ul>
           <li>
@@ -34,10 +32,10 @@ export default function RootLayout({
         </ul>
       </nav>
 
-      <main className="main-container">
+      <section className="main-container">
         <div className="examples">{examples}</div>
         <div className="docs">{docs}</div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
