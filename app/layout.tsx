@@ -31,6 +31,9 @@ export default function RootLayout({
               <li>
                 <Link href={'/parallel'}>Parallel</Link>
               </li>
+              <li>
+                <Link href={'/static'}>Static+Cache</Link>
+              </li>
             </ul>
           </nav>
 

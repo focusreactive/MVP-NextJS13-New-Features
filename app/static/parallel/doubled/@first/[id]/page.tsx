@@ -9,12 +9,12 @@ export const metadata = {
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images();
-  console.log(params.id, image);
+
   return (
     <div>
       <article>
         <h2>{post.title}</h2>
-
+        <div>FIRST</div>
         <p>{post.body}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
@@ -32,7 +32,7 @@ export default PostPage;
 export async function generateStaticParams() {
   const [posts] = await api.posts();
 
-  return posts.slice(0, 10).map((post) => {
+  return posts.slice(10, 20).map((post) => {
     return {
       id: String(post.id),
     };

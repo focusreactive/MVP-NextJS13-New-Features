@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic post',
+  title: 'Dynamic Simple',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images();
-  console.log(params.id, image);
+
   return (
     <div>
       <article>

@@ -4,37 +4,29 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 export const metadata = {
-  title: 'Homepage',
+  title: 'Static',
 };
 
 export default async function RootLayout({
   children,
-  docs,
-  examples,
 }: {
   children: React.ReactNode;
-  docs: React.ReactNode;
-  examples: React.ReactNode;
 }) {
   return (
     <>
       <nav>
         <ul>
           <li>
-            <Link href={'/parallel/posts'}>Posts</Link>
+            <Link href={'/static/simple'}>Simple</Link>
           </li>
           <li>
-            <Link href={'/parallel/users/list'}>Users</Link>
-          </li>
-          <li>
-            <Link href={'/parallel/users/static'}>Users Static</Link>
+            <Link href={'/static/parallel'}>Parallel</Link>
           </li>
         </ul>
       </nav>
 
       <section className="main-container">
-        <div className="examples">{examples}</div>
-        <div className="docs">{docs}</div>
+        <div>{children}</div>
       </section>
     </>
   );

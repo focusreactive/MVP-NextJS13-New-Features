@@ -7,14 +7,10 @@ export const metadata = {
   title: 'Homepage',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-  docs,
-  examples,
 }: {
   children: React.ReactNode;
-  docs: React.ReactNode;
-  examples: React.ReactNode;
 }) {
   return (
     <>
@@ -33,8 +29,7 @@ export default async function RootLayout({
       </nav>
 
       <section className="main-container">
-        <div className="examples">{examples}</div>
-        <div className="docs">{docs}</div>
+        <div>{children}</div>
       </section>
     </>
   );

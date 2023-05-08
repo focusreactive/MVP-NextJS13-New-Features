@@ -9,12 +9,12 @@ export const metadata = {
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images();
-  console.log(params.id, image);
+
   return (
     <div>
       <article>
         <h2>{post.title}</h2>
-
+        <div>ROOT</div>
         <p>{post.body}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
