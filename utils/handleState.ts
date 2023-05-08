@@ -1,6 +1,7 @@
 import fs from 'fs';
+import path from 'path';
 
-const FILE = 'logs.json';
+const FILE = path.join(process.cwd(), 'logs.json');
 
 export async function read() {
   try {
