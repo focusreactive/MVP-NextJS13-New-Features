@@ -10,6 +10,16 @@ export const proxyFetch = (() => {
         return logs;
       }
 
+      if (url.includes('/images')) {
+        const apiHost = `https://dog.ceo/api/breeds/image/random`;
+        const result = await fetch(apiHost, options);
+        const data = await result.json();
+
+        save(logs);
+
+        return { counter, data: data?.message, logs };
+      }
+
       const apiHost = `https://jsonplaceholder.typicode.com${url}`;
       const result = await fetch(apiHost, options);
       const data = await result.json();

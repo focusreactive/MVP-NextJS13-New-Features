@@ -67,6 +67,12 @@ export const api = {
     return [result.data, result.counter] as [User[], number];
   },
 
+  images: async () => {
+    const result = await fetchData('/images');
+
+    return [result.data, result.counter] as [string, number];
+  },
+
   updateLogs: async () => {
     const logs = await proxyFetch.fetch(`/logs`);
 
