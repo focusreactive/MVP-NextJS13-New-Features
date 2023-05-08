@@ -13,7 +13,7 @@ const PostsPage = async () => {
     <div className={'rerender-indicator'}>
       <h2>All Posts</h2>
 
-      {posts.slice(0, 5).map(({ id, userId, title, body }) => (
+      {posts.map(({ id, userId, title, body }) => (
         <article key={id}>
           <Link href={`/posts/${id}`}>{title}</Link>
           <p>{body.slice(0, 100)}...</p>

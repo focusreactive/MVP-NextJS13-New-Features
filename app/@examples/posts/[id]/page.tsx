@@ -9,7 +9,7 @@ export const metadata = {
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images();
-
+  console.log(params.id, image);
   return (
     <div>
       <article>
@@ -31,8 +31,8 @@ export default PostPage;
 
 export async function generateStaticParams() {
   const [posts] = await api.posts();
-
+  console.log(posts);
   return posts.map((post) => ({
-    slug: post.id,
+    id: post.id,
   }));
 }
