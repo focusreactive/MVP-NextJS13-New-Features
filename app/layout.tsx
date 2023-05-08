@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
 
-      <body className={'rerender-indicator'}>
+      <body className={'rerender-indicator'} style={{ border: 0 }}>
         <div>
           <nav>
             <ul>

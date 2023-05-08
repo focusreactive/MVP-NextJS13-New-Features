@@ -1,7 +1,7 @@
 ```js
 import Link from 'next/link';
 
-import { api } from '../../../../utils/api';
+import { api } from '@/utils/api';
 
 const UsersPage = async (props: any) => {
   const [users, counter] = await api.users('UsersPage');

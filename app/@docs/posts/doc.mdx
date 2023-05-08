@@ -1,7 +1,7 @@
 ```js
 import Link from 'next/link';
 
-import { api } from '../../../utils/api';
+import { api } from '@/utils/api';
 
 const PostsPage = async () => {
   const [posts] = await api.posts();

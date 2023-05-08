@@ -62,7 +62,7 @@ export const api = {
     return [result.data, result.counter] as [User, number];
   },
 
-  users: async (id: string) => {
+  users: async () => {
     const result = await fetchData('/users');
     return [result.data, result.counter] as [User[], number];
   },

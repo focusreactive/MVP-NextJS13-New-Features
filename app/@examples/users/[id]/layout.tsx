@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { api } from '../../../../utils/api';
+import { api } from '@/utils/api';
 
 const UserLayout = async ({
   children,

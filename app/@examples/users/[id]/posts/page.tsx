@@ -1,30 +1,33 @@
 import Link from 'next/link';
+import React from 'react';
+
+import { api } from '@/utils/api';
 
 export const metadata = {
   title: 'Users posts',
 };
 
 const UserPostsPage = async ({ params }: { params: { id: string } }) => {
-  const posts = (await fetch(
-    `https://jsonplaceholder.typicode.com/user/${params.id}/posts`,
-  ).then((r) => r.json())) as {
-    id: string;
-    userId: string;
-    title: string;
-    body: string;
-  }[];
+  const [posts] = await api.posts();
+
+  const userPosts = posts.filter((post) => +post.userId === +params.id);
+
+  if (!userPosts) {
+    return <div>No posts yet</div>;
+  }
 
   return (
     <div>
-      {posts.map(({ id, userId, title, body }) => (
+      {userPosts.map(({ id, userId, title, body }) => (
         <article key={id}>
-          <Link href={`/posts/${id}`}>{title}</Link>
-          <p>{body.slice(0, 20)}...</p>
-          <small>
-            <Link href={`/users/${id}`} className={'secondary'}>
-              {title}
-            </Link>
-          </small>
+          <h4>{title}</h4>
+          <p>{body.slice(0, 300)}...</p>
+
+          <div>
+            <Link href={`/posts/${id}`}>Read more</Link>
+            <span style={{ padding: '0 14px' }}> | </span>
+            <Link href={`/posts/${id}`}>Preview</Link>
+          </div>
         </article>
       ))}
     </div>
