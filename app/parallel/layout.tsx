@@ -23,13 +23,13 @@ export default function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/posts'}>Posts</Link>
+            <Link href={'/parallel/posts'}>Posts</Link>
           </li>
           <li>
-            <Link href={'/users/list'}>Users</Link>
+            <Link href={'/parallel/users/list'}>Users</Link>
           </li>
           <li>
-            <Link href={'/users/static'}>Users Static</Link>
+            <Link href={'/parallel/users/static'}>Users Static</Link>
           </li>
         </ul>
       </nav>
