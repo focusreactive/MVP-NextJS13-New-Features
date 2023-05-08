@@ -16,7 +16,7 @@ const PostPage = async () => {
 
         <p>{post.body}</p>
 
-        <Link href={`/users/${post.userId}`} className={'secondary'}>
+        <Link href={`/parallel/users/${post.userId}`} className={'secondary'}>
           Author Page
         </Link>
       </article>

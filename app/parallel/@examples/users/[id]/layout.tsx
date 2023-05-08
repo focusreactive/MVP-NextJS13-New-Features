@@ -20,10 +20,10 @@ const UserLayout = async ({
       <nav>
         <ul>
           <li>
-            <Link href={`/users/${params.id}`}>Profile</Link>
+            <Link href={`/parallel/users/${params.id}`}>Profile</Link>
           </li>
           <li>
-            <Link href={`/users/${params.id}/posts`}>Posts</Link>
+            <Link href={`/parallel/users/${params.id}/posts`}>Posts</Link>
           </li>
         </ul>
       </nav>

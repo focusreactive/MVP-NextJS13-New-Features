@@ -1,4 +1,4 @@
-import { read, save } from './handleState';
+import { clear, read, save } from './handleState';
 
 export const proxyFetch = (() => {
   async function proxy(url: string, options?: RequestInit) {
@@ -8,6 +8,10 @@ export const proxyFetch = (() => {
     try {
       if (url.includes('/logs')) {
         return logs;
+      }
+
+      if (url.includes('/clear-logs')) {
+        return clear();
       }
 
       if (url.includes('/images')) {

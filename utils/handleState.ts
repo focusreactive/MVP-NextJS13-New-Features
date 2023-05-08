@@ -24,3 +24,13 @@ export async function save(logs: any) {
     console.error(error);
   }
 }
+
+export async function clear() {
+  try {
+    fs.promises.rm(FILE).catch(console.error);
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {};
+}

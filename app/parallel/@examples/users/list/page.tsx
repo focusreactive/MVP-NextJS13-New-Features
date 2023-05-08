@@ -20,10 +20,10 @@ const UsersPage = async (props: any) => {
           <nav aria-label="breadcrumb">
             <ul>
               <li>
-                <Link href={`/users/${id}`}>Profile</Link>
+                <Link href={`/parallel/users/${id}`}>Profile</Link>
               </li>
               <li>
-                <Link href={`/users/${id}/posts`}>Posts</Link>
+                <Link href={`/parallel/users/${id}/posts`}>Posts</Link>
               </li>
             </ul>
           </nav>
