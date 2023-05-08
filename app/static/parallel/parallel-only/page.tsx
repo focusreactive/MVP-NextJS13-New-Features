@@ -5,7 +5,7 @@ export const metadata = {
 const Page = () => {
   return (
     <div className={'rerender-indicator'}>
-      <h1>Parallel</h1>
+      <h1>Dynamic route is only in parallel route @first</h1>
     </div>
   );
 };

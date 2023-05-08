@@ -12,11 +12,9 @@ export const metadata = {
 export default async function RootLayout({
   children,
   first,
-  second,
 }: {
   children: React.ReactNode;
   first: React.ReactNode;
-  second: React.ReactNode;
 }) {
   const [posts] = await api.posts();
   return (
@@ -36,7 +34,6 @@ export default async function RootLayout({
       </nav>
 
       <section className="main-container">
-        <div className="examples">{second}</div>
         <div className="docs">{first}</div>
         <div>{children}</div>
       </section>
