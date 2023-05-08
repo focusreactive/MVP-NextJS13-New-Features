@@ -19,9 +19,9 @@ export const proxyFetch = (() => {
       return { counter, data, logs };
     } catch (error) {
       console.error(error);
-    } finally {
-      return { counter, data: [], logs };
     }
+
+    return { counter, data: [], logs };
   }
 
   return {
