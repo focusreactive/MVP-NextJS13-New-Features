@@ -13,6 +13,10 @@ import { api } from '../../../../utils/api';
 //   return [{ id: "1" }];
 // }
 
+export const metadata = {
+  title: 'Users dynamic',
+};
+
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
 

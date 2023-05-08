@@ -7,6 +7,10 @@
 
 // import type { User } from '@/app/global';
 
+export const metadata = {
+  title: 'Users static',
+};
+
 const StaticPage = () => {
   // const [users, setUsers] = useState<[User[], number]>([[], 0]);
   // const params = useSearchParams();

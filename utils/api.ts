@@ -43,6 +43,10 @@ export const api = {
       updatedId = String(99);
     }
 
+    if (id === 'dynamic') {
+      updatedId = String(13);
+    }
+
     const result = await fetchData(`/posts/${updatedId}`, options);
 
     return [result?.data, result?.counter] as [Post, number];

@@ -2,6 +2,10 @@ import Link from 'next/link';
 
 import { api } from '../../../../utils/api';
 
+export const metadata = {
+  title: 'Dynamic post',
+};
+
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
 

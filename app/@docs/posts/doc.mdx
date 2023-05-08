@@ -30,6 +30,21 @@ export default PostsPage;
 
 # Data Fetching
 
+## [Automatic `fetch()` Request Deduping](#automatic-fetch-request-deduping)
+
+![](/assets/deduplicated-fetch-requests.avif)
+
+- On the server, the cache lasts the lifetime of a server request until the rendering process completes.
+  - This optimization applies to `fetch` requests made in Layouts, Pages, Server Components, `generateMetadata` and `generateStaticParams`.
+  - This optimization also applies during [static generation](/docs/app/building-your-application/rendering#static-rendering).
+- On the client, the cache lasts the duration of a session (which could include multiple client-side re-renders) before a full page reload.
+
+If you need to fetch the same data (e.g. current user) in multiple components in a tree, Next.js will automatically cache `fetch` requests (`GET`) that have the same input in a temporary cache. This optimization prevents the same data from being fetched more than once during a rendering pass.
+
+Next.js extends the [options object](https://developer.mozilla.org/en-US/docs/Web/API/fetch#:~:text=preflight%20requests.-,cache,-A%20string%20indicating) of the `fetch()` function to allow each request on the server to set its own persistent caching behavior. Together with [component-level data fetching](/docs/app/building-your-application/data-fetching#fetching-data-at-the-component-level), this allows you to configure caching within your application code directly where the data is being used.
+
+During server rendering, when Next.js comes across a fetch, it will check the cache to see if the data is already available. If it is, it will return the cached data. If not, it will fetch and store data for future requests.
+
 > **Good to know**:
 >
 > - This new data fetching model is currently being developed by the React team. We recommend reading the [support for promises React RFC](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md) which introduces `async`/`await` in Server Components and a new `use()` hook for Client Components.

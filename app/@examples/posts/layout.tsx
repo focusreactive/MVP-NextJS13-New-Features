@@ -12,6 +12,9 @@ const PostsLayout = ({ children }: React.PropsWithChildren) => {
           <li>
             <Link href={`/posts/best`}>Best</Link>
           </li>
+          <li>
+            <Link href={`/posts/dynamic`}>Dynamic</Link>
+          </li>
         </ul>
       </nav>
 

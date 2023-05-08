@@ -2,6 +2,10 @@ import Link from 'next/link';
 
 import { api } from '../../../utils/api';
 
+export const metadata = {
+  title: 'All posts',
+};
+
 const PostsPage = async () => {
   const [posts] = await api.posts();
 

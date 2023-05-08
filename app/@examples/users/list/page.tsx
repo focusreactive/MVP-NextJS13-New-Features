@@ -2,6 +2,10 @@ import Link from 'next/link';
 
 import { api } from '../../../../utils/api';
 
+export const metadata = {
+  title: 'Users list',
+};
+
 const UsersPage = async (props: any) => {
   const [users, counter] = await api.users('UsersPage');
   const [_, counter2] = await api.user('1');

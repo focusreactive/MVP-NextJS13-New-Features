@@ -2,6 +2,10 @@ import Link from 'next/link';
 
 import { api } from '@/utils/api';
 
+export const metadata = {
+  title: 'Random post',
+};
+
 const PostPage = async () => {
   const [post] = await api.post('random', { cache: 'no-store' });
 
