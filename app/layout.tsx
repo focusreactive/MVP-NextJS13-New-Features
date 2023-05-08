@@ -14,12 +14,8 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  docs,
-  examples,
 }: {
   children: React.ReactNode;
-  docs: React.ReactNode;
-  examples: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -33,20 +29,13 @@ export default function RootLayout({
                 <Link href={'/'}>Home</Link>
               </li>
               <li>
-                <Link href={'/posts'}>Posts</Link>
-              </li>
-              <li>
-                <Link href={'/users/list'}>Users</Link>
-              </li>
-              <li>
-                <Link href={'/users/static'}>Users Static</Link>
+                <Link href={'/parallel'}>Parallel</Link>
               </li>
             </ul>
           </nav>
 
           <main className="main-container">
-            <div className="examples">{examples}</div>
-            <div className="docs">{docs}</div>
+            <div>{children}</div>
           </main>
         </div>
 

@@ -29,13 +29,7 @@ export const Error = ({
                 <Link href={'/'}>Home</Link>
               </li>
               <li>
-                <Link href={'/posts'}>Posts</Link>
-              </li>
-              <li>
-                <Link href={'/users/list'}>Users</Link>
-              </li>
-              <li>
-                <Link href={'/users/static'}>Users Static</Link>
+                <Link href={'/parallel'}>Parallel Routes</Link>
               </li>
             </ul>
           </nav>
