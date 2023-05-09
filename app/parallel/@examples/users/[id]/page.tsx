@@ -2,16 +2,6 @@ import { api } from '@/utils/api';
 
 import type { Metadata } from 'next';
 
-// export async function generateStaticParams() {
-//   // const [posts] = await api.posts();
-//
-//   // return posts.map((post) => ({
-//   //   id: post.id,
-//   // }));
-//
-//   return [{ id: "1" }];
-// }
-
 export async function generateMetadata({
   params,
 }: {
