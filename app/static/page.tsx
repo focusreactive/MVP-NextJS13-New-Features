@@ -1,13 +1,11 @@
+import Doc from './doc.mdx';
+
 export const metadata = {
-  title: 'Static',
+  title: 'Static + Cache examples',
 };
 
 const Page = () => {
-  return (
-    <div className={'rerender-indicator'}>
-      <h1>Static + Cache examples</h1>
-    </div>
-  );
+  return <Doc />;
 };
 
 export default Page;

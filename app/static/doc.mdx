@@ -1,0 +1,79 @@
+# Static and Dynamic Rendering
+
+In Next.js, a route can be statically or dynamically rendered.
+
+- In a **static** route, components are rendered on the server at build time. The result of the work is cached and reused on subsequent requests.
+- In a **dynamic** route, components are rendered on the server at request time.
+
+## [Static Rendering (Default)](#static-rendering-default)
+
+Static rendering (default) improves performance because all the rendering work is done ahead of time and can be served from a Content Delivery Network (CDN) geographically closer to the user.
+
+You can opt into dynamic rendering by using a [dynamic function](https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions) or [dynamic data fetching](https://nextjs.org/docs/app/building-your-application/rendering#dynamic-data-fetches) in a layout or page. This will cause Next.js to render the whole route dynamically, at request time.
+
+This table summarizes how [dynamic functions](https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions) and [static data fetching (caching)](https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#static-data-fetching-default) affect the rendering behavior of a route.
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Fetching</th>
+      <th>Dynamic Functions</th>
+      <th>Rendering</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cached</td>
+      <td>No</td>
+      <td>Static</td>
+    </tr>
+    <tr>
+      <td>Cached</td>
+      <td>Yes</td>
+      <td>Dynamic</td>
+    </tr>
+    <tr>
+      <td>Not Cached</td>
+      <td>No</td>
+      <td>Dynamic</td>
+    </tr>
+    <tr>
+      <td>Not Cached</td>
+      <td>Yes</td>
+      <td>Dynamic</td>
+    </tr>
+  </tbody>
+</table>
+
+Note how, for a route to be statically rendered, the data requests are **cached** and there are **no dynamic functions**.
+
+**Note:** In the future, Next.js will introduce hybrid server-side rendering where layouts and pages in a route can be independently statically or dynamically rendered, instead of the whole route.
+
+## [Static Data Fetching (Default)](#static-data-fetching-default)
+
+By default, Next.js will cache the result of `fetch()` requests that do not specifically opt out of caching behavior. This means that fetch requests that do not set a `cache` option will use the `force-cache` option.
+
+If any fetch requests in the route use the `revalidate` option, the route will be re-rendered statically during revalidation.
+
+To learn more about caching data fetching requests, see the [Caching and Revalidating](https://nextjs.org/docs/app/building-your-application/data-fetching/caching) page.
+
+## [Dynamic Rendering](#dynamic-rendering)
+
+During static rendering, if a dynamic function or a dynamic `fetch()` request (no caching) is discovered, Next.js will switch to dynamically rendering the whole route at request time. Any cached data requests can still be re-used during dynamic rendering.
+
+### [Using Dynamic Functions](#using-dynamic-functions)
+
+Dynamic functions rely on information that can only be known at request time such as a user's cookies, current requests headers, or the URL's search params. In Next.js, these dynamic functions are:
+
+- Using [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies) or [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers) in a Server Component will opt the whole route into dynamic rendering at request time.
+- Using [`useSearchParams()`](https://nextjs.org/docs/app/api-reference/functions/use-params) in Client Components will skip static rendering and instead render all client components up to the nearest parent Suspense boundary on the client.
+  - We recommend wrapping the client component that uses `useSearchParams()` in a `<Suspense/>` boundary. This will allow any client components above it to be statically rendered. [Example](https://nextjs.org/docs/app/api-reference/functions/use-params#static-rendering).
+- Using the [`searchParams`](https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional) [Pages](https://nextjs.org/docs/app/api-reference/file-conventions/page) prop will opt the page into dynamic rendering at request time.
+
+### [Using Dynamic Data Fetches](#using-dynamic-data-fetches)
+
+Dynamic data fetches are `fetch()` requests that specifically opt out of caching behavior by setting the `cache` option to `'no-store'` or `revalidate` to `0`.
+
+The caching options for all `fetch` requests in a layout or page can also be set using the [segment config](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config) object.
+
+To learn more about Dynamic Data Fetching, see the [Data Fetching](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching) page.

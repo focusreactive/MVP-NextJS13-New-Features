@@ -36,12 +36,12 @@ export default PostsPage;
 
 - On the server, the cache lasts the lifetime of a server request until the rendering process completes.
   - This optimization applies to `fetch` requests made in Layouts, Pages, Server Components, `generateMetadata` and `generateStaticParams`.
-  - This optimization also applies during [static generation](/docs/app/building-your-application/rendering#static-rendering).
+  - This optimization also applies during [static generation](https://nextjs.org/docs/app/building-your-application/rendering#static-rendering).
 - On the client, the cache lasts the duration of a session (which could include multiple client-side re-renders) before a full page reload.
 
 If you need to fetch the same data (e.g. current user) in multiple components in a tree, Next.js will automatically cache `fetch` requests (`GET`) that have the same input in a temporary cache. This optimization prevents the same data from being fetched more than once during a rendering pass.
 
-Next.js extends the [options object](https://developer.mozilla.org/en-US/docs/Web/API/fetch#:~:text=preflight%20requests.-,cache,-A%20string%20indicating) of the `fetch()` function to allow each request on the server to set its own persistent caching behavior. Together with [component-level data fetching](/docs/app/building-your-application/data-fetching#fetching-data-at-the-component-level), this allows you to configure caching within your application code directly where the data is being used.
+Next.js extends the [options object](https://developer.mozilla.org/en-US/docs/Web/API/fetch#:~:text=preflight%20requests.-,cache,-A%20string%20indicating) of the `fetch()` function to allow each request on the server to set its own persistent caching behavior. Together with [component-level data fetching](https://nextjs.org/docs/app/building-your-application/data-fetching#fetching-data-at-the-component-level), this allows you to configure caching within your application code directly where the data is being used.
 
 During server rendering, when Next.js comes across a fetch, it will check the cache to see if the data is already available. If it is, it will return the cached data. If not, it will fetch and store data for future requests.
 
@@ -52,7 +52,7 @@ During server rendering, when Next.js comes across a fetch, it will check the ca
 
 React and Next.js 13 introduced a new way to fetch and manage data in your application. The new data fetching system works in the `app` directory and is built on top of the [`fetch()` Web API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-`fetch()` is a Web API used to fetch remote resources that **returns a promise**. React extends `fetch` to provide [automatic request deduping](/docs/app/building-your-application/data-fetching#automatic-fetch-request-deduping), and Next.js extends the `fetch` options object to allow each request to set its own [caching and revalidating](/docs/app/building-your-application/data-fetching/caching).
+`fetch()` is a Web API used to fetch remote resources that **returns a promise**. React extends `fetch` to provide [automatic request deduping](https://nextjs.org/docs/app/building-your-application/data-fetching#automatic-fetch-request-deduping), and Next.js extends the `fetch` options object to allow each request to set its own [caching and revalidating](https://nextjs.org/docs/app/building-your-application/data-fetching/caching).
 
 ## [`async`/`await` in Server Components](#asyncawait-in-server-components)
 
@@ -92,8 +92,8 @@ export default async function Page() {
 
 Next.js provides helpful server functions you may need when fetching data in Server Components:
 
-- [`cookies()`](/docs/app/api-reference/functions/cookies)
-- [`headers()`](/docs/app/api-reference/functions/headers)
+- [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies)
+- [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers)
 
 ## [`use` in Client Components](#use-in-client-components)
 
@@ -105,7 +105,7 @@ Wrapping `fetch` in `use` is currently **not** recommended in Client Components 
 
 ## [Static Data Fetching](#static-data-fetching)
 
-By default, `fetch` will automatically fetch and [cache data](/docs/app/building-your-application/data-fetching/caching) indefinitely.
+By default, `fetch` will automatically fetch and [cache data](https://nextjs.org/docs/app/building-your-application/data-fetching/caching) indefinitely.
 
 ```ts
 fetch('https://...'); // cache: 'force-cache' is the default
@@ -113,13 +113,13 @@ fetch('https://...'); // cache: 'force-cache' is the default
 
 ### [Revalidating Data](#revalidating-data)
 
-To revalidate [cached data](/docs/app/building-your-application/data-fetching/caching) at a timed interval, you can use the `next.revalidate` option in `fetch()` to set the `cache` lifetime of a resource (in seconds).
+To revalidate [cached data](https://nextjs.org/docs/app/building-your-application/data-fetching/caching) at a timed interval, you can use the `next.revalidate` option in `fetch()` to set the `cache` lifetime of a resource (in seconds).
 
 ```ts
 fetch('https://...', { next: { revalidate: 10 } });
 ```
 
-See [Revalidating Data](/docs/app/building-your-application/data-fetching/revalidating) for more information.
+See [Revalidating Data](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating) for more information.
 
 > **NOTE:** Caching at the fetch level via `revalidate` or `cache: 'force-cache'` stores the data across requests in a shared cache. You should avoid using it for user specific data (i.e. requests that derive data from `cookies()` or `headers()`)
 
@@ -173,7 +173,7 @@ By starting the fetch prior to calling `await` in the Server Component, each req
 
 We can save time by initiating both requests in parallel, however, the user won't see the rendered result until both promises are resolved.
 
-To improve the user experience, you can add a [suspense boundary](/docs/app/building-your-application/routing/loading-ui-and-streaming) to break up the rendering work and show part of the result as soon as possible:
+To improve the user experience, you can add a [suspense boundary](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to break up the rendering work and show part of the result as soon as possible:
 
 artist/[username]/page.jsx
 
@@ -215,7 +215,7 @@ async function Albums({ promise }) {
 }
 ```
 
-Take a look at the [preloading pattern](/docs/app/building-your-application/data-fetching/caching#preload-pattern-with-cache) for more information on improving components structure.
+Take a look at the [preloading pattern](https://nextjs.org/docs/app/building-your-application/data-fetching/caching#preload-pattern-with-cache) for more information on improving components structure.
 
 ### [Sequential Data Fetching](#sequential-data-fetching)
 
@@ -258,7 +258,7 @@ By fetching data inside the component, each fetch request and nested segment in 
 
 ### [Blocking Rendering in a Route](#blocking-rendering-in-a-route)
 
-By fetching data in a [layout](/docs/app/building-your-application/routing/pages-and-layouts), rendering for all route segments beneath it can only start once the data has finished loading.
+By fetching data in a [layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts), rendering for all route segments beneath it can only start once the data has finished loading.
 
 In the `pages` directory, pages using server-rendering would show the browser loading spinner until `getServerSideProps` had finished, then render the React component for that page. This can be described as "all or nothing" data fetching. Either you had the entire data for your page, or none.
 
@@ -273,7 +273,7 @@ Whenever possible, it's best to fetch data in the segment that uses it. This als
 
 You might not always have the ability to use and configure `fetch` requests directly if you're using a third-party library such as an ORM or database client.
 
-In cases where you cannot use `fetch` but still want to control the caching or revalidating behavior of a layout or page, you can rely on the [default caching behavior](/docs/app/building-your-application/data-fetching/fetching#default-caching-behavior) of the segment or use the [segment cache configuration](#segment-cache-configuration).
+In cases where you cannot use `fetch` but still want to control the caching or revalidating behavior of a layout or page, you can rely on the [default caching behavior](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#default-caching-behavior) of the segment or use the [segment cache configuration](#segment-cache-configuration).
 
 ### [Default Caching Behavior](#default-caching-behavior)
 
@@ -281,11 +281,11 @@ Any data fetching libraries that do not use `fetch` directly **will not** affect
 
 If the segment is static (default), the output of the request will be cached and revalidated (if configured) alongside the rest of the segment. If the segment is dynamic, the output of the request will _not_ be cached and will be re-fetched on every request when the segment is rendered.
 
-> **Good to know:** Dynamic functions like [`cookies()`](/docs/app/api-reference/functions/cookies) and [`headers()`](/docs/app/api-reference/functions/headers) will make the route segment dynamic.
+> **Good to know:** Dynamic functions like [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies) and [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers) will make the route segment dynamic.
 
 ### [Segment Cache Configuration](#segment-cache-configuration)
 
-As a temporary solution, until the caching behavior of third-party queries can be configured, you can use [segment configuration](/docs/app/api-reference/file-conventions/route-segment-config#configrevalidate) to customize the cache behavior of the entire segment.
+As a temporary solution, until the caching behavior of third-party queries can be configured, you can use [segment configuration](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#configrevalidate) to customize the cache behavior of the entire segment.
 
 app/page.tsx
 
