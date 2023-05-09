@@ -17,7 +17,7 @@ async function getFiles(dir) {
 
 async function addDummyDocs() {
   try {
-    const files = await getFiles('app/@examples');
+    const files = await getFiles('app/parallel/@examples');
 
     files.forEach((pagePath) => {
       const docsPath = pagePath.replace('@examples', '@docs');

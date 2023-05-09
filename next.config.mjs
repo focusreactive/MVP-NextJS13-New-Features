@@ -7,6 +7,8 @@ import createMDX from '@next/mdx';
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverActions: true,
+    turbo: true,
   },
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],

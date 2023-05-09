@@ -29,6 +29,9 @@ export default async function RootLayout({
           <li>
             <Link href={'/parallel/users/static'}>Users Static</Link>
           </li>
+          <li>
+            <Link href={'/parallel/me/server'}>Me</Link>
+          </li>
         </ul>
       </nav>
 

@@ -45,7 +45,7 @@ export default function RootLayout({
           </main>
         </div>
 
-        <RequestsCounter />
+        {/*<RequestsCounter />*/}
       </body>
     </html>
   );
