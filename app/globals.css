@@ -17,11 +17,11 @@ body {
 }
 
 .docs {
-  width: 100%;
+  width: 50%;
 }
 
 .examples {
-  width: 100%;
+  width: 50%;
 }
 
 .rerender-indicator {

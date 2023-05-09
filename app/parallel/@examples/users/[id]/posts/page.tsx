@@ -18,7 +18,7 @@ const UserPostsPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      {userPosts.map(({ id, userId, title, body }) => (
+      {userPosts.slice(5).map(({ id, userId, title, body }) => (
         <article key={id}>
           <h4>{title}</h4>
           <p>{body.slice(0, 300)}...</p>

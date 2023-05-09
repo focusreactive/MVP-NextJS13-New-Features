@@ -1,12 +1,6 @@
+# Post Page
+
 ```js
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const [post] = await api.post(params.id);
-
-  return {
-    title: post.title,
-  };
-}
-
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images();
@@ -51,9 +45,9 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
 };
 ```
 
----
+#
 
-# Page Dynamic Metadata
+## Page Dynamic Metadata
 
 ```js
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -65,19 +59,31 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 ```
 
----
+#
 
-# JSON LD
+## JSON LD
 
 [Docs](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/optimizing/metadata#json-ld)
 
-[This page in Google Reach Results](https://search.google.com/test/rich-results/result?id=RpXQvngfOGeNa0WigNfAEA)
+[This page in Google Reach Results](https://search.google.com/test/rich-results/result?id=ZPNpReiRoNw4QO8U3s87Tw)
 
 Put the JSON LD script right in the page component:
 
 ```js
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-/>
+const Component = () => {
+  const jsonLd = {...};
+
+  return (
+    <section>
+      ...
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      ...
+    </section>
+  );
+};
 ```
