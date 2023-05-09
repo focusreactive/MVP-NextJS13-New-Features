@@ -64,11 +64,11 @@ In this example the layout, page, and fetch request are all asking for the route
 
 Since the fetch request has the shortest revalidation time, this page will use its value and be revalidated every 10 seconds.
 
-See [`revalidate`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate) for other possible configuration options.
+See [`revalidate`](https://nextjs.orghttps://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate) for other possible configuration options.
 
 **Good to know:**
 
-- You can set `fetchCache` to `'only-cache'` or `'force-cache'` to ensure that all `fetch` requests opt into caching but the revalidation frequency might still be lowered by individual `fetch` requests. See [`fetchCache`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#fetchCache) for more information.
+- You can set `fetchCache` to `'only-cache'` or `'force-cache'` to ensure that all `fetch` requests opt into caching but the revalidation frequency might still be lowered by individual `fetch` requests. See [`fetchCache`](https://nextjs.orghttps://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#fetchCache) for more information.
 
 ## [Per-request Caching](#per-request-caching)
 
@@ -119,10 +119,10 @@ Although the `getUser()` function is called twice in the example above, only one
 
 **Good to know:**
 
-- `fetch()` has already been patched to include support for `cache()` automatically, so you don't need to wrap functions that use `fetch()` with `cache()`. See [automatic request deduping](https://nextjs.org/docs/app/building-your-application/data-fetching#automatic-fetch-request-deduping) for more information.
+- `fetch()` has already been patched to include support for `cache()` automatically, so you don't need to wrap functions that use `fetch()` with `cache()`. See [automatic request deduping](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/data-fetching#automatic-fetch-request-deduping) for more information.
 - In this new model, we recommend **fetching data directly in the component that needs it**, even if you're requesting the same data in multiple components instead of prop drilling.
 - You can wrap functions you don't control such as third-party libraries with `cache` for the same per-request caching behavior.
-- Using `cache` allows shared data fetching without having to know if a parent layout was [rendered during this request](https://nextjs.org/docs/app/building-your-application/routing#partial-rendering).
+- Using `cache` allows shared data fetching without having to know if a parent layout was [rendered during this request](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing#partial-rendering).
 - We recommend using the [`server-only` package](/docs/getting-started/react-essentials#keeping-server-only-code-out-of-client-components-poisoning) to make sure server data fetching functions are not accidentally used on the client.
 
 ### [GraphQL and `cache()`](#graphql-and-cache)
@@ -181,7 +181,7 @@ export default async function Page({
 > **Good to know**:
 >
 > - The `preload()` function can have any name. It's a pattern, not an API.
-> - This pattern is completely optional and something you can use to optimize on a case-by-case basis. This pattern is a further optimization on top of [parallel data fetching](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#parallel-data-fetching). Now you don't have to pass promises down as props and can instead rely on the preload pattern.
+> - This pattern is completely optional and something you can use to optimize on a case-by-case basis. This pattern is a further optimization on top of [parallel data fetching](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/data-fetching/fetching#parallel-data-fetching). Now you don't have to pass promises down as props and can instead rely on the preload pattern.
 
 ### [Combining `cache`, `preload`, and `server-only`](#combining-cache-preload-and-server-only)
 

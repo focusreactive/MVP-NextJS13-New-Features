@@ -29,6 +29,9 @@ export default function RootLayout({
                 <Link href={'/'}>Home</Link>
               </li>
               <li>
+                <Link href={'/overview'}>Overview</Link>
+              </li>
+              <li>
                 <Link href={'/parallel'}>Parallel</Link>
               </li>
               <li>
