@@ -16,6 +16,14 @@ export const RequestsCounter = () => {
       .then(setState)
       .then(() => setLoadingData(false));
   };
+  const clean = () => {
+    setLoadingData(true);
+
+    fetch(`${window.location.origin}/api/clear-logs`)
+      .then((r) => r.json())
+      .then(setState)
+      .then(() => setLoadingData(false));
+  };
 
   // TODO: choose how to update
 
@@ -46,6 +54,7 @@ export const RequestsCounter = () => {
       }}
     >
       <button onClick={update}>Refresh</button>
+      <button onClick={clean}>Clean</button>
       {loadingData ? (
         <Loader />
       ) : (

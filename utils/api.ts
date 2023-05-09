@@ -2,32 +2,8 @@ import { proxyFetch } from './proxyFetch';
 
 import type { Post, User } from '@/app/global';
 
-export const state: Record<string, { calls: number; realCalls: number }> = {};
-export const subscribers: Record<string, () => void> = {};
-
-const updateState = (path: string | null, logs: Record<string, number>) => {
-  if (path) {
-    if (!state[path]) state[path] = { calls: 0, realCalls: 0 };
-    state[path].calls += 1;
-  }
-
-  if (logs) {
-    Object.entries(logs).forEach(([url, count]) => {
-      if (!state[url]) state[url] = { calls: 0, realCalls: 0 };
-      state[url].realCalls += count;
-    });
-  }
-};
-
-const triggerSubscribers = () => {
-  Object.values(subscribers).forEach((fn) => fn());
-};
-
 const fetchData = async (url: string, options?: RequestInit) => {
   const result = await proxyFetch.fetch(url, options).catch(console.error);
-
-  updateState(url, result.logs);
-  triggerSubscribers();
   return { data: result?.data, counter: result?.counter };
 };
 
@@ -71,14 +47,5 @@ export const api = {
     const result = await fetchData('/images');
 
     return [result.data, result.counter] as [string, number];
-  },
-
-  updateLogs: async () => {
-    const logs = await proxyFetch.fetch(`/logs`);
-
-    updateState(null, logs);
-    triggerSubscribers();
-
-    return logs;
   },
 };

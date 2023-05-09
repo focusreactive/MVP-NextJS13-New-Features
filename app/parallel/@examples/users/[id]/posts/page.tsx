@@ -24,9 +24,9 @@ const UserPostsPage = async ({ params }: { params: { id: string } }) => {
           <p>{body.slice(0, 300)}...</p>
 
           <div>
-            <Link href={`/posts/${id}`}>Read more</Link>
+            <Link href={`/parallel/posts/${id}`}>Read more</Link>
             <span style={{ padding: '0 14px' }}> | </span>
-            <Link href={`/posts/${id}`}>Preview</Link>
+            <Link href={`/parallel/posts/${id}`}>Preview</Link>
           </div>
         </article>
       ))}

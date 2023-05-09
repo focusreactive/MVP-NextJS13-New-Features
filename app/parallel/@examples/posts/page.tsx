@@ -15,10 +15,10 @@ const PostsPage = async () => {
 
       {posts.map(({ id, userId, title, body }) => (
         <article key={id}>
-          <Link href={`/posts/${id}`}>{title}</Link>
+          <Link href={`/parallel/posts/${id}`}>{title}</Link>
           <p>{body.slice(0, 100)}...</p>
           <small>
-            <Link href={`/users/${id}`} className={'secondary'}>
+            <Link href={`/parallel/users/${id}`} className={'secondary'}>
               Author Page
             </Link>
           </small>

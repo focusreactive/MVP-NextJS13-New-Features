@@ -38,7 +38,7 @@ export default function RootLayout({
           </nav>
 
           <main className="main-container">
-            <div>{children}</div>
+            <div style={{ width: '100%' }}>{children}</div>
           </main>
         </div>
 

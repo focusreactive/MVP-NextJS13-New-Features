@@ -44,3 +44,25 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
 
 export default UserPage;
 ```
+
+# Dynamic Image Generation
+
+[Preview](https://www.opengraph.xyz/url/https%3A%2F%2Fnextjs13-mvp.vercel.app%2Fusers%2F1)
+
+```js
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string },
+}): Promise<Metadata> {
+  const [user] = await api.user(params.id);
+
+  return {
+    title: user.name,
+    openGraph: {
+      title: user.name,
+      images: [`/api/user-image?id=${params.id}`], // app/api/user-image/route.tsx
+    },
+  };
+}
+```

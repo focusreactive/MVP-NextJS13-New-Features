@@ -1,7 +1,6 @@
-import Link from 'next/link';
-
-import { sleep } from '@/utils/sleep';
 import { api } from '@/utils/api';
+
+import type { Metadata } from 'next';
 
 // export async function generateStaticParams() {
 //   // const [posts] = await api.posts();
@@ -13,9 +12,21 @@ import { api } from '@/utils/api';
 //   return [{ id: "1" }];
 // }
 
-export const metadata = {
-  title: 'Users dynamic',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const [user] = await api.user(params.id);
+
+  return {
+    title: user.name,
+    openGraph: {
+      title: user.name,
+      images: [`/api/user-image?id=${params.id}`],
+    },
+  };
+}
 
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
