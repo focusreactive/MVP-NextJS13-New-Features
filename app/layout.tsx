@@ -32,6 +32,9 @@ export default function RootLayout({
                 <Link href={'/overview'}>Overview</Link>
               </li>
               <li>
+                <Link href={'/layout'}>Layout</Link>
+              </li>
+              <li>
                 <Link href={'/parallel'}>Parallel</Link>
               </li>
               <li>

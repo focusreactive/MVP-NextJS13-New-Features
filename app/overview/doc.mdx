@@ -40,13 +40,11 @@ If any fetch requests in the route use the revalidate option, the route will be 
 
 In version 13, Next.js introduced a new **App Router** built on [React Server Components](/docs/getting-started/react-essentials#server-components), which supports shared layouts, nested routing, loading states, error handling, and more.
 
-The App Router works in a new directory named `app`. The `app` directory works alongside the `pages` directory to allow for incremental adoption. This allows you to opt some routes of your application into the new behavior while keeping other routes in the `pages` directory for previous behavior. If your application uses the `pages` directory, please also see the [Pages Router](/docs/pages/building-your-application/routing) documentation.
+The App Router works in a new directory named `app`. The `app` directory works alongside the `pages` directory to allow for incremental adoption. This allows you to opt some routes of your application into the new behavior while keeping other routes in the `pages` directory for previous behavior.
 
 > **Good to know:** The App Router takes priority over the Pages Router. Routes across directories should not resolve to the same URL path and will cause a build-time error to prevent a conflict.
 
 By default, components inside `app` are [React Server Components](/docs/getting-started/react-essentials#server-components). This is a performance optimization and allows you to easily adopt them, and you can also use [Client Components](/docs/getting-started/react-essentials#client-components).
-
-> **Recommendation:** Check out the [Server and Client Components](/docs/getting-started/react-essentials) page if you're new to Server Components.
 
 ## [Roles of Folders and Files](#roles-of-folders-and-files)
 
@@ -67,8 +65,6 @@ Next.js provides a set of special files to create UI with specific behavior in n
 - [error.js](https://nextjs.org/docs/app/building-your-application/routing/error-handling): Create error UI for a segment and its children. `error.js` wraps a page or child segment in a [React Error Boundary](https://reactjs.org/docs/error-boundaries.html), showing the error UI if an error is caught.
   - [global-error.js](https://nextjs.org/docs/app/building-your-application/routing/error-handling): Similar to `error.js`, but specifically for catching errors in the root `layout.js`.
 - [not-found.js](https://nextjs.org/docs/app/api-reference/file-conventions/not-found): Create UI to show when the [`notFound`](https://nextjs.org/docs/app/api-reference/functions/not-found) function is thrown within a route segment or when a URL is not matched by any route.
-
-> **Good to know:** `.js`, `.jsx`, or `.tsx` file extensions can be used for special files.
 
 ## [Component Hierarchy](#component-hierarchy)
 
@@ -100,8 +96,6 @@ Although routing is server-centric, the router uses **client-side navigation** w
 
 Additionally, as users navigate around the app, the router will store the result of the React Server Component payload in an **in-memory client-side cache**. The cache is split by route segments which allows invalidation at any level and ensures consistency across [React's concurrent renders](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react). This means that for certain cases, the cache of a previously fetched segment can be re-used, further improving performance.
 
-Checkout the [Linking and Navigating](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating) page to learn how to use the Link component.
-
 ## [Partial Rendering](#partial-rendering)
 
 When navigating between sibling routes (e.g. `/dashboard/settings` and `/dashboard/analytics` below), Next.js will only fetch and render the layouts and pages in routes that change. It will **not** re-fetch or re-render anything above the segments in the subtree. This means that in routes that share a layout, the layout will be preserved when a user navigates between sibling pages.
@@ -116,5 +110,3 @@ The App Router also provides a set conventions to help you implement more advanc
 
 - [Parallel Routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes): Allow you to simultaneously show two or more pages in the same view that can be navigated independently. You can use them for split views that have their own sub-navigation. E.g. Dashboards.
 - [Intercepting Routes](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing/intercepting-routes): Allow you to intercept a route and show it in the context of another route. You can use these when keeping the context for the current page is important. E.g. Seeing all tasks while editing one task or expanding a photo in a feed.
-
-These patterns allow you to build richer and more complex UIs, democratizing features that were historically complex for small teams and individual developers to implement.
