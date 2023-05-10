@@ -12,6 +12,7 @@ export const register = async (formData: FormData) => {
 
   await sleep(3000);
 
+  // @ts-ignore
   cookies().set({
     name: 'user',
     value: JSON.stringify({ name }),
