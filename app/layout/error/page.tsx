@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
+
 import styles from './Page.module.css';
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
 const Page = async () => {
-  const throwError = () => {
-    throw new Error('Masz problem');
-  };
+  const [error, setError] = useState(false);
+
+  if (error) throw new Error('Masz problem');
+
+  const throwError = () => setError(true);
 
   return (
     <div className={'rerender-indicator'}>
