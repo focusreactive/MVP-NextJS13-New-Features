@@ -43,8 +43,8 @@ export const api = {
     return [result.data, result.counter] as [User[], number];
   },
 
-  images: async () => {
-    const result = await fetchData('/images');
+  images: async (options?: RequestInit) => {
+    const result = await fetchData('/images', options);
 
     return [result.data, result.counter] as [string, number];
   },

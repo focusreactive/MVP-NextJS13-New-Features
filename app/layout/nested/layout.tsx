@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import getRandomColor from '@/utils/getRandomColor';
+import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
 export const metadata = {
   title: 'Layout metadata',
@@ -18,13 +18,13 @@ export default async function RootLayout({
           <li>
             <Link href={'/layout/nested/nested'}>Nested</Link>
           </li>
+          <li>
+            <BuildInfo />
+          </li>
         </ul>
       </nav>
 
-      <section className="main-container">
-        <div style={{ backgroundColor: getRandomColor() }}>RANDOM COLOR</div>
-        <div>{`Built at: ${new Date(Date.now()).toISOString()}`}</div>
-        <h2>NEXT_RUNTIME{process.env.NEXT_RUNTIME}</h2>
+      <section className="layout">
         <div>{children}</div>
       </section>
     </>

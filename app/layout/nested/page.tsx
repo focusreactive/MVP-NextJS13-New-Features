@@ -1,11 +1,10 @@
-import getRandomColor from '@/utils/getRandomColor';
+import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
 const Page = () => {
   return (
     <div className={'rerender-indicator'}>
       <h1>One level deep</h1>
-      <div style={{ backgroundColor: getRandomColor() }}>RANDOM COLOR</div>
-      <div>{`Built at: ${new Date(Date.now()).toISOString()}`}</div>
+      <BuildInfo />
       <main className="container">
         <div className="grid">
           <section>
@@ -24,7 +23,7 @@ const Page = () => {
             </p>
             <figure>
               <img
-                src="img/ashim-d-silva-3Ijt7UkSBYE-unsplash-1500x750.jpg"
+                src="/assets/ashim-d-silva-3Ijt7UkSBYE-unsplash-1500x750.jpg"
                 alt="Architecture"
               />
               <figcaption>
@@ -66,7 +65,7 @@ const Page = () => {
 
           <aside>
             <img
-              src="img/maarten-deckers-T5nXYXCf50I-unsplash-1500x750.jpg"
+              src="/assets/maarten-deckers-T5nXYXCf50I-unsplash-1500x750.jpg"
               alt="Architecture"
             />
 
@@ -80,7 +79,7 @@ const Page = () => {
             </p>
 
             <img
-              src="img/daniel-von-appen-tb4heMa-ZRo-unsplash-1500-750.jpg"
+              src="/assets/daniel-von-appen-tb4heMa-ZRo-unsplash-1500-750.jpg"
               alt="Architecture"
             />
 
@@ -93,7 +92,7 @@ const Page = () => {
             </p>
 
             <img
-              src="img/matthew-hamilton-Ru3Ap8TNcsk-unsplash-1500-750.jpg"
+              src="/assets/matthew-hamilton-Ru3Ap8TNcsk-unsplash-1500-750.jpg"
               alt="Architecture"
             />
 
