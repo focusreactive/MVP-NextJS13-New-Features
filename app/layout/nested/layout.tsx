@@ -16,7 +16,7 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/layout/nested/nested'}>Nested</Link>
+            <Link href={'/layout/nested/loading'}>Loading</Link>
           </li>
           <li>
             <BuildInfo />
