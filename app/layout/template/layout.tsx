@@ -27,6 +27,7 @@ export default async function RootLayout({
       <section className="main-container">
         <div style={{ backgroundColor: getRandomColor() }}>RANDOM COLOR</div>
         <div>{`Built at: ${new Date(Date.now()).toISOString()}`}</div>
+        <h2>NEXT_RUNTIME{process.env.NEXT_RUNTIME}</h2>
         <div>{children}</div>
       </section>
     </>

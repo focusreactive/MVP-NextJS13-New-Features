@@ -12,6 +12,7 @@ const Page = async () => {
     <div className={'rerender-indicator'}>
       <div style={{ backgroundColor: getRandomColor() }}>RANDOM COLOR</div>
       <div>{`Built at: ${new Date(Date.now()).toISOString()}`}</div>
+      <h2>NEXT_RUNTIME{process.env.NEXT_RUNTIME}</h2>
       <main className="container">
         <img src={image} alt="dog" width={400} />
         <div className={styles.container}>
