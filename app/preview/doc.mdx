@@ -1,0 +1,46 @@
+```tsx
+const Page = () => {
+  const { isEnabled } = draftMode();
+
+  return (
+    <div className={'content-container'}>
+      <h1>Preview URL aka Draft Mode</h1>
+      <p>
+        This page is {isEnabled ? 'dynamic' : 'static'}{' '}
+        {new Date().toLocaleTimeString()}
+      </p>
+
+      <div>
+        <Link href={'/api/enable-draft'}>Enable</Link> |{' '}
+        <Link href={'/api/disable-draft'}>Disable</Link>
+      </div>
+    </div>
+  );
+};
+```
+
+#
+
+`app/api/enable-draft/route.ts`
+
+```tsx
+import { draftMode } from 'next/headers';
+
+export async function GET(request: Request) {
+  draftMode().enable();
+  return new Response('Draft mode is enabled');
+}
+```
+
+#
+
+`app/api/disable-draft/route.ts`
+
+```tsx
+import { draftMode } from 'next/headers';
+
+export async function GET(request: Request) {
+  draftMode().disable();
+  return new Response('Draft mode is disabled');
+}
+```
