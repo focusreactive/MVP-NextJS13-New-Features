@@ -23,7 +23,6 @@ const Page = () => {
         </ul>
       </div>
 
-
       <Parent />
       <br />
       <Doc />

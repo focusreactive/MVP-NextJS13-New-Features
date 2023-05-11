@@ -14,13 +14,11 @@ const Page = () => {
     <div>
       <h3>Ignores parent template</h3>
 
-
       <Parent />
       <br />
       <Doc />
     </div>
   );
 };
-
 
 export default Page;

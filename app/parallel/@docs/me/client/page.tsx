@@ -1,7 +1,5 @@
+import Doc from './doc.mdx';
 
-  import Doc from './doc.mdx';
-  
-  export default function Page() {
-    return <Doc />;
-  }
-          
+export default function Page() {
+  return <Doc />;
+}
