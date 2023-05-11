@@ -40,6 +40,9 @@ export default function RootLayout({
               <li>
                 <Link href={'/static'}>Static+Cache</Link>
               </li>
+              <li>
+                <Link href={'/metadata'}>Metadata</Link>
+              </li>
             </ul>
           </nav>
 

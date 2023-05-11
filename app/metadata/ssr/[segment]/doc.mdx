@@ -1,0 +1,14 @@
+`/metadata/ssr/[segment]`
+
+```tsx
+export async function generateMetadata(
+  { searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { title } = await parent;
+
+  return {
+    title: `${title?.absolute} - ${searchParams.id}`,
+  };
+}
+```
