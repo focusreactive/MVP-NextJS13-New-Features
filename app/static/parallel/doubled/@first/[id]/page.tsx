@@ -7,21 +7,19 @@ export const metadata = {
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
-  const [post] = await api.post(params.id);
+  const [user] = await api.user(params.id);
   const [image] = await api.images();
 
   return (
     <div>
       <article>
-        <h2>{post.title}</h2>
+        <h2>{user.name}</h2>
         <div>FIRST</div>
-        <p>{post.body}</p>
+        <p>{user.username}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        <Link href={`/users/${post.userId}`} className={'secondary'}>
-          Author Page
-        </Link>
+        <Link href={user.website}>Site</Link>
       </article>
     </div>
   );
