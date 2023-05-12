@@ -21,16 +21,13 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/parallel/posts'}>Posts</Link>
+            <Link href={'/layout/parallel/sync'}>Sync</Link>
           </li>
           <li>
-            <Link href={'/parallel/users/list'}>Users</Link>
+            <Link href={'/layout/parallel/left'}>Left</Link>
           </li>
           <li>
-            <Link href={'/parallel/users/static'}>Users Static</Link>
-          </li>
-          <li>
-            <Link href={'/parallel/me/server'}>Me</Link>
+            <Link href={'/layout/parallel/right'}>Right</Link>
           </li>
         </ul>
       </nav>
