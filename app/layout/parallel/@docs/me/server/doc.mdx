@@ -1,0 +1,77 @@
+# Server actions in server components
+
+[Docs](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions)
+
+```js
+const Page = async () => {
+  const cookie = cookies().get('user')?.value;
+  const user = cookie && JSON.parse(cookie);
+
+  const register = async (formData: FormData) => {
+    'use server';
+
+    const name = formData.get('name');
+
+    if (!name) return;
+
+    cookies().set({
+      name: 'user',
+      value: JSON.stringify({ name }),
+      httpOnly: true,
+    });
+
+    revalidatePath('/parallel/me');
+  };
+
+  const logout = async () => {
+    'use server';
+
+    cookies().set({ name: 'user', value: '', httpOnly: true });
+
+    revalidatePath('/parallel/me');
+  };
+
+  if (!user?.name) {
+    return (
+      <div>
+        <h1>Registration (server)</h1>
+
+        <form action={register}>
+          <label>
+            Enter your name:
+            <input type="text" name={'name'} />
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
+
+  return (
+    <form action={logout}>
+      <h1>Hello, {user.name}!</h1>
+      <button>Logout</button>
+    </form>
+  );
+};
+```
+
+#
+
+## Key takeaways
+
+- Functions with `'use server'` should have serializable arguments and a serializable return value
+- There are 3 ways to call such functions (first two support progressive enhancement):
+  - `action` prop on a form
+  - `formAction` prop on `<button>`, `<input type="submit">`, and `<input type="image">` in a form
+  - `startTransition`
+- `useOptimistic` to implement optimistic updates
+- `useFormStatus` to get the status of a form submission
+- We can't define server actions in client components, but
+  - we can pass server functions as a prop
+  - we can import server functions inside client components
+- Two ways to revalidate a page:
+  - `revalidatePath`
+  - `revalidateTag`
+- We can use `cookies()` and `headers()` functions in server actions
+- We can modify cookies (basically they are read-only)

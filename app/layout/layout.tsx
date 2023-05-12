@@ -19,9 +19,6 @@ export default async function RootLayout({
             <Link href={'/layout/nested'}>Nested</Link>
           </li>
           <li>
-            <Link href={'/layout/template'}>Template</Link>
-          </li>
-          <li>
             <Link href={'/layout/parallel'}>Parallel</Link>
           </li>
           <li>
