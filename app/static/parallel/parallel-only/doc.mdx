@@ -1,4 +1,6 @@
-Dynamic route `[id]`, cached by default
+Dynamic route `[id]`, should be cached by default and static as static/simple but instead SSR is used
+
+dynamic route is nested in @parallel
 
 ```ts
 import Link from 'next/link';
@@ -6,7 +8,7 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic Simple',
+  title: 'Dynamic post',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
@@ -35,7 +37,7 @@ export default PostPage;
 export async function generateStaticParams() {
   const [posts] = await api.posts();
 
-  return posts.slice(0, 10).map((post) => {
+  return posts.slice(10, 20).map((post) => {
     return {
       id: String(post.id),
     };
@@ -43,7 +45,8 @@ export async function generateStaticParams() {
 }
 ```
 
-```tsimport { proxyFetch } from './proxyFetch';
+```ts
+import { proxyFetch } from './proxyFetch';
 
 import type { Post, User } from '@/app/global';
 

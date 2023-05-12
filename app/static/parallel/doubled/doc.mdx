@@ -1,4 +1,8 @@
-Dynamic route `[id]`, cached by default
+Dynamic route `[id]`
+
+the dynamic route is nested in @parallel, but there is also a dynamic route in the root folder so it is working as SSG now
+
+static/parallel/doubled/@first/[id].tsx
 
 ```ts
 import Link from 'next/link';
@@ -6,7 +10,51 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic Simple',
+  title: 'Dynamic post',
+};
+
+const PostPage = async ({ params }: { params: { id: string } }) => {
+  const [user] = await api.user(params.id);
+  const [image] = await api.images();
+  const site = user.website;
+
+  return (
+    <div>
+      <article>
+        <h2>{user.name}</h2>
+        <div>FIRST</div>
+        <p>{user.username}</p>
+        <div className="grid">
+          <img src={image} alt="dog" width={400} />
+        </div>
+        {site && <Link href={user.website}>Site</Link>}
+      </article>
+    </div>
+  );
+};
+
+export default PostPage;
+
+export async function generateStaticParams() {
+  const [posts] = await api.posts();
+
+  return posts.slice(10, 20).map((post) => {
+    return {
+      id: String(post.id),
+    };
+  });
+}
+```
+
+static/parallel/doubled/[id].tsx
+
+```ts
+import Link from 'next/link';
+
+import { api } from '@/utils/api';
+
+export const metadata = {
+  title: 'Dynamic post',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
@@ -17,7 +65,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
     <div>
       <article>
         <h2>{post.title}</h2>
-
+        <div>ROOT</div>
         <p>{post.body}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
@@ -43,7 +91,8 @@ export async function generateStaticParams() {
 }
 ```
 
-```tsimport { proxyFetch } from './proxyFetch';
+```ts
+import { proxyFetch } from './proxyFetch';
 
 import type { Post, User } from '@/app/global';
 

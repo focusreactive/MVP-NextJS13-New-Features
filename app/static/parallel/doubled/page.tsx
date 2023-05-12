@@ -1,11 +1,13 @@
+import Doc from './doc.mdx';
+
 export const metadata = {
-  title: 'Parallel',
+  title: 'Simple',
 };
 
 const Page = () => {
   return (
     <div className={'rerender-indicator'}>
-      <h1>Dynamic route is in parallel route @first and in folder root</h1>
+      <Doc />
     </div>
   );
 };
