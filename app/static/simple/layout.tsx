@@ -31,9 +31,7 @@ export default async function RootLayout({
         </ul>
       </nav>
 
-      <section className="main-container">
-        <div>{children}</div>
-      </section>
+      <section className="main-container">{children}</section>
     </>
   );
 }

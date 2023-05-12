@@ -17,6 +17,7 @@ export default async function RootLayout({
   first: React.ReactNode;
 }) {
   const [posts] = await api.posts();
+
   return (
     <>
       <nav>
