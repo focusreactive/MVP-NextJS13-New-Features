@@ -1,7 +1,7 @@
 import Doc from './doc.mdx';
 
 export const metadata = {
-  title: 'Static + Cache examples',
+  title: 'Config',
 };
 
 const Page = () => {

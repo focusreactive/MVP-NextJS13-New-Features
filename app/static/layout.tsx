@@ -22,12 +22,13 @@ export default async function RootLayout({
           <li>
             <Link href={'/static/parallel'}>Parallel</Link>
           </li>
+          <li>
+            <Link href={'/static/config'}>Config</Link>
+          </li>
         </ul>
       </nav>
 
-      <section className="blog">
-        <div>{children}</div>
-      </section>
+      <section className="layout">{children}</section>
     </>
   );
 }

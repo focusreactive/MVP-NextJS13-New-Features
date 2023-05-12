@@ -9,6 +9,7 @@ export const metadata = {
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
   const [image] = await api.images();
+  const site = user.website;
 
   return (
     <div>
@@ -19,7 +20,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        <Link href={user.website}>Site</Link>
+        {site && <Link href={user.website}>Site</Link>}
       </article>
     </div>
   );
