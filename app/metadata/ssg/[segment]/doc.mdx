@@ -1,0 +1,18 @@
+`/metadata/ssg/[segment]`
+
+```tsx
+export async function generateStaticParams() {
+  return [{ segment: 'page-1' }, { segment: 'page-2' }, { segment: 'page-3' }];
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { title } = await parent;
+
+  return {
+    title: `${title} - ${params.segment}`,
+  };
+}
+```

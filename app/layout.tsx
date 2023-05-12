@@ -6,8 +6,6 @@ import React from 'react';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-import { RequestsCounter } from '@/components/RequestsCounter';
-
 export const metadata = {
   title: 'Homepage',
 };
@@ -39,6 +37,12 @@ export default function RootLayout({
               </li>
               <li>
                 <Link href={'/static'}>Static+Cache</Link>
+              </li>
+              <li>
+                <Link href={'/metadata'}>Metadata</Link>
+              </li>
+              <li>
+                <Link href={'/preview'}>Preview</Link>
               </li>
             </ul>
           </nav>

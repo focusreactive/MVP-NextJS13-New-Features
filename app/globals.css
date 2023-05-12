@@ -41,11 +41,13 @@ body {
 }
 
 .animate-character {
-  background-image: linear-gradient(-225deg,
-      #fff800 0%,
-      #ff1361 29%,
-      #44107a 67%,
-      #231557 100%);
+  background-image: linear-gradient(
+    -225deg,
+    #fff800 0%,
+    #ff1361 29%,
+    #44107a 67%,
+    #231557 100%
+  );
   background-size: 200% auto;
   color: #fff;
   background-clip: text;
@@ -74,4 +76,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.remark-highlight {
+  font-size: 14px;
 }
