@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import NavLink from '@/components/NavLink/NavLink';
 import Doc from './doc.mdx';
 
 import type { Metadata } from 'next';
@@ -18,13 +17,13 @@ const Layout = ({ children }: PropsWithChildren) => {
 
       <ul>
         <li>
-          <Link href={'/metadata/ssr/page-1'}>Page 1</Link>
+          <NavLink href={'/metadata/ssr/page-1'}>Page 1</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/ssr/page-2'}>Page 2</Link>
+          <NavLink href={'/metadata/ssr/page-2'}>Page 2</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/ssr/page-3'}>Page 3</Link>
+          <NavLink href={'/metadata/ssr/page-3'}>Page 3</NavLink>
         </li>
       </ul>
 

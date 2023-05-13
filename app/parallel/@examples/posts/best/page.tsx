@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -16,9 +16,12 @@ const PostPage = async () => {
 
         <p>{post.body}</p>
 
-        <Link href={`/parallel/users/${post.userId}`} className={'secondary'}>
+        <NavLink
+          href={`/parallel/users/${post.userId}`}
+          className={'secondary'}
+        >
           Author Page
-        </Link>
+        </NavLink>
       </article>
     </div>
   );

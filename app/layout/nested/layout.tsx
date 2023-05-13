@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
@@ -16,7 +16,7 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/layout/nested/loading'}>Loading</Link>
+            <NavLink href={'/layout/nested/loading'}>Loading</NavLink>
           </li>
           <li>
             <BuildInfo />

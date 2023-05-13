@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 const Page = () => {
   return (
@@ -6,13 +6,13 @@ const Page = () => {
       <h1>Metadata examples</h1>
 
       <p>
-        <Link
+        <NavLink
           href={
             'https://nextjs.org/docs/app/api-reference/functions/generate-metadata'
           }
         >
           Docs
-        </Link>
+        </NavLink>
       </p>
 
       <div>
@@ -30,20 +30,20 @@ const Page = () => {
           <li>Server components only</li>
           <li>
             Usage of <code>searchParams</code> make the segment SSR (see{' '}
-            <Link href={'/metadata/ssr'}>Dynamic SSR</Link>)
+            <NavLink href={'/metadata/ssr'}>Dynamic SSR</NavLink>)
           </li>
           <li>
             If page don't have <code>title</code> the closest parent{' '}
             <code>title</code> will be used
           </li>
           <li>
-            <Link
+            <NavLink
               href={
                 'https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata'
               }
             >
               List of unsupported tags
-            </Link>
+            </NavLink>
           </li>
           <li>
             <code>robots.txt</code> can be part of metadata or a separate file

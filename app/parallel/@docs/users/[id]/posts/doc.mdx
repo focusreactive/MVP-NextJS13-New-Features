@@ -1,5 +1,5 @@
 ```js
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 const UserPostsPage = async ({ params }: { params: { id: string } }) => {
   const posts = (await fetch(
@@ -15,12 +15,12 @@ const UserPostsPage = async ({ params }: { params: { id: string } }) => {
     <div>
       {posts.map(({ id, userId, title, body }) => (
         <article key={id}>
-          <Link href={`/posts/${id}`}>{title}</Link>
+          <NavLink href={`/posts/${id}`}>{title}</NavLink>
           <p>{body.slice(0, 20)}...</p>
           <small>
-            <Link href={`/users/${id}`} className={'secondary'}>
+            <NavLink href={`/users/${id}`} className={'secondary'}>
               {title}
-            </Link>
+            </NavLink>
           </small>
         </article>
       ))}

@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+
+import NavLink from '@/components/NavLink/NavLink';
 
 const PostsLayout = ({ children }: React.PropsWithChildren) => {
   return (
@@ -7,13 +8,13 @@ const PostsLayout = ({ children }: React.PropsWithChildren) => {
       <nav>
         <ul>
           <li>
-            <Link href={`/parallel/posts/random`}>Random</Link>
+            <NavLink href={`/parallel/posts/random`}>Random</NavLink>
           </li>
           <li>
-            <Link href={`/parallel/posts/best`}>Best</Link>
+            <NavLink href={`/parallel/posts/best`}>Best</NavLink>
           </li>
           <li>
-            <Link href={`/parallel/posts/dynamic`}>Dynamic</Link>
+            <NavLink href={`/parallel/posts/dynamic`}>Dynamic</NavLink>
           </li>
         </ul>
       </nav>

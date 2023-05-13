@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import Doc from './doc.mdx';
 

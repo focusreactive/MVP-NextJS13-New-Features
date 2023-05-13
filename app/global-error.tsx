@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect } from 'react';
+
+import NavLink from '@/components/NavLink/NavLink';
 
 export const Error = ({
   error,
@@ -26,10 +27,10 @@ export const Error = ({
           <nav>
             <ul>
               <li>
-                <Link href={'/'}>Home</Link>
+                <NavLink href={'/'}>Home</NavLink>
               </li>
               <li>
-                <Link href={'/parallel'}>Parallel Routes</Link>
+                <NavLink href={'/parallel'}>Parallel Routes</NavLink>
               </li>
             </ul>
           </nav>

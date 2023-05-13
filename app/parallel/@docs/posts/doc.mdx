@@ -1,5 +1,5 @@
 ```js
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -12,12 +12,12 @@ const PostsPage = async () => {
 
       {posts.slice(0, 5).map(({ id, userId, title, body }) => (
         <article key={id}>
-          <Link href={`/posts/${id}`}>{title}</Link>
+          <NavLink href={`/posts/${id}`}>{title}</NavLink>
           <p>{body.slice(0, 100)}...</p>
           <small>
-            <Link href={`/users/${id}`} className={'secondary'}>
+            <NavLink href={`/users/${id}`} className={'secondary'}>
               Author Page
-            </Link>
+            </NavLink>
           </small>
         </article>
       ))}

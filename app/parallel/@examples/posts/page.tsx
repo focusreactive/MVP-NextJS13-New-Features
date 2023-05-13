@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
@@ -15,12 +14,12 @@ const PostsPage = async () => {
 
       {posts.map(({ id, userId, title, body }) => (
         <article key={id}>
-          <Link href={`/parallel/posts/${id}`}>{title}</Link>
+          <NavLink href={`/parallel/posts/${id}`}>{title}</NavLink>
           <p>{body.slice(0, 100)}...</p>
           <small>
-            <Link href={`/parallel/users/${id}`} className={'secondary'}>
+            <NavLink href={`/parallel/users/${id}`} className={'secondary'}>
               Author Page
-            </Link>
+            </NavLink>
           </small>
         </article>
       ))}

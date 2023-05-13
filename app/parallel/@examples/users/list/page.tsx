@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
@@ -20,10 +19,10 @@ const UsersPage = async (props: any) => {
           <nav aria-label="breadcrumb">
             <ul>
               <li>
-                <Link href={`/parallel/users/${id}`}>Profile</Link>
+                <NavLink href={`/parallel/users/${id}`}>Profile</NavLink>
               </li>
               <li>
-                <Link href={`/parallel/users/${id}/posts`}>Posts</Link>
+                <NavLink href={`/parallel/users/${id}/posts`}>Posts</NavLink>
               </li>
             </ul>
           </nav>

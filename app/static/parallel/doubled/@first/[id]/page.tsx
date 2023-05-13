@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -20,7 +20,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        {site && <Link href={user.website}>Site</Link>}
+        {site && <NavLink href={user.website}>Site</NavLink>}
       </article>
     </div>
   );

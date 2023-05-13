@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
@@ -16,13 +16,13 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/layout/nested'}>Nested</Link>
+            <NavLink href={'/layout/nested'}>Nested</NavLink>
           </li>
           <li>
-            <Link href={'/layout/parallel'}>Parallel</Link>
+            <NavLink href={'/layout/parallel'}>Parallel</NavLink>
           </li>
           <li>
-            <Link href={'/layout/error'}>Error</Link>
+            <NavLink href={'/layout/error'}>Error</NavLink>
           </li>
           <li>
             <BuildInfo />

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 import { draftMode } from 'next/headers';
 
 import Doc from './doc.mdx';
@@ -11,13 +11,13 @@ const Page = () => {
       <h1>Preview URL aka Draft Mode</h1>
 
       <p>
-        <Link
+        <NavLink
           href={
             'https://nextjs.org/docs/app/building-your-application/configuring/draft-mode'
           }
         >
           Docs
-        </Link>
+        </NavLink>
       </p>
 
       <p>
@@ -26,8 +26,8 @@ const Page = () => {
       </p>
 
       <div>
-        <Link href={'/api/enable-draft'}>Enable</Link> |{' '}
-        <Link href={'/api/disable-draft'}>Disable</Link>
+        <NavLink href={'/api/enable-draft'}>Enable</NavLink> |{' '}
+        <NavLink href={'/api/disable-draft'}>Disable</NavLink>
       </div>
 
       <br />

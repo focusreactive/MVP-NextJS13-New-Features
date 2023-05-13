@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
 
+import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
@@ -24,9 +24,9 @@ const UserPostsPage = async ({ params }: { params: { id: string } }) => {
           <p>{body.slice(0, 300)}...</p>
 
           <div>
-            <Link href={`/parallel/posts/${id}`}>Read more</Link>
+            <NavLink href={`/parallel/posts/${id}`}>Read more</NavLink>
             <span style={{ padding: '0 14px' }}> | </span>
-            <Link href={`/parallel/posts/${id}`}>Preview</Link>
+            <NavLink href={`/parallel/posts/${id}`}>Preview</NavLink>
           </div>
         </article>
       ))}

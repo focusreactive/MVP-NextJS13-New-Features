@@ -5,7 +5,7 @@ the dynamic route is nested in @parallel, but there is also a dynamic route in t
 static/parallel/doubled/@first/[id].tsx
 
 ```ts
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -27,7 +27,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        {site && <Link href={user.website}>Site</Link>}
+        {site && <NavLink href={user.website}>Site</NavLink>}
       </article>
     </div>
   );
@@ -49,7 +49,7 @@ export async function generateStaticParams() {
 static/parallel/doubled/[id].tsx
 
 ```ts
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -70,9 +70,9 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        <Link href={`/users/${post.userId}`} className={'secondary'}>
+        <NavLink href={`/users/${post.userId}`} className={'secondary'}>
           Author Page
-        </Link>
+        </NavLink>
       </article>
     </div>
   );

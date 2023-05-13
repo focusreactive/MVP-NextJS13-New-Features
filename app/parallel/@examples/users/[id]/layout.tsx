@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 
+import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 const UserLayout = async ({
@@ -20,10 +20,10 @@ const UserLayout = async ({
       <nav>
         <ul>
           <li>
-            <Link href={`/parallel/users/${params.id}`}>Profile</Link>
+            <NavLink href={`/parallel/users/${params.id}`}>Profile</NavLink>
           </li>
           <li>
-            <Link href={`/parallel/users/${params.id}/posts`}>Posts</Link>
+            <NavLink href={`/parallel/users/${params.id}/posts`}>Posts</NavLink>
           </li>
         </ul>
       </nav>

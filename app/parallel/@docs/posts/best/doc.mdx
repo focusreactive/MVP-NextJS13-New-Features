@@ -1,5 +1,5 @@
 ```js
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -13,9 +13,9 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
 
         <p>{post.body}</p>
 
-        <Link href={`/users/${post.userId}`} className={'secondary'}>
+        <NavLink href={`/users/${post.userId}`} className={'secondary'}>
           Author Page
-        </Link>
+        </NavLink>
       </article>
     </div>
   );

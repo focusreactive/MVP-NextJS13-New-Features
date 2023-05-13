@@ -95,11 +95,11 @@ If you were to navigate from the root `/` to `/settings`, the content that gets 
 
 #### [Soft Navigation](#soft-navigation)
 
-On a [soft navigation](https://nextjs.orghttps://nextjs.org/docs/app/routing/linking-and-navigating#soft-navigation) - Next.js will render the slot's previously active state, even if it doesn't match the current URL.
+On a [soft navigation](https://nextjs.orghttps://nextjs.org/docs/app/routing/NavLinking-and-navigating#soft-navigation) - Next.js will render the slot's previously active state, even if it doesn't match the current URL.
 
 #### [Hard Navigation](#hard-navigation)
 
-On a [hard navigation](https://nextjs.orghttps://nextjs.org/docs/app/routing/linking-and-navigating#hard-navigation) - a navigation that requires a full page reload - Next.js will first try to render the unmatched slot's `default.js` file. If that's not available, a 404 gets rendered.
+On a [hard navigation](https://nextjs.orghttps://nextjs.org/docs/app/routing/NavLinking-and-navigating#hard-navigation) - a navigation that requires a full page reload - Next.js will first try to render the unmatched slot's `default.js` file. If that's not available, a 404 gets rendered.
 
 > The 404 for unmatched routes helps ensure that you don't accidentally render a route that shouldn't be parallel rendered.
 
@@ -169,7 +169,7 @@ export default function Default() {
 
 #### [Dismissing a modal](#dismissing-a-modal)
 
-If a modal was initiated through client navigation, e.g. by using `<Link href="/login">`, you can dismiss the modal by calling `router.back()` or by using a `Link` component.
+If a modal was initiated through client navigation, e.g. by using `<NavLink href="/login">`, you can dismiss the modal by calling `router.back()` or by using a `Link` component.
 
 ```ts
 'use client';

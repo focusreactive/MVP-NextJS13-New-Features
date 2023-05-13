@@ -1,5 +1,5 @@
 ```js
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import { api } from '@/utils/api';
 
@@ -19,10 +19,10 @@ const UsersPage = async (props: any) => {
           <nav aria-label="breadcrumb">
             <ul>
               <li>
-                <Link href={`/users/${id}`}>Profile</Link>
+                <NavLink href={`/users/${id}`}>Profile</NavLink>
               </li>
               <li>
-                <Link href={`/users/${id}/posts`}>Posts</Link>
+                <NavLink href={`/users/${id}/posts`}>Posts</NavLink>
               </li>
             </ul>
           </nav>

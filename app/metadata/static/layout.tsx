@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
@@ -55,13 +55,13 @@ const Layout = ({ children }: PropsWithChildren) => {
 
       <ul>
         <li>
-          <Link href={'/metadata/static/title-default'}>Default</Link>
+          <NavLink href={'/metadata/static/title-default'}>Default</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/static/title-template'}>Template</Link>
+          <NavLink href={'/metadata/static/title-template'}>Template</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/static/title-absolute'}>Absolute</Link>
+          <NavLink href={'/metadata/static/title-absolute'}>Absolute</NavLink>
         </li>
       </ul>
 

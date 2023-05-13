@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 import '@picocss/pico/css/pico.min.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
@@ -21,13 +21,13 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <Link href={'/layout/parallel/sync'}>Sync</Link>
+            <NavLink href={'/layout/parallel/sync'}>Sync</NavLink>
           </li>
           <li>
-            <Link href={'/layout/parallel/left'}>Left</Link>
+            <NavLink href={'/layout/parallel/left'}>Left</NavLink>
           </li>
           <li>
-            <Link href={'/layout/parallel/right'}>Right</Link>
+            <NavLink href={'/layout/parallel/right'}>Right</NavLink>
           </li>
         </ul>
       </nav>

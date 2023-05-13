@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -45,9 +44,12 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
           <img src={image} alt="dog" width={400} />
         </div>
 
-        <Link href={`/parallel/users/${post.userId}`} className={'secondary'}>
+        <NavLink
+          href={`/parallel/users/${post.userId}`}
+          className={'secondary'}
+        >
           Author Page
-        </Link>
+        </NavLink>
       </article>
     </div>
   );

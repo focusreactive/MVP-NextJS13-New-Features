@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import '@picocss/pico/css/pico.min.css';
 import './globals.css';
 import React from 'react';
 
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+import NavLink from '@/components/NavLink/NavLink';
 
 export const metadata = {
   title: 'Homepage',
@@ -24,25 +24,25 @@ export default function RootLayout({
           <nav>
             <ul>
               <li>
-                <Link href={'/'}>Home</Link>
+                <NavLink href={'/'}>Home</NavLink>
               </li>
               <li>
-                <Link href={'/overview'}>Overview</Link>
+                <NavLink href={'/overview'}>Overview</NavLink>
               </li>
               <li>
-                <Link href={'/layout'}>Layout</Link>
+                <NavLink href={'/layout'}>Layout</NavLink>
               </li>
               <li>
-                <Link href={'/parallel'}>Parallel</Link>
+                <NavLink href={'/parallel'}>Parallel</NavLink>
               </li>
               <li>
-                <Link href={'/static'}>Static+Cache</Link>
+                <NavLink href={'/static'}>Static+Cache</NavLink>
               </li>
               <li>
-                <Link href={'/metadata'}>Metadata</Link>
+                <NavLink href={'/metadata'}>Metadata</NavLink>
               </li>
               <li>
-                <Link href={'/preview'}>Preview</Link>
+                <NavLink href={'/preview'}>Preview</NavLink>
               </li>
             </ul>
           </nav>

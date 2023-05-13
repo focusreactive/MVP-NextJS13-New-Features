@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLink from '@/components/NavLink/NavLink';
 
 import type { PropsWithChildren } from 'react';
 
@@ -9,13 +9,13 @@ const Layout = ({ children }: PropsWithChildren) => {
 
       <ul>
         <li>
-          <Link href={'/metadata/static'}>Static</Link>
+          <NavLink href={'/metadata/static'}>Static</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/ssg'}>Dynamic SSG</Link>
+          <NavLink href={'/metadata/ssg'}>Dynamic SSG</NavLink>
         </li>
         <li>
-          <Link href={'/metadata/ssr'}>Dynamic SSR</Link>
+          <NavLink href={'/metadata/ssr'}>Dynamic SSR</NavLink>
         </li>
       </ul>
 
