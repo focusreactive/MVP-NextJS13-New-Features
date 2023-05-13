@@ -7,7 +7,11 @@ import styles from './NavLink.module.css';
 
 import type { PropsWithChildren } from 'react';
 
-const NavLink = ({ href, children }: PropsWithChildren & { href: string }) => {
+const NavLink = ({
+  href,
+  children,
+  className,
+}: PropsWithChildren & { href: string; className: string }) => {
   const segments = useSelectedLayoutSegments();
 
   const fullSlug = href.startsWith('/')
@@ -25,7 +29,11 @@ const NavLink = ({ href, children }: PropsWithChildren & { href: string }) => {
     );
   }
 
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
 };
 
 export default NavLink;
