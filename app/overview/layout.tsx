@@ -1,4 +1,3 @@
-import NavLink from '@/components/NavLink/NavLink';
 import '@picocss/pico/css/pico.min.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
@@ -12,17 +11,5 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <NavLink href={'/overview/wtf'}>WTF</NavLink>
-          </li>
-        </ul>
-      </nav>
-
-      <section className="blog">{children}</section>
-    </>
-  );
+  return <section className="blog">{children}</section>;
 }

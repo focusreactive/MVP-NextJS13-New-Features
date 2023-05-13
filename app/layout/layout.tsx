@@ -26,6 +26,9 @@ export default async function RootLayout({
           <li>
             <BuildInfo />
           </li>
+          <li>
+            <NavLink href={'/layout/wtf'}>WTF</NavLink>
+          </li>
         </ul>
       </nav>
 
