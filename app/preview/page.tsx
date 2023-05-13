@@ -1,6 +1,6 @@
-import NavLink from '@/components/NavLink/NavLink';
 import { draftMode } from 'next/headers';
 
+import NavLink from '@/components/NavLink/NavLink';
 import Doc from './doc.mdx';
 
 const Page = () => {

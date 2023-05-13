@@ -1,5 +1,4 @@
 import NavLink from '@/components/NavLink/NavLink';
-
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
 export const metadata = {

@@ -1,9 +1,8 @@
-import NavLink from '@/components/NavLink/NavLink';
-
 import '@picocss/pico/css/pico.min.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import { api } from '@/utils/api';
+import NavLink from '@/components/NavLink/NavLink';
 
 export const metadata = {
   title: 'Simple',
