@@ -11,7 +11,7 @@ const NavLink = ({
   href,
   children,
   className,
-}: PropsWithChildren & { href: string; className: string }) => {
+}: PropsWithChildren & { href: string; className?: string }) => {
   const segments = useSelectedLayoutSegments();
 
   const fullSlug = href.startsWith('/')
