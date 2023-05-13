@@ -18,7 +18,7 @@ const NavLink = ({
     ? '/' + segments.join('/')
     : segments.join('/');
 
-  // works only with top level layout
+  // works only with top level layout, segments before current layout are missing and there is no way to pass data between layouts  https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments#returns
 
   if (fullSlug === href) {
     return (
