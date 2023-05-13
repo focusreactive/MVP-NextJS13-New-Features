@@ -11,11 +11,5 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <section className="blog">
-        <div>{children}</div>
-      </section>
-    </>
-  );
+  return <section className="blog">{children}</section>;
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
@@ -12,7 +13,6 @@ const Page = async () => {
 
     if (!name) return;
 
-    // @ts-ignore
     cookies().set({
       name: 'user',
       value: JSON.stringify({ name }),
@@ -25,7 +25,6 @@ const Page = async () => {
   const logout = async () => {
     'use server';
 
-    // @ts-ignore
     cookies().set({ name: 'user', value: '', httpOnly: true });
 
     revalidatePath('/parallel/me');

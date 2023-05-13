@@ -18,8 +18,7 @@ const NavLink = ({
     ? '/' + segments.join('/')
     : segments.join('/');
 
-  // TODO: fix empty segments for nested layouts
-  //   console.warn(fullSlug, href);
+  // works only with top level layout
 
   if (fullSlug === href) {
     return (

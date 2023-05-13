@@ -1,11 +1,12 @@
+// @ts-nocheck
 'use client';
 
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { experimental_useFormStatus as useFormStatus } from 'react-dom';
 
-import { register } from "@/app/parallel/@examples/me/client/_actions/register";
-import { logout } from "@/app/parallel/@examples/me/client/_actions/logout";
+import { register } from '@/app/parallel/@examples/me/client/_actions/register';
+import { logout } from '@/app/parallel/@examples/me/client/_actions/logout';
 
-import type { CSSProperties, PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from 'react';
 
 export const Form = ({ user }: { user: { name: string } }) => {
   if (!user?.name) {
