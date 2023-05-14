@@ -6,10 +6,6 @@ import Doc from './doc.mdx';
 import styles from './Page.module.css';
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
-export const metadata = {
-  title: 'Error page',
-};
-
 const Page = async () => {
   const [error, setError] = useState(false);
 
