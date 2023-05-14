@@ -24,10 +24,10 @@ export default async function RootLayout({
             <NavLink href={'/layout/error'}>Error</NavLink>
           </li>
           <li>
-            <BuildInfo />
+            <NavLink href={'/layout/wtf'}>WTF</NavLink>
           </li>
           <li>
-            <NavLink href={'/layout/wtf'}>WTF</NavLink>
+            <BuildInfo />
           </li>
         </ul>
       </nav>

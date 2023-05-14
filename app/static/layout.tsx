@@ -17,13 +17,19 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <NavLink href={'/static/simple'}>Simple</NavLink>
+            <NavLink href={'/static/default'}>Default</NavLink>
           </li>
           <li>
             <NavLink href={'/static/parallel'}>Parallel</NavLink>
           </li>
           <li>
             <NavLink href={'/static/config'}>Config</NavLink>
+          </li>
+          <li>
+            <NavLink href={'/static/revalidate'}>Revalidate</NavLink>
+          </li>
+          <li>
+            <NavLink href={'/static/no-cache'}>No cache</NavLink>
           </li>
         </ul>
       </nav>

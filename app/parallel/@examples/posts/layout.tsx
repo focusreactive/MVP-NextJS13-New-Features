@@ -8,12 +8,6 @@ const PostsLayout = ({ children }: React.PropsWithChildren) => {
       <nav>
         <ul>
           <li>
-            <NavLink href={`/parallel/posts/random`}>Random</NavLink>
-          </li>
-          <li>
-            <NavLink href={`/parallel/posts/best`}>Best</NavLink>
-          </li>
-          <li>
             <NavLink href={`/parallel/posts/dynamic`}>Dynamic</NavLink>
           </li>
         </ul>

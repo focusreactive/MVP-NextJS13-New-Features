@@ -1,5 +1,6 @@
-Not easy way to highlight selected (current link)
-We can only pass full path to Link component
+There is no easy way to highlight the selected (current) link
+Nested layouts missing information about previous segments
+We can only pass the full path to the Link component
 
 # useSelectedLayoutSegments
 
@@ -112,3 +113,55 @@ For example, given the Layouts and URLs below, the returned segments would be:
     </tr>
   </tbody>
 </table>
+
+[Not-found page does not work in next.js 13](https://stackoverflow.com/questions/75302340/not-found-page-does-not-work-in-next-js-13)
+
+app/layout/[...not_found]/page.tsx
+
+```ts
+import { notFound } from 'next/navigation';
+
+export default function NotFoundCatchAll() {
+  notFound();
+}
+```
+
+app/layout/not-found.tsx
+
+```ts
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <div>
+      <h1>Not found – 404!</h1>
+      <div>
+        <Link href="/">Go back to Home</Link>
+      </div>
+    </div>
+  );
+}
+```
+
+# not-found.js
+
+The **not-found** file is used to render UI when the [`notFound`](/docs/app/api-reference/functions/not-found) function is thrown within a route segment.
+
+app/blog/not-found.tsx
+
+```ts
+export default function NotFound() {
+  return (
+    <>
+      <h2>Not Found</h2>
+      <p>Could not find requested resource</p>
+    </>
+  );
+}
+```
+
+> **Note:** In addition to catching expected `notFound()` errors, the root `app/not-found.js` file also handles any unmatched URLs for your whole application. This means users that visit a URL that is not handled by your app will be shown the UI exported by the `app/not-found.js` file.
+
+## [Props](#props)
+
+`not-found.js` components do not accept any props.

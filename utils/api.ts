@@ -9,21 +9,7 @@ const fetchData = async (url: string, options?: RequestInit) => {
 
 export const api = {
   post: async (id: string, options?: RequestInit) => {
-    let updatedId = id;
-
-    if (id === 'random') {
-      updatedId = String(Math.round(Math.random() * 100));
-    }
-
-    if (id === 'best') {
-      updatedId = String(99);
-    }
-
-    if (id === 'dynamic') {
-      updatedId = String(13);
-    }
-
-    const result = await fetchData(`/posts/${updatedId}`, options);
+    const result = await fetchData(`/posts/${id}`, options);
 
     return [result?.data, result?.counter] as [Post, number];
   },
