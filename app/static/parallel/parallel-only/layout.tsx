@@ -5,7 +5,7 @@ import { api } from '@/utils/api';
 import NavLink from '@/components/NavLink/NavLink';
 
 export const metadata = {
-  title: 'Homepage',
+  title: 'Parallel only layout',
 };
 
 export default async function RootLayout({

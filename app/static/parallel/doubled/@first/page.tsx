@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Homepage example',
+  title: 'Doubled page',
 };
 
 const HomePage = () => {

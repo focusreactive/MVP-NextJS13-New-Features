@@ -3,7 +3,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 export const metadata = {
-  title: 'Overview layout',
+  title: 'Data fetching layout',
 };
 
 export default async function RootLayout({
@@ -11,5 +11,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="blog">{children}</section>;
+  return (
+    <>
+      <nav>
+        <ul></ul>
+      </nav>
+
+      <section className="layout">{children}</section>
+    </>
+  );
 }

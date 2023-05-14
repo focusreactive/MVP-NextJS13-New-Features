@@ -1,3 +1,7 @@
+export const metadata = {
+  title: 'Default parallel page',
+};
+
 export default function Page() {
   return (
     <div className={'rerender-indicator'}>

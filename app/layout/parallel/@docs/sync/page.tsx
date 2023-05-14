@@ -2,7 +2,7 @@ import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'All posts',
+  title: 'Sync docs page',
 };
 
 const PostsPage = async () => {

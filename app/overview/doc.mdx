@@ -85,3 +85,482 @@ The App Router also provides a set conventions to help you implement more advanc
 
 - [Parallel Routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes): Allow you to simultaneously show two or more pages in the same view that can be navigated independently. You can use them for split views that have their own sub-navigation. E.g. Dashboards.
 - [Intercepting Routes](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing/intercepting-routes): Allow you to intercept a route and show it in the context of another route. You can use these when keeping the context for the current page is important. E.g. Seeing all tasks while editing one task or expanding a photo in a feed.
+
+# Route Handlers
+
+> **Good to know:** Route Handlers are only available inside the `app` directory. They are the equivalent of [API Routes](/docs/pages/building-your-application/routing/api-routes) inside the `pages` directory meaning you **do not** need to use API Routes and Route Handlers together.
+
+## [Convention](#convention)
+
+Route Handlers are defined in a [`route.js|ts` file](/docs/app/api-reference/file-conventions/route) inside the `app` directory:
+
+app/api/route.ts
+
+```ts
+export async function GET(request: Request) {}
+```
+
+Route Handlers can be nested inside the `app` directory, similar to `page.js` and `layout.js`. But there **cannot** be a `route.js` file at the same route segment level as `page.js`.
+
+### [Supported HTTP Methods](#supported-http-methods)
+
+The following [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) are supported: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`. If an unsupported method is called, Next.js will return a `405 Method Not Allowed` response.
+
+### [Extended `NextRequest` and `NextResponse` APIs](#extended-nextrequest-and-nextresponse-apis)
+
+In addition to supporting native [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). Next.js extends them with [`NextRequest`](/docs/app/api-reference/functions/next-request) and [`NextResponse`](/docs/app/api-reference/functions/next-response) to provide convenient helpers for advanced use cases.
+
+## [Behavior](#behavior)
+
+### [Static Route Handlers](#static-route-handlers)
+
+Route Handlers are [statically evaluated](/docs/app/building-your-application/data-fetching#static-and-dynamic-data-fetches) by default when using the `GET` method with the `Response` object.
+
+app/items/route.ts
+
+```ts
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const res = await fetch('https://data.mongodb-api.com/...', {
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
+    },
+  });
+  const data = await res.json();
+
+  return NextResponse.json({ data });
+}
+```
+
+> **TypeScript Warning:** Although `Response.json()` is valid, native TypeScript types currently shows an error, you can use [`NextResponse.json()`](/docs/app/api-reference/functions/next-response#json) for typed responses instead.
+
+### [Dynamic Route Handlers](#dynamic-route-handlers)
+
+Route handlers are evaluated dynamically when:
+
+- Using the `Request` object with the `GET` method.
+- Using any of the other HTTP methods.
+- Using [Dynamic Functions](/docs/app/building-your-application/routing/router-handlers#dynamic-functions) like `cookies` and `headers`.
+- The [Segment Config Options](#segment-config-options) manually specifies dynamic mode.
+
+For example:
+
+app/products/api/route.ts
+
+```ts
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
+    },
+  });
+  const product = await res.json();
+
+  return NextResponse.json({ product });
+}
+```
+
+Similarly, the `POST` method will cause the Route Handler to be evaluated dynamically.
+
+app/items/route.ts
+
+```ts
+import { NextResponse } from 'next/server';
+
+export async function POST() {
+  const res = await fetch('https://data.mongodb-api.com/...', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
+    },
+    body: JSON.stringify({ time: new Date().toISOString() }),
+  });
+
+  const data = await res.json();
+
+  return NextResponse.json(data);
+}
+```
+
+> **Note:** Previously, API Routes could have been used for use cases like handling form submissions. Route Handlers are likely not the solution for these uses cases. We will be recommending the use of [mutations](/docs/app/building-your-application/data-fetching/server-actions) for this when ready.
+
+### [Route Resolution](#route-resolution)
+
+You can consider a `route` the lowest level routing primitive.
+
+- They **do not** participate in layouts or client-side navigations like `page`.
+- There **cannot** be a `route.js` file at the same route as `page.js`.
+
+<table>
+  <thead>
+    <tr>
+      <th>Page</th>
+      <th>Route</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>app/page.js</code>
+      </td>
+      <td>
+        <code>app/route.js</code>
+      </td>
+      <td>
+        <span class="text-gray-500">
+          <svg
+            data-testid="geist-icon"
+            fill="none"
+            height="18"
+            shape-rendering="geometricPrecision"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="18"
+            style={{ color: 'red' }}
+          >
+            <path d="M18 6L6 18"></path>
+            <path d="M6 6l12 12"></path>
+          </svg>
+        </span>
+        Conflict
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/page.js</code>
+      </td>
+      <td>
+        <code>app/api/route.js</code>
+      </td>
+      <td>
+        <span class="text-green-600 inline-flex align-middle">
+          <svg
+            data-testid="geist-icon"
+            fill="none"
+            height="18"
+            shape-rendering="geometricPrecision"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="18"
+            style={{ color: 'green' }}
+          >
+            <path d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
+          </svg>
+        </span>
+        Valid
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/[user]/page.js</code>
+      </td>
+      <td>
+        <code>app/api/route.js</code>
+      </td>
+      <td>
+        <span class="text-green-600 inline-flex align-middle">
+          <svg
+            data-testid="geist-icon"
+            fill="none"
+            height="18"
+            shape-rendering="geometricPrecision"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="18"
+            style={{ color: 'green' }}
+          >
+            <path d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
+          </svg>
+        </span>
+        Valid
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Each `route.js` or `page.js` file takes over all HTTP verbs for that route.
+
+app/page.js
+
+```ts
+export default function Page() {
+  return <h1>Hello, Next.js!</h1>;
+}
+
+// ❌ Conflict
+// `app/route.js`
+export async function POST(request) {}
+```
+
+## [Examples](#examples)
+
+The following examples show how to combine Route Handlers with other Next.js APIs and features.
+
+### [Revalidating Static Data](#revalidating-static-data)
+
+You can [revalidate static data](https://beta.nextjs.org/docs/data-fetching/revalidating) fetches using the [`next.revalidate`](/docs/app/building-your-application/data-fetching/fetching#revalidating-data) option:
+
+app/items/route.ts
+
+```ts
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const res = await fetch('https://data.mongodb-api.com/...', {
+    next: { revalidate: 60 }, // Revalidate every 60 seconds
+  });
+  const data = await res.json();
+
+  return NextResponse.json(data);
+}
+```
+
+Alternatively, you can use the [`revalidate` segment config option](/docs/app/api-reference/file-conventions/route-segment-config#revalidate):
+
+    export const revalidate = 60;
+
+### [Dynamic Functions](#dynamic-functions)
+
+Route Handlers can be used with dynamic functions from Next.js, like [`cookies`](/docs/app/api-reference/functions/cookies) and [`headers`](/docs/app/api-reference/functions/headers).
+
+#### [Cookies](#cookies)
+
+You can read cookies with [`cookies`](/docs/app/api-reference/functions/cookies) from `next/headers`. This server function can be called directly in a Route Handler, or nested inside of another function.
+
+This `cookies` instance is read-only. To set cookies, you need to return a new `Response` using the [`Set-Cookie`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie) header.
+
+app/api/route.ts
+
+```ts
+import { cookies } from 'next/headers';
+
+export async function GET(request: Request) {
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
+
+  return new Response('Hello, Next.js!', {
+    status: 200,
+    headers: { 'Set-Cookie': `token=${token}` },
+  });
+}
+```
+
+Alternatively, you can use abstractions on top of the underlying Web APIs to read cookies ([`NextRequest`](/docs/app/api-reference/functions/next-request)):
+
+app/api/route.ts
+
+```ts
+import { type NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const token = request.cookies.get('token');
+}
+```
+
+#### [Headers](#headers)
+
+You can read headers with [`headers`](/docs/app/api-reference/functions/headers) from `next/headers`. This server function can be called directly in a Route Handler, or nested inside of another function.
+
+This `headers` instance is read-only. To set headers, you need to return a new `Response` with new `headers`.
+
+app/api/route.ts
+
+```ts
+import { headers } from 'next/headers';
+
+export async function GET(request: Request) {
+  const headersList = headers();
+  const referer = headersList.get('referer');
+
+  return new Response('Hello, Next.js!', {
+    status: 200,
+    headers: { referer: referer },
+  });
+}
+```
+
+Alternatively, you can use abstractions on top of the underlying Web APIs to read headers ([`NextRequest`](/docs/app/api-reference/functions/next-request)):
+
+app/api/route.ts
+
+```ts
+import { type NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+}
+```
+
+### [Redirects](#redirects)
+
+app/api/route.ts
+
+```ts
+import { redirect } from 'next/navigation';
+
+export async function GET(request: Request) {
+  redirect('https://nextjs.org/');
+}
+```
+
+### [Dynamic Route Segments](#dynamic-route-segments)
+
+> We recommend reading the [Defining Routes](/docs/app/building-your-application/routing/defining-routes) page before continuing.
+
+Route Handlers can use [Dynamic Segments](/docs/app/building-your-application/routing/defining-routes#dynamic-segments) to create request handlers from dynamic data.
+
+app/items/\[slug\]/route.js
+
+```ts
+export async function GET(
+  request: Request,
+  {
+    params,
+  }: {
+    params: { slug: string };
+  },
+) {
+  const slug = params.slug; // 'a', 'b', or 'c'
+}
+```
+
+<table><thead><tr><th>Route</th><th>Example URL</th><th><code>params</code></th></tr></thead><tbody><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/a</code></td><td><code>`{ slug: 'a' }`</code></td></tr><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/b</code></td><td><code>`{ slug: 'b' }`</code></td></tr><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/c</code></td><td><code>`{ slug: 'c' }`</code></td></tr></tbody></table>
+app/api/route.ts
+
+```ts
+// https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream#convert_async_iterator_to_stream
+function iteratorToStream(iterator: any) {
+  return new ReadableStream({
+    async pull(controller) {
+      const { value, done } = await iterator.next();
+
+      if (done) {
+        controller.close();
+      } else {
+        controller.enqueue(value);
+      }
+    },
+  });
+}
+
+function sleep(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
+
+const encoder = new TextEncoder();
+
+async function* makeIterator() {
+  yield encoder.encode('<p>One</p>');
+  await sleep(200);
+  yield encoder.encode('<p>Two</p>');
+  await sleep(200);
+  yield encoder.encode('<p>Three</p>');
+}
+
+export async function GET() {
+  const iterator = makeIterator();
+  const stream = iteratorToStream(iterator);
+
+  return new Response(stream);
+}
+```
+
+### [Request Body](#request-body)
+
+You can read the `Request` body using the standard Web API methods:
+
+app/items/route.ts
+
+```ts
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  const res = await request.json();
+  return NextResponse.json({ res });
+}
+```
+
+### [CORS](#cors)
+
+You can set CORS headers on a `Response` using the standard Web API methods:
+
+app/api/route.ts
+
+```ts
+export async function GET(request: Request) {
+  return new Response('Hello, Next.js!', {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
+}
+```
+
+### [Edge and Node.js Runtimes](#edge-and-nodejs-runtimes)
+
+Route Handlers have an isomorphic Web API to support both Edge and Node.js runtimes seamlessly, including support for streaming. Since Route Handlers use the same route segment configuration as pages and layouts, they support long-awaited features like general-purpose [statically regenerated](/docs/app/building-your-application/data-fetching/revalidating) Route Handlers.
+
+You can use the `runtime` segment config option to specify the runtime:
+
+    export const runtime = 'edge'; // 'nodejs' is the default
+
+### [Non-UI Responses](#non-ui-responses)
+
+You can use Route Handlers to return non-UI content. Note that [`sitemap.xml`](/docs/app/api-reference/file-conventions/metadata#sitemap), [`robots.txt`](/docs/app/api-reference/file-conventions/metadata#robots=file), [`favicon.ico`](/docs/app/api-reference/file-conventions/metadata#app-icons), and [open graph images](/docs/app/api-reference/file-conventions/metadata#open-graph-images) all have built-in SEO support.
+
+app/rss.xml/route.ts
+
+```ts
+export async function GET() {
+  return new Response(`<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+
+    <channel>
+      <title>Next.js Documentation</title>
+      <link>https://nextjs.org/docs</link>
+      <description>The React Framework for the Web</description>
+    </channel>
+
+    </rss>`);
+}
+```
+
+### [Segment Config Options](#segment-config-options)
+
+Route Handlers use the same route segment configuration as pages and layouts.
+
+app/items/route.ts
+
+```ts
+export const dynamic = 'auto';
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = 'auto';
+export const runtime = 'nodejs';
+export const preferredRegion = 'auto';
+```
+
+See the [API reference](/docs/app/api-reference/file-conventions/route-segment-config) for more details.

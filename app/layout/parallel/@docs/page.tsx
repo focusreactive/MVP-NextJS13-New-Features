@@ -1,7 +1,7 @@
 import Doc from './doc.mdx';
 
 export const metadata = {
-  title: 'Homepage docs',
+  title: 'Docs page',
 };
 
 const HomePage = () => {

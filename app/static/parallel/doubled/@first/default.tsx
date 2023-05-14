@@ -1,3 +1,7 @@
+export const metadata = {
+  title: 'Doubled default page',
+};
+
 export default function Page() {
   return (
     <div className={'rerender-indicator'}>

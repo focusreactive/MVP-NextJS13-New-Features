@@ -2,7 +2,7 @@ import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic post',
+  title: 'Dynamic parallel only page',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {

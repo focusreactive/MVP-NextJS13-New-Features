@@ -4,7 +4,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 export const metadata = {
-  title: 'Homepage',
+  title: 'Second doubled layout',
 };
 
 export default function RootLayout({

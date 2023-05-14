@@ -1,11 +1,13 @@
+import Doc from './doc.mdx';
+
 export const metadata = {
-  title: 'Homepage example',
+  title: 'Data fetching page',
 };
 
 const Page = () => {
   return (
-    <div className={'rerender-indicator'}>
-      <h1>Checking page</h1>
+    <div className="blog">
+      <Doc />
     </div>
   );
 };

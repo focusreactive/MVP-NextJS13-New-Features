@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Parallel',
+  title: 'Parallel page',
 };
 
 const Page = () => {

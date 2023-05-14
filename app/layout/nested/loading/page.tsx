@@ -2,6 +2,10 @@ import styles from './Page.module.css';
 import { api } from '@/utils/api';
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
+export const metadata = {
+  title: 'Loading page',
+};
+
 const Page = async () => {
   const [image] = await api.images({ cache: 'no-store' });
 

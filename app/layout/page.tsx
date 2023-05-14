@@ -1,7 +1,7 @@
 import Doc from './doc.mdx';
 
 export const metadata = {
-  title: 'Page metadata',
+  title: 'Layout page',
 };
 
 const Page = () => {

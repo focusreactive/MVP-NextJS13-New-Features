@@ -7,7 +7,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import NavLink from '@/components/NavLink/NavLink';
 
 export const metadata = {
-  title: 'Homepage',
+  title: 'Homepage layout',
 };
 
 export default function RootLayout({
@@ -43,6 +43,9 @@ export default function RootLayout({
               </li>
               <li>
                 <NavLink href={'/preview'}>Preview</NavLink>
+              </li>
+              <li>
+                <NavLink href={'/data-fetching'}>Data fetching</NavLink>
               </li>
             </ul>
           </nav>

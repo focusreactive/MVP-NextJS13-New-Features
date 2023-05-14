@@ -1,7 +1,7 @@
 import Doc from './doc.mdx';
 
 export const metadata = {
-  title: 'Simple',
+  title: 'Parallel only page',
 };
 
 const Page = () => {

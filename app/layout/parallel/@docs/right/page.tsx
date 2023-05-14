@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 
+export const metadata = {
+  title: 'Right docs page',
+};
+
 const PostsPage = async () => {
   const [error, setError] = useState(false);
 

@@ -1,5 +1,9 @@
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
+export const metadata = {
+  title: 'Nested page',
+};
+
 const Page = () => {
   return (
     <div className={'rerender-indicator'}>

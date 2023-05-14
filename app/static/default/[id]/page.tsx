@@ -2,7 +2,7 @@ import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic Simple',
+  title: 'Default dynamic page',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {

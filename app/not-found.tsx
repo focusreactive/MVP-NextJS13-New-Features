@@ -1,5 +1,9 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Not found root page',
+};
+
 export default function NotFound() {
   return (
     <div>

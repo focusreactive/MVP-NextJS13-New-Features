@@ -4,7 +4,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 export const metadata = {
-  title: 'Static',
+  title: 'Parallel layout',
 };
 
 export default async function RootLayout({

@@ -2,7 +2,7 @@ import NavLink from '@/components/NavLink/NavLink';
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 
 export const metadata = {
-  title: 'Layout metadata',
+  title: 'Nested layout',
 };
 
 export default async function RootLayout({
