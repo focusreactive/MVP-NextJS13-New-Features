@@ -1,0 +1,35 @@
+```tsx
+const Page = () => {
+  return (
+    <div>
+      <ClientComponent />
+    </div>
+  );
+};
+```
+
+#
+
+```tsx
+'use client';
+
+export const ClientComponent = () => {
+  const [state, setState] = useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setState(state + 1)}>{state}</button>
+
+      <ServerComponent />
+    </div>
+  );
+};
+```
+
+#
+
+```tsx
+export const ServerComponent = () => {
+  return <div>im a server component! (nope) {typeof window}</div>;
+};
+```

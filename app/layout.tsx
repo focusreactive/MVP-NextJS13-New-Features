@@ -47,6 +47,9 @@ export default function RootLayout({
               <li>
                 <NavLink href={'/data-fetching'}>Data fetching</NavLink>
               </li>
+              <li>
+                <NavLink href={'/rsc'}>RSC</NavLink>
+              </li>
             </ul>
           </nav>
 
