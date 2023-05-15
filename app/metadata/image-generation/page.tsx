@@ -28,6 +28,8 @@ const Page = ({ searchParams }: Props) => {
 
   return (
     <div>
+      <hr />
+
       <h2>Dynamic Image Generation</h2>
 
       <p>

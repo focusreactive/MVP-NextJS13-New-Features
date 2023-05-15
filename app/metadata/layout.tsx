@@ -34,6 +34,9 @@ const Layout = ({ children }: PropsWithChildren) => {
             Image Generation
           </NavLink>
         </li>
+        <li>
+          <NavLink href={'/metadata/json-ld'}>JSON-LD</NavLink>
+        </li>
       </ul>
 
       {children}
