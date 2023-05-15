@@ -50,6 +50,9 @@ export default function RootLayout({
               <li>
                 <NavLink href={'/rsc'}>RSC</NavLink>
               </li>
+              <li>
+                <NavLink href={'/server-actions'}>Server Actions</NavLink>
+              </li>
             </ul>
           </nav>
 

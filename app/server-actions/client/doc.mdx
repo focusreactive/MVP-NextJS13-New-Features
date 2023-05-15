@@ -1,6 +1,4 @@
-# Server actions in client components
-
-```js
+```tsx
 const Page = async () => {
   const cookie = cookies().get('user')?.value;
   const user = cookie && JSON.parse(cookie);
@@ -11,10 +9,9 @@ const Page = async () => {
 
 #
 
-## Register action
+`app/server-actions/client/_actions/register.tsx`
 
-```js
-// app/parallel/@examples/me/client/_actions/register.tsx
+```tsx
 export const register = async (formData: FormData) => {
   const name = formData.get('name');
 
@@ -34,10 +31,9 @@ export const register = async (formData: FormData) => {
 
 #
 
-## Logout action
+`app/server-actions/client/_actions/logout.tsx`
 
-```js
-// app/parallel/@examples/me/client/_actions/logout.tsx
+```tsx
 export const logout = async () => {
   cookies().set({ name: 'user', value: '', httpOnly: true });
 
@@ -47,17 +43,16 @@ export const logout = async () => {
 
 #
 
-## Client component form
+`app/server-actions/client/_components/Form.tsx`
 
-```js
-// app/parallel/@examples/me/client/_components/Form.tsx
+```tsx
 'use client';
 
 export const Form = ({ user }: { user: { name: string } }) => {
   if (!user?.name) {
     return (
       <div>
-        <h1>Registration (client)</h1>
+        <h2>Server actions in client component</h2>
 
         <form action={register}>
           <FormContent>
@@ -74,7 +69,7 @@ export const Form = ({ user }: { user: { name: string } }) => {
 
   return (
     <form action={logout}>
-      <h1>Hello, {user.name}!</h1>
+      <h3>Hello, {user.name}!</h3>
       <button>Logout</button>
     </form>
   );
