@@ -33,19 +33,16 @@ export default function RootLayout({
                 <NavLink href={'/layout'}>Layout</NavLink>
               </li>
               <li>
-                <NavLink href={'/parallel'}>Parallel</NavLink>
+                <NavLink href={'/static'}>Static+Cache</NavLink>
               </li>
               <li>
-                <NavLink href={'/static'}>Static+Cache</NavLink>
+                <NavLink href={'/data-fetching'}>Data fetching</NavLink>
               </li>
               <li>
                 <NavLink href={'/metadata'}>Metadata</NavLink>
               </li>
               <li>
                 <NavLink href={'/preview'}>Preview</NavLink>
-              </li>
-              <li>
-                <NavLink href={'/data-fetching'}>Data fetching</NavLink>
               </li>
               <li>
                 <NavLink href={'/rsc'}>RSC</NavLink>
