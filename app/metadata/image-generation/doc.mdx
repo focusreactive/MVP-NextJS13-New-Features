@@ -94,7 +94,6 @@ export async function GET(request: Request) {
   );
 }
 
-
 function getFont({ origin }: { origin: string }) {
   return fetch(`${origin}/fonts/Righteous-Regular.ttf`).then((res) =>
     res.arrayBuffer(),

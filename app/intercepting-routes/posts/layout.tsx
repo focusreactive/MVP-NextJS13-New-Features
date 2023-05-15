@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UsersLayout = async ({
+const PostsLayout = async ({
   children,
   modal,
 }: React.PropsWithChildren & { modal: React.ReactNode }) => {
@@ -13,4 +13,4 @@ const UsersLayout = async ({
   );
 };
 
-export default UsersLayout;
+export default PostsLayout;

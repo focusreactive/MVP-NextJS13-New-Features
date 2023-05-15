@@ -1,9 +1,14 @@
 import { api } from '@/utils/api';
+import image from './intercepting-routes.png';
+import Doc from './doc.mdx';
 
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const [user] = await api.user(params.id);
 
   return (
+    <div>
+      <h2>{user.name}</h2>
+
       <table>
         <thead>
           <tr>
@@ -23,6 +28,18 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
           </tr>
         </tbody>
       </table>
+
+      <br />
+
+      <details>
+        <summary>Help</summary>
+        <img src={image.src} alt="" />
+        <br />
+        <hr />
+        <br />
+        <Doc />
+      </details>
+    </div>
   );
 };
 

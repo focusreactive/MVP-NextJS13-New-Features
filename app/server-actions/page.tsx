@@ -13,8 +13,8 @@ const Page = () => {
           Docs
         </Link>
 
-        <br/>
-        <br/>
+        <br />
+        <br />
 
         <Link
           target={'_blank'}

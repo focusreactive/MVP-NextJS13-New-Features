@@ -6,11 +6,9 @@ const PostsPage = async () => {
 
   return (
     <div>
-      <h1>Posts</h1>
-
       {posts.map(({ id, userId, title, body }) => (
         <article key={id}>
-          <NavLink href={`/intercepting-routes/posts/${id}`}>{title}</NavLink>
+          <h2>{title}</h2>
           <p>{body.slice(0, 100)}...</p>
           <small>
             <NavLink

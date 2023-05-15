@@ -1,20 +1,21 @@
-import NavLink from '@/components/NavLink/NavLink';
+import Link from 'next/link';
 
 import type { PropsWithChildren } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className={'content-container'}>
-      <nav>
-        <ul>
-          <li>
-            <NavLink href={'/intercepting-routes/users'}>Users</NavLink>
-          </li>
-          <li>
-            <NavLink href={'/intercepting-routes/posts'}>Posts</NavLink>
-          </li>
-        </ul>
-      </nav>
+      <h1>Intercepting routes</h1>
+
+      <p>
+        <Link
+          href={
+            'https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes'
+          }
+        >
+          Docs
+        </Link>
+      </p>
 
       {children}
     </div>
