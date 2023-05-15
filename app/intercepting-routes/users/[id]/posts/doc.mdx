@@ -1,0 +1,64 @@
+`app/intercepting-routes/posts/[id]/page.tsx`
+
+```tsx
+const PostPage = async ({ params }: { params: { id: string } }) => {
+  const [post] = await api.post(params.id);
+
+  return (
+    <article>
+      <h2>{post.title}</h2>
+
+      <p>{post.body}</p>
+
+      <NavLink
+        href={`/intercepting-routes/users/${post.userId}`}
+        className={'secondary'}
+      >
+        Author Page
+      </NavLink>
+    </article>
+  );
+};
+```
+
+#
+
+`app/intercepting-routes/users/@modal/(..)posts/[id]/page.tsx`
+
+```tsx
+const PostPage = async ({ params }: { params: { id: string } }) => {
+  const [post] = await api.post(params.id);
+
+  return (
+    <dialog open>
+      <article>
+        <header>
+          <h2 style={{ marginBottom: 0 }}>{post.title}</h2>
+        </header>
+
+        <p>{post.body}</p>
+
+        <BackLink />
+      </article>
+    </dialog>
+  );
+};
+```
+
+#
+
+`components/BackLink.tsx`
+
+```tsx
+'use client';
+
+export const BackLink = () => {
+  const router = useRouter();
+
+  return (
+    <button onClick={router.back} style={{ marginTop: 20 }}>
+      Go back
+    </button>
+  );
+};
+```

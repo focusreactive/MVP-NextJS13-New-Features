@@ -8,7 +8,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
     <dialog open>
       <article>
         <header>
-          <h3 style={{ marginBottom: 0 }}>{post.title}</h3>
+          <h2 style={{ marginBottom: 0 }}>{post.title}</h2>
         </header>
 
         <p>{post.body}</p>

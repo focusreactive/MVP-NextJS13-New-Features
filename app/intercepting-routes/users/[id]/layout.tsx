@@ -7,23 +7,21 @@ const UserLayout = async ({
   children,
   params,
 }: React.PropsWithChildren & { params: { id: string } }) => {
-  const [user, counter] = await api.user(params.id);
+  const [user] = await api.user(params.id);
 
   return (
-    <div className={'rerender-indicator'}>
-      <small className={'layout-label'}>/users/[id] layout</small>
-
+    <div>
       <h2 className={'animate-character'}>
-        {user.name} {counter}
+        {user.name}
       </h2>
 
       <nav>
         <ul>
           <li>
-            <NavLink href={`/parallel/users/${params.id}`}>Profile</NavLink>
+            <NavLink href={`/intercepting-routes/users/${params.id}`}>Profile</NavLink>
           </li>
           <li>
-            <NavLink href={`/parallel/users/${params.id}/posts`}>Posts</NavLink>
+            <NavLink href={`/intercepting-routes/users/${params.id}/posts`}>Posts</NavLink>
           </li>
         </ul>
       </nav>
