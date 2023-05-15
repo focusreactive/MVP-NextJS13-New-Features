@@ -1,5 +1,24 @@
-import { ImageResponse } from 'next/server';
+```tsx
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const id = searchParams?.id || '1';
+  const [user] = await api.user(id);
 
+  return {
+    openGraph: {
+      title: user.name,
+      images: [`/api/user-image?id=${id}`],
+    },
+  };
+}
+```
+
+#
+
+`app/api/user-image/route.tsx`
+
+```tsx
 export const runtime = 'edge';
 
 export async function GET(request: Request) {
@@ -75,21 +94,10 @@ export async function GET(request: Request) {
   );
 }
 
+
 function getFont({ origin }: { origin: string }) {
   return fetch(`${origin}/fonts/Righteous-Regular.ttf`).then((res) =>
     res.arrayBuffer(),
   );
 }
-
-const stringToColour = function (str: string) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let colour = '#';
-  for (let i = 0; i < 3; i++) {
-    let value = (hash >> (i * 8)) & 0xff;
-    colour += ('00' + value.toString(16)).substr(-2);
-  }
-  return colour;
-};
+```

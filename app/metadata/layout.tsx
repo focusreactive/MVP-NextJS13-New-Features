@@ -5,6 +5,18 @@ import type { PropsWithChildren } from 'react';
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className={'content-container'}>
+      <h1>Metadata examples</h1>
+
+      <p>
+        <NavLink
+          href={
+            'https://nextjs.org/docs/app/api-reference/functions/generate-metadata'
+          }
+        >
+          Docs
+        </NavLink>
+      </p>
+
       <hr />
 
       <ul>
@@ -16,6 +28,11 @@ const Layout = ({ children }: PropsWithChildren) => {
         </li>
         <li>
           <NavLink href={'/metadata/ssr'}>Dynamic SSR</NavLink>
+        </li>
+        <li>
+          <NavLink href={'/metadata/image-generation'}>
+            Image Generation
+          </NavLink>
         </li>
       </ul>
 

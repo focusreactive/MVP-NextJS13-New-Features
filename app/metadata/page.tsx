@@ -3,18 +3,6 @@ import NavLink from '@/components/NavLink/NavLink';
 const Page = () => {
   return (
     <div>
-      <h1>Metadata examples</h1>
-
-      <p>
-        <NavLink
-          href={
-            'https://nextjs.org/docs/app/api-reference/functions/generate-metadata'
-          }
-        >
-          Docs
-        </NavLink>
-      </p>
-
       <div>
         <p>
           <b>Key takeaways:</b>
