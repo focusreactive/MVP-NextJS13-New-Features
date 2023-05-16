@@ -1,16 +1,3 @@
-Data fetching:
-where(Server, Client), when(buildtime, runtime), how(layout, page, component)
-
-Simple static - Blog
-auto switch to dynamic with parallel routes - Dashboard
-WTF - Static dashboard
-
-Dynamic functions: cookies(), headers(), useSearchParams(), searchParams Pages prop
-
-If any fetch requests in the route use the revalidate option, the route will be re-rendered statically during revalidation.
-
----
-
 ## [The `app` Directory](#the-app-directory)
 
 In version 13, Next.js introduced a new **App Router** built on [React Server Components](/docs/getting-started/react-essentials#server-components), which supports shared layouts, nested routing, loading states, error handling, and more.
@@ -23,14 +10,10 @@ By default, components inside `app` are [React Server Components](/docs/getting-
 
 ## [Roles of Folders and Files](#roles-of-folders-and-files)
 
-In the App Router:
-
 - **Folders** are used to define routes. A route is a single path of nested folders, following the hierarchy from the **root folder** down to a final **leaf folder** that includes a `page.js` file.
 - **Files** are used to create UI that is shown for the route segment. See [special files](https://nextjs.org/docs/app/building-your-application/routing#file-conventions).
 
 ## [File Conventions](#file-conventions)
-
-Next.js provides a set of special files to create UI with specific behavior in nested routes:
 
 - [page.js](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#pages): Create the unique UI of a route and make the path publicly accessible.
   - [route.js](https://nextjs.org/docs/app/building-your-application/routing/router-handlers): Create server-side API endpoints for a route.
@@ -42,8 +25,6 @@ Next.js provides a set of special files to create UI with specific behavior in n
 - [not-found.js](https://nextjs.org/docs/app/api-reference/file-conventions/not-found): Create UI to show when the [`notFound`](https://nextjs.org/docs/app/api-reference/functions/not-found) function is thrown within a route segment or when a URL is not matched by any route.
 
 ## [Component Hierarchy](#component-hierarchy)
-
-The React components defined in special files of a route segment are rendered in a specific hierarchy:
 
 - `layout.js`
 - `template.js`
@@ -80,8 +61,6 @@ When navigating between sibling routes (e.g. `/dashboard/settings` and `/dashboa
 Without partial rendering, each navigation would cause the full page to re-render on the server. Rendering only the segment that’s updating reduces the amount of data transferred and execution time, leading to improved performance.
 
 ## [Advanced Routing Patterns](#advanced-routing-patterns)
-
-The App Router also provides a set conventions to help you implement more advanced routing patterns. These include:
 
 - [Parallel Routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes): Allow you to simultaneously show two or more pages in the same view that can be navigated independently. You can use them for split views that have their own sub-navigation. E.g. Dashboards.
 - [Intercepting Routes](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing/intercepting-routes): Allow you to intercept a route and show it in the context of another route. You can use these when keeping the context for the current page is important. E.g. Seeing all tasks while editing one task or expanding a photo in a feed.
@@ -187,124 +166,6 @@ export async function POST() {
 ```
 
 > **Note:** Previously, API Routes could have been used for use cases like handling form submissions. Route Handlers are likely not the solution for these uses cases. We will be recommending the use of [mutations](/docs/app/building-your-application/data-fetching/server-actions) for this when ready.
-
-### [Route Resolution](#route-resolution)
-
-You can consider a `route` the lowest level routing primitive.
-
-- They **do not** participate in layouts or client-side navigations like `page`.
-- There **cannot** be a `route.js` file at the same route as `page.js`.
-
-<table>
-  <thead>
-    <tr>
-      <th>Page</th>
-      <th>Route</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>app/page.js</code>
-      </td>
-      <td>
-        <code>app/route.js</code>
-      </td>
-      <td>
-        <span class="text-gray-500">
-          <svg
-            data-testid="geist-icon"
-            fill="none"
-            height="18"
-            shape-rendering="geometricPrecision"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
-            width="18"
-            style={{ color: 'red' }}
-          >
-            <path d="M18 6L6 18"></path>
-            <path d="M6 6l12 12"></path>
-          </svg>
-        </span>
-        Conflict
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>app/page.js</code>
-      </td>
-      <td>
-        <code>app/api/route.js</code>
-      </td>
-      <td>
-        <span class="text-green-600 inline-flex align-middle">
-          <svg
-            data-testid="geist-icon"
-            fill="none"
-            height="18"
-            shape-rendering="geometricPrecision"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
-            width="18"
-            style={{ color: 'green' }}
-          >
-            <path d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
-          </svg>
-        </span>
-        Valid
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>app/[user]/page.js</code>
-      </td>
-      <td>
-        <code>app/api/route.js</code>
-      </td>
-      <td>
-        <span class="text-green-600 inline-flex align-middle">
-          <svg
-            data-testid="geist-icon"
-            fill="none"
-            height="18"
-            shape-rendering="geometricPrecision"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
-            width="18"
-            style={{ color: 'green' }}
-          >
-            <path d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
-          </svg>
-        </span>
-        Valid
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-Each `route.js` or `page.js` file takes over all HTTP verbs for that route.
-
-app/page.js
-
-```ts
-export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
-}
-
-// ❌ Conflict
-// `app/route.js`
-export async function POST(request) {}
-```
 
 ## [Examples](#examples)
 
@@ -557,4 +418,284 @@ export const revalidate = false;
 export const fetchCache = 'auto';
 export const runtime = 'nodejs';
 export const preferredRegion = 'auto';
+```
+
+# useSelectedLayoutSegment
+
+`useSelectedLayoutSegment` is a **Client Component** hook that lets you read the active route segment **one level below** the Layout it is called from.
+
+It is useful for navigation UI, such as tabs inside a parent layout that change style depending on the active child segment.
+
+app/example-client-component.tsx
+
+```ts
+'use client';
+
+import { useSelectedLayoutSegment } from 'next/navigation';
+
+export default function ExampleClientComponent() {
+  const segment = useSelectedLayoutSegment();
+
+  return <>Active segment: {segment}</>;
+}
+```
+
+**Good to know:**
+
+- Since `useSelectedLayoutSegment` is a [Client Component](/docs/getting-started/react-essentials#client-components) hook, and Layouts are [Server Components](/docs/getting-started/react-essentials#server-components) by default, `useSelectedLayoutSegment` is usually called via a Client Component that is imported into a Layout.
+- `useSelectedLayoutSegment` only returns the segment one level down. To return all active segments, see [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments)
+
+## [Parameters](#parameters)
+
+```ts
+const segment = useSelectedLayoutSegment();
+```
+
+`useSelectedLayoutSegment` does not take any parameters.
+
+## [Returns](#returns)
+
+`useSelectedLayoutSegment` returns a string of the active segment or `null` if one doesn't exist.
+
+For example, given the Layouts and URLs below, the returned segment would be:
+
+<table>
+  <thead>
+    <tr>
+      <th>Layout</th>
+      <th>Visited URL</th>
+      <th>Returned Segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>app/layout.js</code>
+      </td>
+      <td>
+        <code>/</code>
+      </td>
+      <td>
+        <code>null</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard</code>
+      </td>
+      <td>
+        <code>'dashboard'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard</code>
+      </td>
+      <td>
+        <code>null</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard/settings</code>
+      </td>
+      <td>
+        <code>'settings'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard/analytics</code>
+      </td>
+      <td>
+        <code>'analytics'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard/analytics/monthly</code>
+      </td>
+      <td>
+        <code>'analytics'</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## [Examples](#examples)
+
+### [Creating an active link component](#creating-an-active-link-component)
+
+You can use `useSelectedLayoutSegment` to create an active link component that changes style depending on the active segment. For example, a featured posts list in the sidebar of a blog:
+
+app/blog/blog-nav-link.tsx
+
+```ts
+'use client';
+
+import Link from 'next/link';
+import { useSelectedLayoutSegment } from 'next/navigation';
+
+// This *client* component will be imported into a blog layout
+export default function BlogNavLink({
+  slug,
+  children,
+}: {
+  slug: string;
+  children: React.ReactNode;
+}) {
+  // Navigating to `/blog/hello-world` will return 'hello-world'
+  // for the selected layout segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
+
+  return (
+    <Link
+      href={`/blog/${slug}`}
+      // Change style depending on whether the link is active
+      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+    >
+      {children}
+    </Link>
+  );
+}
+```
+
+app/blog/layout.tsx
+
+```ts
+// Import the Client Component into a parent Layout (Server Component)
+import { BlogNavLink } from './blog-nav-link';
+import getFeaturedPosts from './get-featured-posts';
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const featuredPosts = await getFeaturedPosts();
+  return (
+    <div>
+      {featuredPosts.map((post) => (
+        <div key={post.id}>
+          <BlogNavLink slug={post.slug}>{post.title}</BlogNavLink>
+        </div>
+      ))}
+      <div>{children}</div>
+    </div>
+  );
+}
+```
+
+# usePathname
+
+`usePathname` is a **Client Component** hook that lets you read the current URL's **pathname**.
+
+app/example-client-component.tsx
+
+```ts
+'use client';
+
+import { usePathname } from 'next/navigation';
+
+export default function ExampleClientComponent() {
+  const pathname = usePathname();
+  return <>Current pathname: {pathname}</>;
+}
+```
+
+**Good to know:**
+
+- `usePathname` is a [Client Component](/docs/getting-started/react-essentials) hook and is **not supported** in [Server Components](/docs/getting-started/react-essentials).
+- `usePathname` can return `null` when a [fallback route](/docs/pages/building-your-application/data-fetching/get-static-paths#fallback-pages) is being rendered or when a `pages` directory page has been [automatically statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) by Next.js and the router is not ready.
+  - Next.js will automatically update your types if it detects both an `app` and `pages` directory in your project.
+
+## [Parameters](#parameters)
+
+```ts
+const pathname = usePathname();
+```
+
+`usePathname` does not take any parameters.
+
+## [Returns](#returns)
+
+`usePathname` returns a string of the current URL's pathname. For example:
+
+<table>
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Returned value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>/</code>
+      </td>
+      <td>
+        <code>'/'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/dashboard</code>
+      </td>
+      <td>
+        <code>'/dashboard'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/dashboard?v=2</code>
+      </td>
+      <td>
+        <code>'/dashboard'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/blog/hello-world</code>
+      </td>
+      <td>
+        <code>'/blog/hello-world'</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## [Examples](#examples)
+
+### [Do something in response to a route change](#do-something-in-response-to-a-route-change)
+
+app/example-client-component.tsx
+
+```ts
+'use client';
+
+import { usePathname, useSearchParams } from 'next/navigation';
+
+function ExampleClientComponent() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    // Do something here...
+  }, [pathname, searchParams]);
+}
 ```
