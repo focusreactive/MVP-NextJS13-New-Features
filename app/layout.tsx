@@ -55,6 +55,11 @@ export default function RootLayout({
                   Intercepting Routes
                 </NavLink>
               </li>
+              <li>
+                <NavLink href={'/api-routes'}>
+                  API Routes
+                </NavLink>
+              </li>
             </ul>
           </nav>
 
