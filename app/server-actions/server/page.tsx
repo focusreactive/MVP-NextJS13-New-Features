@@ -7,6 +7,7 @@ import Doc from './doc.mdx';
 const Page = async () => {
   const cookie = cookies().get('user')?.value;
   const user = cookie && JSON.parse(cookie);
+  const secret = process.env.SECRET_TOKEN;
 
   const register = async (formData: FormData) => {
     'use server';
@@ -20,6 +21,8 @@ const Page = async () => {
       value: JSON.stringify({ name }),
       httpOnly: true,
     });
+
+    console.log(secret);
 
     revalidatePath('/parallel/me');
   };
