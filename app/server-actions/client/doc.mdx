@@ -12,6 +12,8 @@ const Page = async () => {
 `app/server-actions/client/_actions/register.tsx`
 
 ```tsx
+'use server';
+
 export const register = async (formData: FormData) => {
   const name = formData.get('name');
 
@@ -34,6 +36,8 @@ export const register = async (formData: FormData) => {
 `app/server-actions/client/_actions/logout.tsx`
 
 ```tsx
+'use server';
+
 export const logout = async () => {
   cookies().set({ name: 'user', value: '', httpOnly: true });
 
