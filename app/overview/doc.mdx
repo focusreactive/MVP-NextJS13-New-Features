@@ -108,9 +108,7 @@ The following [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/M
 
 ### [Extended `NextRequest` and `NextResponse` APIs](#extended-nextrequest-and-nextresponse-apis)
 
-In addition to supporting native [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). Next.js extends them with [`NextRequest`](/docs/app/api-reference/functions/next-request) and [`NextResponse`](/docs/app/api-reference/functions/next-response) to provide convenient helpers for advanced use cases.
-
-## [Behavior](#behavior)
+In addition to supporting native [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). Next.js extends them with [`NextRequest`](/docs/app/api-reference/functions/next-request) and [`NextResponse`](/docs/app/api-reference/functions/next-response)
 
 ### [Static Route Handlers](#static-route-handlers)
 
@@ -144,8 +142,6 @@ Route handlers are evaluated dynamically when:
 - Using any of the other HTTP methods.
 - Using [Dynamic Functions](/docs/app/building-your-application/routing/router-handlers#dynamic-functions) like `cookies` and `headers`.
 - The [Segment Config Options](#segment-config-options) manually specifies dynamic mode.
-
-For example:
 
 app/products/api/route.ts
 
@@ -562,5 +558,3 @@ export const fetchCache = 'auto';
 export const runtime = 'nodejs';
 export const preferredRegion = 'auto';
 ```
-
-See the [API reference](/docs/app/api-reference/file-conventions/route-segment-config) for more details.

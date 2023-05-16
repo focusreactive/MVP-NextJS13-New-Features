@@ -23,7 +23,7 @@ export default async function RootLayout({
 
             return (
               <li key={id}>
-                <NavLink href={`/default/simple/${id}`}>{id}</NavLink>
+                <NavLink href={`/static/default/${id}`}>{id}</NavLink>
               </li>
             );
           })}
