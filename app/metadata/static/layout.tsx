@@ -53,7 +53,7 @@ const Layout = ({ children }: PropsWithChildren) => {
     <div>
       <hr />
 
-      <ul>
+      <ul className={'nav'}>
         <li>
           <NavLink href={'/metadata/static/title-default'}>Default</NavLink>
         </li>
