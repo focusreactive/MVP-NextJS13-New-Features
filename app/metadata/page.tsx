@@ -1,4 +1,4 @@
-import NavLink from '@/components/NavLink/NavLink';
+import Link from 'next/link';
 
 const Page = () => {
   return (
@@ -13,31 +13,30 @@ const Page = () => {
             Can be defined only in <code>layout</code> and <code>page</code>
           </li>
           <li>
-            All metadata in parent routes is merged with current page (cascade)
+            All metadata in parent routes are merged with that in the current
+            page (cascade)
           </li>
           <li>Server components only</li>
           <li>
-            Usage of <code>searchParams</code> make the segment SSR (see{' '}
-            <NavLink href={'/metadata/ssr'}>Dynamic SSR</NavLink>)
+            Usage of <code>searchParams</code> makes the segment SSR. See:{' '}
+            <Link href={'/metadata/ssr'}>Dynamic SSR</Link>
           </li>
           <li>
-            If page don't have <code>title</code> the closest parent{' '}
-            <code>title</code> will be used
+            File-based Metadata. We can generate <code>robots.txt</code>,{' '}
+            <code>sitemap</code> and images dynamically, defining them in
+            separate files. See: <Link href={'/metadata/sitemap'}>Sitemap</Link>
+            , <Link href={'/metadata/robots'}>Robots</Link> and{' '}
+            <Link href={'/metadata/image-generation'}>Image Generation</Link>
           </li>
           <li>
-            <NavLink
+            <Link
+              target={'_blank'}
               href={
                 'https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata'
               }
             >
               List of unsupported tags
-            </NavLink>
-          </li>
-          <li>
-            <code>robots.txt</code> can be part of metadata or a separate file
-            (see <code>app/sitemap.ts</code>), so as any icon like
-            <code>apple-icon.js</code>, <code>icon.js</code>,{' '}
-            <code>opengraph-image.js</code>, <code>twitter-image.js</code>
+            </Link>
           </li>
         </ul>
       </div>

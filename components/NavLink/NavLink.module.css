@@ -1,6 +1,6 @@
 .selected {
   border-radius: 10px;
-  background-color: aquamarine;
+  background-color: #daf3ff;
 }
 
 @keyframes spin {

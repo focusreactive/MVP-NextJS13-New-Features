@@ -13,7 +13,10 @@ const Page = () => {
       <h3>Template in metadata title</h3>
 
       <div>
-        <b>Key takeaways:</b>
+        <p>
+          <b>Key takeaways:</b>
+        </p>
+
         <ul>
           <li>
             Applies only to children segments (layout -&gt; page on the same

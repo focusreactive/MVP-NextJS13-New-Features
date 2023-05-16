@@ -51,7 +51,7 @@ export default function RootLayout({
                 <NavLink href={'/server-actions'}>Server Actions</NavLink>
               </li>
               <li>
-                <NavLink href={'/intercepting-routes'}>
+                <NavLink href={'/intercepting-routes/posts'}>
                   Intercepting Routes
                 </NavLink>
               </li>

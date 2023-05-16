@@ -86,3 +86,11 @@ body {
 .remark-highlight {
   font-size: 14px;
 }
+
+.nav a {
+  padding: 10px 14px;
+}
+
+ul ul li {
+  list-style-type: circle;
+}

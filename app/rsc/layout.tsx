@@ -9,7 +9,7 @@ const Layout = ({ children }: PropsWithChildren) => {
     <div className={'content-container'}>
       <h1>RSC | Client boundaries</h1>
 
-      <ul>
+      <ul className={'nav'}>
         <li>
           <NavLink href={'/rsc/client-boundary'}>
             Server -&gt; Client -&gt; Client

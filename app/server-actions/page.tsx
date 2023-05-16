@@ -27,7 +27,10 @@ const Page = () => {
       </p>
 
       <div>
-        <b>Key takeaways:</b>
+        <p>
+          <b>Key takeaways:</b>
+        </p>
+
         <ul>
           <li>
             Functions with <code>'use server'</code> should have serializable
@@ -36,27 +39,29 @@ const Page = () => {
           <li>
             There are 3 ways to call such functions (first two support
             progressive enhancement):
-          </li>
-          <li>
-            <code>action</code> prop on a form
-          </li>
-          <li>
-            <code>formAction</code> prop on{' '}
-            <code>
-              {'<'}button{'>'}
-            </code>
-            ,{' '}
-            <code>
-              {'<'}input type="submit"{'>'}
-            </code>
-            , and{' '}
-            <code>
-              {'<'}input type="image"{'>'}
-            </code>{' '}
-            in a form
-          </li>
-          <li>
-            <code>startTransition</code>
+            <ul>
+              <li>
+                <code>action</code> prop on a form
+              </li>
+              <li>
+                <code>formAction</code> prop on{' '}
+                <code>
+                  {'<'}button{'>'}
+                </code>
+                ,{' '}
+                <code>
+                  {'<'}input type="submit"{'>'}
+                </code>
+                , and{' '}
+                <code>
+                  {'<'}input type="image"{'>'}
+                </code>{' '}
+                in a form
+              </li>
+              <li>
+                <code>startTransition</code>
+              </li>
+            </ul>
           </li>
           <li>
             <code>useOptimistic</code> to implement optimistic updates
@@ -64,15 +69,21 @@ const Page = () => {
           <li>
             <code>useFormStatus</code> to get the status of a form submission
           </li>
-          <li>We can't define server actions in client components, but</li>
-          <li>we can pass server functions as a prop</li>
-          <li>we can import server functions inside client components</li>
-          <li>Two ways to revalidate a page:</li>
           <li>
-            <code>revalidatePath</code>
+            We can't define server actions in client components, but we can pass
+            them as props
           </li>
+          <li>We can import server functions inside client components</li>
           <li>
-            <code>revalidateTag</code>
+            Two ways to revalidate a page:
+            <ul>
+              <li>
+                <code>revalidatePath</code>
+              </li>
+              <li>
+                <code>revalidateTag</code>
+              </li>
+            </ul>
           </li>
           <li>
             We can use <code>cookies()</code> and <code>headers()</code>{' '}
