@@ -1,98 +1,119 @@
-Dynamic route `[id]`, cached by default
+# Caching Data
+
+Next.js has built-in support for caching data, both on a per-request basis (recommended) or for an entire route segment.
+
+By default, all `fetch()` requests are cached and deduplicated automatically.
+
+Requests are **not** cached if:
+
+- Dynamic methods (`next/headers`, `export const POST`, or similar) are used and the fetch is a `POST` request (or uses `Authorization` or `cookie` headers)
+- `fetchCache` is configured to skip cache by default
+- `revalidate: 0` or `cache: 'no-store'` is configured on individual `fetch`
+
+### [React `cache()`](#react-cache)
+
+React allows you to [`cache()`](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md) and deduplicate requests, memoizing the result of the wrapped function call. The same function called with the same arguments will reuse a cached value instead of re-running the function.
+
+utils/getUser.ts
 
 ```ts
-import NavLink from '@/components/NavLink/NavLink';
+import { cache } from 'react';
 
-import { api } from '@/utils/api';
+export const getUser = cache(async (id: string) => {
+  const user = await db.user.findUnique({ id });
+  return user;
+});
+```
 
-export const metadata = {
-  title: 'Dynamic Simple',
+### [GraphQL and `cache()`](#graphql-and-cache)
+
+`POST` requests are automatically deduplicated when using `fetch` – unless they are inside of `POST` Route Handler or come after reading `headers()`/`cookies()`. If you are using GraphQL and `POST` requests in the above cases, you can use `cache` to deduplicate requests. The `cache` arguments must be flat and only include primitives. Deep objects won't match for deduplication.
+
+utils/getUser.ts
+
+```ts
+import { cache } from 'react';
+
+export const getUser = cache(async (id: string) => {
+  const res = await fetch('/graphql', { method: 'POST', body: '...' });
+  // ...
+});
+```
+
+### [Preload pattern with `cache()`](#preload-pattern-with-cache)
+
+components/User.tsx
+
+```ts
+import { getUser } from '@utils/getUser';
+
+export const preload = (id: string) => {
+  // void evaluates the given expression and returns undefined
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void
+  void getUser(id);
 };
-
-const PostPage = async ({ params }: { params: { id: string } }) => {
-  const [post] = await api.post(params.id);
-  const [image] = await api.images();
-
-  return (
-    <div>
-      <article>
-        <h2>{post.title}</h2>
-
-        <p>{post.body}</p>
-        <div className="grid">
-          <img src={image} alt="dog" width={400} />
-        </div>
-        <NavLink href={`/users/${post.userId}`} className={'secondary'}>
-          Author Page
-        </NavLink>
-      </article>
-    </div>
-  );
-};
-
-export default PostPage;
-
-export async function generateStaticParams() {
-  const [posts] = await api.posts();
-
-  return posts.slice(0, 10).map((post) => {
-    return {
-      id: String(post.id),
-    };
-  });
+export default async function User({ id }: { id: string }) {
+  const result = await getUser(id);
+  // ...
 }
 ```
 
+By calling `preload`, you can eagerly start fetching data you're likely going to need.
+
+app/user/\[id\]/page.tsx
+
 ```ts
-import { proxyFetch } from './proxyFetch';
+import User, { preload } from '@components/User';
 
-import type { Post, User } from '@/app/global';
-
-const fetchData = async (url: string, options?: RequestInit) => {
-  const result = await proxyFetch.fetch(url, options).catch(console.error);
-  return { data: result?.data, counter: result?.counter };
-};
-
-export const api = {
-  post: async (id: string, options?: RequestInit) => {
-    let updatedId = id;
-
-    if (id === 'random') {
-      updatedId = String(Math.round(Math.random() * 100));
-    }
-
-    if (id === 'best') {
-      updatedId = String(99);
-    }
-
-    if (id === 'dynamic') {
-      updatedId = String(13);
-    }
-
-    const result = await fetchData(`/posts/${updatedId}`, options);
-
-    return [result?.data, result?.counter] as [Post, number];
-  },
-
-  posts: async () => {
-    const result = await fetchData('/posts');
-    return [result.data, result.counter] as [Post[], number];
-  },
-
-  user: async (id: string) => {
-    const result = await fetchData(`/users/${id}`);
-    return [result.data, result.counter] as [User, number];
-  },
-
-  users: async () => {
-    const result = await fetchData('/users');
-    return [result.data, result.counter] as [User[], number];
-  },
-
-  images: async (options?: RequestInit) => {
-    const result = await fetchData('/images', options);
-
-    return [result.data, result.counter] as [string, number];
-  },
-};
+export default async function Page({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  preload(id); // starting loading the user data now
+  const condition = await fetchCondition();
+  return condition ? <User id={id} /> : null;
+}
 ```
+
+### [Combining `cache`, `preload`, and `server-only`](#combining-cache-preload-and-server-only)
+
+You can combine the `cache` function, the `preload` pattern, and the `server-only` package to create a data fetching utility that can be used throughout your app.
+
+utils/getUser.ts
+
+```ts
+import { cache } from 'react';
+import 'server-only';
+
+export const preload = (id: string) => {
+  void getUser(id);
+};
+
+export const getUser = cache(async (id: string) => {
+  // ...
+});
+```
+
+With this approach, you can eagerly fetch data, cache responses, and guarantee that this data fetching [only happens on the server](/docs/getting-started/react-essentials#keeping-server-only-code-out-of-client-components-poisoning).
+
+The `getUser.ts` exports can be used by layouts, pages, or components to give them control over when a user's data is fetched.
+
+## [Segment-level Caching](#segment-level-caching)
+
+> **Note:** We recommend using per-request caching for improved granularity and control over caching.
+
+Segment-level caching allows you to cache and revalidate data used in route segments.
+
+This mechanism allows different segments of a path to control the cache lifetime of the entire route. Each `page.tsx` and `layout.tsx` in the route hierarchy can export a `revalidate` value that sets the revalidation time for the route.
+
+app/page.tsx
+
+TypeScript
+
+    export const revalidate = 60; // revalidate this segment every 60 seconds
+
+**Good to know:**
+
+- If a page, layout, and fetch request all specify a [`revalidate`](/docs/app/api-reference/file-conventions/route-segment-config#revalidate) frequency, the lowest value of the three will be used.
+- Advanced: You can set `fetchCache` to `'only-cache'` or `'force-cache'` to ensure that all `fetch` requests opt into caching but the revalidation frequency might still be lowered by individual `fetch` requests. See [`fetchCache`](/docs/app/api-reference/file-conventions/route-segment-config#fetchCache) for more information.
