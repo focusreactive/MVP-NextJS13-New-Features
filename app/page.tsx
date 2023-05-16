@@ -4,7 +4,7 @@ export const metadata = {
 
 const HomePage = () => {
   return (
-    <div className={'rerender-indicator'}>
+    <div>
       <h1>HOMEPAGE</h1>
     </div>
   );

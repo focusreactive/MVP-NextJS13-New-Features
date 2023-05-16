@@ -11,7 +11,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className={'rerender-indicator'}>
       <nav>
         <ul>
           <li>
@@ -35,6 +35,6 @@ export default async function RootLayout({
       <section className="layout">
         <div>{children}</div>
       </section>
-    </>
+    </div>
   );
 }

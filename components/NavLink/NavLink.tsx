@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 
 import styles from './NavLink.module.css';
 
@@ -13,8 +13,20 @@ const NavLink = ({
   className,
 }: PropsWithChildren & { href: string; className?: string }) => {
   const pathName = usePathname();
+  const segment = useSelectedLayoutSegment();
 
-  if (pathName === href) {
+  if (
+    (segment && (href.endsWith(segment) || href.includes(`/${segment}/`))) ||
+    (!segment && href === '/')
+  ) {
+    if (pathName === href) {
+      return (
+        <Link href={href} className={styles.current}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <Link href={href} className={styles.selected}>
         {children}

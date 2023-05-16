@@ -3,6 +3,11 @@
   background-color: #daf3ff;
 }
 
+.current {
+  border-radius: 10px;
+  background-color: #7ad5ff;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

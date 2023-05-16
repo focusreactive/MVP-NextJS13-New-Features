@@ -6,7 +6,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <div className={'rerender-indicator'}>
+    <div>
       <main className="blog">
         <Doc />
       </main>
