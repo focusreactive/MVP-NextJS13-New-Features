@@ -1,20 +1,27 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import Doc from './doc.mdx';
 
 const PostPage = async () => {
-  const res = await fetch(`${window.location.origin}/api/check-post`, {
-    method: 'POST',
-  });
-  const data = await res.json();
+  const [state, setState] = useState({ random: '' });
+
+  useEffect(() => {
+    fetch(`${window.location.origin}/api/check-post`, {
+      method: 'POST',
+    })
+      .then((r) => r.json())
+      .then(setState);
+  }, []);
 
   return (
     <div className="blog">
       <Doc />
       <article>
         <BuildInfo />
-        <strong>DATA FROM SERVER {data}</strong>
+        <strong>DATA FROM SERVER {state?.random}</strong>
       </article>
     </div>
   );
