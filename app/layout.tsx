@@ -38,7 +38,7 @@ export default function RootLayout({
                 <NavLink href={'/data-fetching'}>Data fetching</NavLink>
               </li>
               <li>
-                <NavLink href={'/static'}>Static+Cache</NavLink>
+                <NavLink href={'/static'}>Static</NavLink>
               </li>
               <li>
                 <NavLink href={'/metadata'}>Metadata</NavLink>

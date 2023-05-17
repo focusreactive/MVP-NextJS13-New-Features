@@ -30,7 +30,7 @@ export default async function RootLayout({
         </ul>
       </nav>
 
-      <section className="main-container">{children}</section>
+      <section className="blog">{children}</section>
     </>
   );
 }

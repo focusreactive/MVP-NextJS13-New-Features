@@ -1,19 +1,20 @@
+```ts
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
+import Doc from './doc.mdx';
 
 export const metadata = {
   title: 'Dynamic revalidate page',
 };
 
-export const revalidate = 86400;
-
-const PostPage = async ({ params }: { params: { id: string } }) => {
-  const [post] = await api.post(params.id);
-  const [image] = await api.images({ cache: 'no-cache' });
+const PostPage = async () => {
+  const [post] = await api.post('60');
+  const [image] = await api.images({ next: { revalidate: 60 } });
 
   return (
-    <div>
+    <div className="blog">
+      <Doc />
       <article>
         <BuildInfo />
         <h2>{post.title}</h2>
@@ -30,13 +31,4 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
 };
 
 export default PostPage;
-
-export async function generateStaticParams() {
-  const [posts] = await api.posts();
-
-  return posts.slice(0, 10).map((post) => {
-    return {
-      id: String(post.id),
-    };
-  });
-}
+```
