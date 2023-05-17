@@ -20,7 +20,12 @@ export default async function RootLayout({
             <NavLink href={'/data-fetching/revalidate'}>Revalidate</NavLink>
           </li>
           <li>
-            <NavLink href={'/data-fetching/no-cache'}>No cache</NavLink>
+            <NavLink href={'/data-fetching/no-cache'}>
+              No cache (no store)
+            </NavLink>
+          </li>
+          <li>
+            <NavLink href={'/data-fetching/post'}>POST</NavLink>
           </li>
         </ul>
       </nav>
