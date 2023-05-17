@@ -1,12 +1,12 @@
 ## [The `app` Directory](#the-app-directory)
 
-In version 13, Next.js introduced a new **App Router** built on [React Server Components](/docs/getting-started/react-essentials#server-components), which supports shared layouts, nested routing, loading states, error handling, and more.
+**App Router** built on [React Server Components](/docs/getting-started/react-essentials#server-components), which supports shared layouts, nested routing, loading states, error handling, and more.
 
-The App Router works in a new directory named `app`. The `app` directory works alongside the `pages` directory to allow for incremental adoption. This allows you to opt some routes of your application into the new behavior while keeping other routes in the `pages` directory for previous behavior.
+The App Router works in a new directory named `app`. The `app` directory works alongside the `pages` directory to allow for incremental adoption.
 
 > **Good to know:** The App Router takes priority over the Pages Router. Routes across directories should not resolve to the same URL path and will cause a build-time error to prevent a conflict.
 
-By default, components inside `app` are [React Server Components](/docs/getting-started/react-essentials#server-components). This is a performance optimization and allows you to easily adopt them, and you can also use [Client Components](/docs/getting-started/react-essentials#client-components).
+By default, components inside `app` are [React Server Components](/docs/getting-started/react-essentials#server-components).
 
 ## [Roles of Folders and Files](#roles-of-folders-and-files)
 
@@ -64,8 +64,6 @@ When navigating between sibling routes (e.g. `/dashboard/settings` and `/dashboa
 - [Intercepting Routes](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing/intercepting-routes): Allow you to intercept a route and show it in the context of another route. You can use these when keeping the context for the current page is important. E.g. Seeing all tasks while editing one task or expanding a photo in a feed.
 
 # Route Handlers
-
-## [Convention](#convention)
 
 Route Handlers are defined in a [`route.js|ts` file](/docs/app/api-reference/file-conventions/route) inside the `app` directory:
 
@@ -337,11 +335,11 @@ export const runtime = 'nodejs';
 export const preferredRegion = 'auto';
 ```
 
-# useSelectedLayoutSegment
+# New Functions
+
+## useSelectedLayoutSegment
 
 `useSelectedLayoutSegment` is a **Client Component** hook that lets you read the active route segment **one level below** the Layout it is called from.
-
-It is useful for navigation UI, such as tabs inside a parent layout that change style depending on the active child segment.
 
 app/example-client-component.tsx
 
@@ -357,24 +355,9 @@ export default function ExampleClientComponent() {
 }
 ```
 
-**Good to know:**
-
-- Since `useSelectedLayoutSegment` is a [Client Component](/docs/getting-started/react-essentials#client-components) hook, and Layouts are [Server Components](/docs/getting-started/react-essentials#server-components) by default, `useSelectedLayoutSegment` is usually called via a Client Component that is imported into a Layout.
-- `useSelectedLayoutSegment` only returns the segment one level down. To return all active segments, see [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments)
-
-## [Parameters](#parameters)
-
-```ts
-const segment = useSelectedLayoutSegment();
-```
-
-`useSelectedLayoutSegment` does not take any parameters.
-
-## [Returns](#returns)
+### [Returns](#returns)
 
 `useSelectedLayoutSegment` returns a string of the active segment or `null` if one doesn't exist.
-
-For example, given the Layouts and URLs below, the returned segment would be:
 
 <table>
   <thead>
@@ -454,72 +437,82 @@ For example, given the Layouts and URLs below, the returned segment would be:
   </tbody>
 </table>
 
-## [Examples](#examples)
+## useSelectedLayoutSegments
 
-### [Creating an active link component](#creating-an-active-link-component)
+`useSelectedLayoutSegments` is a **Client Component** hook that lets you read the active route segments below the Layout it is called from.
 
-You can use `useSelectedLayoutSegment` to create an active link component that changes style depending on the active segment. For example, a featured posts list in the sidebar of a blog:
+### [Returns](#returns)
 
-app/blog/blog-nav-link.tsx
+`useSelectedLayoutSegments` returns an array of strings containing the active segments one level down from the layout the hook was called from. Or an empty array if none exist.
 
-```ts
-'use client';
+<table>
+  <thead>
+    <tr>
+      <th>Layout</th>
+      <th>Visited URL</th>
+      <th>Returned Segments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>app/layout.js</code>
+      </td>
+      <td>
+        <code>/</code>
+      </td>
+      <td>
+        <code>[]</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard</code>
+      </td>
+      <td>
+        <code>['dashboard']</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard/settings</code>
+      </td>
+      <td>
+        <code>['dashboard', 'settings']</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard</code>
+      </td>
+      <td>
+        <code>[]</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>app/dashboard/layout.js</code>
+      </td>
+      <td>
+        <code>/dashboard/settings</code>
+      </td>
+      <td>
+        <code>['settings']</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
-
-// This *client* component will be imported into a blog layout
-export default function BlogNavLink({
-  slug,
-  children,
-}: {
-  slug: string;
-  children: React.ReactNode;
-}) {
-  // Navigating to `/blog/hello-world` will return 'hello-world'
-  // for the selected layout segment
-  const segment = useSelectedLayoutSegment();
-  const isActive = slug === segment;
-
-  return (
-    <Link
-      href={`/blog/${slug}`}
-      // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
-    >
-      {children}
-    </Link>
-  );
-}
-```
-
-app/blog/layout.tsx
-
-```ts
-// Import the Client Component into a parent Layout (Server Component)
-import { BlogNavLink } from './blog-nav-link';
-import getFeaturedPosts from './get-featured-posts';
-
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const featuredPosts = await getFeaturedPosts();
-  return (
-    <div>
-      {featuredPosts.map((post) => (
-        <div key={post.id}>
-          <BlogNavLink slug={post.slug}>{post.title}</BlogNavLink>
-        </div>
-      ))}
-      <div>{children}</div>
-    </div>
-  );
-}
-```
-
-# usePathname
+## usePathname
 
 `usePathname` is a **Client Component** hook that lets you read the current URL's **pathname**.
 
@@ -538,21 +531,9 @@ export default function ExampleClientComponent() {
 
 **Good to know:**
 
-- `usePathname` is a [Client Component](/docs/getting-started/react-essentials) hook and is **not supported** in [Server Components](/docs/getting-started/react-essentials).
 - `usePathname` can return `null` when a [fallback route](/docs/pages/building-your-application/data-fetching/get-static-paths#fallback-pages) is being rendered or when a `pages` directory page has been [automatically statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) by Next.js and the router is not ready.
-  - Next.js will automatically update your types if it detects both an `app` and `pages` directory in your project.
 
-## [Parameters](#parameters)
-
-```ts
-const pathname = usePathname();
-```
-
-`usePathname` does not take any parameters.
-
-## [Returns](#returns)
-
-`usePathname` returns a string of the current URL's pathname. For example:
+### [Returns](#returns)
 
 <table>
   <thead>
@@ -614,5 +595,266 @@ function ExampleClientComponent() {
   useEffect(() => {
     // Do something here...
   }, [pathname, searchParams]);
+}
+```
+
+# fetch
+
+Next.js extends the native [Web `fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to allow each request on the server to set its own persistent caching semantics.
+
+In the browser, the `cache` option indicates how a fetch request will interact with the _browser's_ HTTP cache. With this extension, `cache` indicates how a _server-side_ fetch request will interact with the framework's persistent HTTP cache.
+
+You can call `fetch` with `async` and `await` directly within Server Components.
+
+app/page.tsx
+
+```ts
+export default async function Page() {
+  // This request should be cached until manually invalidated.
+  // Similar to `getStaticProps`.
+  // `force-cache` is the default and can be omitted.
+  const staticData = await fetch(`https://...`, { cache: 'force-cache' });
+
+  // This request should be refetched on every request.
+  // Similar to `getServerSideProps`.
+  const dynamicData = await fetch(`https://...`, { cache: 'no-store' });
+
+  // This request should be cached with a lifetime of 10 seconds.
+  // Similar to `getStaticProps` with the `revalidate` option.
+  const revalidatedData = await fetch(`https://...`, {
+    next: { revalidate: 10 },
+  });
+
+  return <div>...</div>;
+}
+```
+
+## [`fetch(url, options)`](#fetchurl-options)
+
+Since Next.js extends the [Web `fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), you can use any of the [native options available](https://developer.mozilla.org/en-US/docs/Web/API/fetch#parameters).
+
+Further, Next.js polyfills `fetch` on both the client and the server, so you can use fetch in both [Server and Client Components](/docs/getting-started/react-essentials).
+
+### [`options.cache`](#optionscache)
+
+Configure how the request should interact with Next.js HTTP cache.
+
+```ts
+fetch(`https://...`, { cache: 'force-cache' | 'no-store' });
+```
+
+- **`force-cache`** (default) - Next.js looks for a matching request in its HTTP cache.
+  - If there is a match and it is fresh, it will be returned from the cache.
+  - If there is no match or a stale match, Next.js will fetch the resource from the remote server and update the cache with the downloaded resource.
+- **`no-store`** - Next.js fetches the resource from the remote server on every request without looking in the cache, and it will not update the cache with the downloaded resource.
+
+**Good to know:**
+
+- If you don't provide a `cache` option, Next.js will default to `force-cache`, unless a [dynamic function](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions) such as `cookies()` is used, in which case it will default to `no-store`.
+- The `no-cache` option behaves the same way as `no-store` in Next.js.
+
+### [`options.next.revalidate`](#optionsnextrevalidate)
+
+```ts
+    fetch(`https://...`, { next: { revalidate: false | 0 | number } } });
+```
+
+Set the cache lifetime of a resource (in seconds).
+
+- **`false`** - Cache the resource indefinitely. Semantically equivalent to `revalidate: Infinity`. The [HTTP cache](/docs/app/building-your-application/data-fetching#caching-data) may evict older resources over time.
+- **`0`** - Prevent the resource from being cached.
+- **`number`** - (in seconds) Specify the resource should have a cache lifetime of at most `n` seconds.
+
+**Good to know:**
+
+- If an individual `fetch()` request sets a `revalidate` number lower than the [default `revalidate`](/docs/app/api-reference/file-conventions/route-segment-config#configrevalidate) of a route, the whole route revalidation interval will be decreased.
+- If two fetch requests with the same URL in the same route have different `revalidate` values, the lower value will be used.
+- As a convenience, it is not necessary to set the `cache` option if `revalidate` is set to a number since `0` implies `cache: 'no-store'` and a positive value implies `cache: 'force-cache'`.
+- Conflicting options such as `{ revalidate: 0, cache: 'force-cache' }` or `{ revalidate: 10, cache: 'no-store' }` will cause an error.
+
+# notFound
+
+The `notFound` function allows you to render the [`not-found file`](/docs/app/api-reference/file-conventions/not-found) within a route segment as well as inject a `<meta name="robots" content="noindex" />` tag.
+
+## [`notFound()`](#notfound)
+
+Invoking the `notFound()` function throws a `NEXT_NOT_FOUND` error and terminates rendering of the route segment in which it was thrown. Specifying a [**not-found** file](/docs/app/api-reference/file-conventions/not-found) allows you to gracefully handle such errors by rendering a Not Found UI within the segment.
+
+app/user/\[id\]/page.js
+
+```ts
+import { notFound } from 'next/navigation';
+
+async function fetchUsers(id) {
+  const res = await fetch('https://...');
+  if (!res.ok) return undefined;
+  return res.json();
+}
+
+export default async function Profile({ params }) {
+  const user = await fetchUser(params.id);
+
+  if (!user) {
+    notFound();
+  }
+
+  // ...
+}
+```
+
+> **Note:** `notFound()` does not require you to use `return notFound()` due to using the TypeScript [`never`](https://www.typescriptlang.org/docs/handbook/2/functions.html#never) type.
+
+# cookies
+
+The `cookies` function allows you to read the HTTP incoming request cookies from a [Server Component](/docs/getting-started/react-essentials) or write outgoing request cookies in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions) or [Route Handler](/docs/app/building-your-application/routing/router-handlers).
+
+**Good to know:**
+
+- `cookies()` is a **[Dynamic Function](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions)** whose returned values cannot be known ahead of time. Using it in a layout or page will opt a route into **[dynamic rendering](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-rendering)** at request time.
+
+## [`cookies().get(name)`](#cookiesgetname)
+
+A method that takes a cookie name and returns an object with name and value. If a cookie with `name` isn't found, it returns `undefined`. If multiple cookies match, it will only return the first match.
+
+app/page.js
+
+```ts
+import { cookies } from 'next/headers';
+
+export default function Page() {
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme');
+  return '...';
+}
+```
+
+## [`cookies().getAll()`](#cookiesgetall)
+
+A method that is similar to `get`, but returns a list of all the cookies with a matching `name`. If `name` is unspecified, it returns all the available cookies.
+
+app/page.js
+
+```ts
+import { cookies } from 'next/headers';
+
+export default function Page() {
+  const cookieStore = cookies();
+  return cookieStore.getAll().map((cookie) => (
+    <div key={cookie.name}>
+      <p>Name: {cookie.name}</p>
+      <p>Value: {cookie.value}</p>
+    </div>
+  ));
+}
+```
+
+## [`cookies().has(name)`](#cookieshasname)
+
+A method that takes a cookie name and returns a `boolean` based on if the cookie exists (`true`) or not (`false`).
+
+app/page.js
+
+```ts
+import { cookies } from 'next/headers';
+
+export default function Page() {
+  const cookiesList = cookies();
+  const hasCookie = cookiesList.has('theme');
+  return '...';
+}
+```
+
+## [`cookies().set(name, value, options)`](#cookiessetname-value-options)
+
+A method that takes a cookie name, value, and options and sets the outgoing request cookie. This method is only available in a [Server Action](/docs/app/building-your-application/data-fetching/server-actions) or [Route Handler](/docs/app/building-your-application/routing/router-handlers).
+
+```ts
+import { cookies } from 'next/headers';
+
+async function create(data) {
+  'use server';
+  cookies().set('name', 'lee');
+  // or
+  cookies().set('name', 'lee', { secure: true });
+  // or
+  cookies().set({
+    name: 'name',
+    value: 'lee',
+    httpOnly: true,
+    path: '/',
+  });
+}
+```
+
+# headers
+
+The `headers` function allows you to read the HTTP incoming request headers from a [Server Component](/docs/getting-started/react-essentials).
+
+## [`headers()`](#headers)
+
+This API extends the [Web Headers API](https://developer.mozilla.org/en-US/docs/Web/API/Headers). It is **read-only**, meaning you cannot `set` / `delete` the outgoing request headers.
+
+app/page.tsx
+
+```ts
+import { headers } from 'next/headers';
+
+export default function Page() {
+  const headersList = headers();
+  const referer = headersList.get('referer');
+
+  return <div>Referer: {referer}</div>;
+}
+```
+
+**Good to know:**
+
+- `headers()` is a **[Dynamic Function](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions)** whose returned values cannot be known ahead of time. Using it in a layout or page will opt a route into **[dynamic rendering](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-rendering)** at request time.
+
+### [API Reference](#api-reference)
+
+```ts
+const headersList = headers();
+```
+
+#### [Parameters](#parameters)
+
+`headers` does not take any parameters.
+
+#### [Returns](#returns)
+
+`headers` returns a **read-only** [Web Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
+
+- [`Headers.entries()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/entries): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing to go through all key/value pairs contained in this object.
+- [`Headers.forEach()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/forEach): Executes a provided function once for each key/value pair in this `Headers` object.
+- [`Headers.get()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get): Returns a [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) sequence of all the values of a header within a `Headers` object with a given name.
+- [`Headers.has()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has): Returns a boolean stating whether a `Headers` object contains a certain header.
+- [`Headers.keys()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/keys): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing you to go through all keys of the key/value pairs contained in this object.
+- [`Headers.values()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/values): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing you to go through all values of the key/value pairs contained in this object.
+
+### [Examples](#examples)
+
+#### [Usage with Data Fetching](#usage-with-data-fetching)
+
+`headers()` can be used in combination with [Suspense for Data Fetching](/docs/app/building-your-application/data-fetching/fetching).
+
+app/page.js
+
+```ts
+import { headers } from 'next/headers';
+
+async function getUser() {
+  const headersInstance = headers();
+  const authorization = headersInstance.get('authorization');
+  // Forward the authorization header
+  const res = await fetch('...', {
+    headers: { authorization },
+  });
+  return res.json();
+}
+
+export default async function UserPage() {
+  const user = await getUser();
+  return <h1>{user.name}</h1>;
 }
 ```
