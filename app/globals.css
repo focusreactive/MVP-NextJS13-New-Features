@@ -185,10 +185,14 @@ ul ul li {
   list-style-type: circle;
 }
 
+ul {
+  width: 100%;
+}
+
 nav {
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
-  padding: 5px;
+  padding: 5px 20px;
 }
 
 :root {

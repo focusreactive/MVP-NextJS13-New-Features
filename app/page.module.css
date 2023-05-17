@@ -264,3 +264,8 @@
         transform: rotate(0deg);
     }
 }
+
+.navLogo {
+    padding: 0;
+    margin-left: auto;
+}

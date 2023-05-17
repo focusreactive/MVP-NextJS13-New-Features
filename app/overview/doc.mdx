@@ -1,19 +1,22 @@
 ## [The `app` Directory](#the-app-directory)
 
-**App Router** built on [React Server Components](/docs/getting-started/react-essentials#server-components), which supports shared layouts, nested routing, loading states, error handling, and more.
+### Key points:
 
-The App Router works in a new directory named `app`. The `app` directory works alongside the `pages` directory to allow for incremental adoption.
+- components inside `app` are React Server Components by default
+- fetch is cached by default
+- fetch data from anywhere: layout, page, component (can use async / await)
+- folders are used to define routes, files are used to create UI or API endpoint
+- no rerender for shared layouts - partial rendering
+- segments are wrapped in error boundary and suspense
+- new routes: parallel routes, intercepting routes
+- can use `pages` and `app` alongside with priority to `app`
 
-> **Good to know:** The App Router takes priority over the Pages Router. Routes across directories should not resolve to the same URL path and will cause a build-time error to prevent a conflict.
-
-By default, components inside `app` are [React Server Components](/docs/getting-started/react-essentials#server-components).
-
-## [Roles of Folders and Files](#roles-of-folders-and-files)
+### [Roles of Folders and Files](#roles-of-folders-and-files)
 
 - **Folders** are used to define routes. A route is a single path of nested folders, following the hierarchy from the **root folder** down to a final **leaf folder** that includes a `page.js` file.
 - **Files** are used to create UI that is shown for the route segment.
 
-## [File Conventions](#file-conventions)
+### [File Conventions](#file-conventions)
 
 - [page.js](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#pages): Create the unique UI of a route and make the path publicly accessible.
   - [route.js](https://nextjs.org/docs/app/building-your-application/routing/router-handlers): Create server-side API endpoints for a route.
@@ -24,7 +27,7 @@ By default, components inside `app` are [React Server Components](/docs/getting-
   - [global-error.js](https://nextjs.org/docs/app/building-your-application/routing/error-handling): Similar to `error.js`, but specifically for catching errors in the root `layout.js`.
 - [not-found.js](https://nextjs.org/docs/app/api-reference/file-conventions/not-found): Create UI to show when the [`notFound`](https://nextjs.org/docs/app/api-reference/functions/not-found) function is thrown within a route segment or when a URL is not matched by any route.
 
-## [Component Hierarchy](#component-hierarchy)
+### [Component Hierarchy](#component-hierarchy)
 
 - `layout.js`
 - `template.js`
@@ -38,13 +41,13 @@ In a nested route, the components of a segment will be nested **inside** the com
 
 ![Nested File Conventions Component Hierarchy](/assets/nested-file-conventions-component-hierarchy.avif)
 
-## [Colocation](#colocation)
+### [Colocation](#colocation)
 
 In addition to special files, you have the option to colocate your own files inside folders. For example, stylesheets, tests, components, and more.
 
 ![Component colocation inside the App Router](/assets/component-collocation.avif)
 
-## [Server-Centric Routing with Client-side Navigation](#server-centric-routing-with-client-side-navigation)
+### [Server-Centric Routing with Client-side Navigation](#server-centric-routing-with-client-side-navigation)
 
 The App Router uses **server-centric routing** to align with [Server Components](/docs/getting-started/react-essentials#server-components) and [data fetching on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching). With server-centric routing, the client does not have to download a route map and the same request for Server Components can be used to look up routes.
 
@@ -52,18 +55,18 @@ Although routing is server-centric, the router uses **client-side navigation** w
 
 Additionally, as users navigate around the app, the router will store the result of the React Server Component payload in an **in-memory client-side cache**. The cache is split by route segments which allows invalidation at any level and ensures consistency across [React's concurrent renders](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react).
 
-## [Partial Rendering](#partial-rendering)
+### [Partial Rendering](#partial-rendering)
 
 When navigating between sibling routes (e.g. `/dashboard/settings` and `/dashboard/analytics` below), Next.js will only fetch and render the layouts and pages in routes that change. It will **not** re-fetch or re-render anything above the segments in the subtree. This means that in routes that share a layout, the layout will be preserved when a user navigates between sibling pages.
 
 ![How partial rendering works](/assets/partial-rendering.avif)
 
-## [Advanced Routing Patterns](#advanced-routing-patterns)
+### [Advanced Routing Patterns](#advanced-routing-patterns)
 
 - [Parallel Routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes): Allow you to simultaneously show two or more pages in the same view that can be navigated independently. You can use them for split views that have their own sub-navigation. E.g. Dashboards.
 - [Intercepting Routes](https://nextjs.orghttps://nextjs.org/docs/app/building-your-application/routing/intercepting-routes): Allow you to intercept a route and show it in the context of another route. You can use these when keeping the context for the current page is important. E.g. Seeing all tasks while editing one task or expanding a photo in a feed.
 
-# Route Handlers
+### Route Handlers
 
 Route Handlers are defined in a [`route.js|ts` file](/docs/app/api-reference/file-conventions/route) inside the `app` directory:
 
@@ -155,140 +158,6 @@ export async function POST() {
 
 > **Note:** Previously, API Routes could have been used for use cases like handling form submissions. Route Handlers are likely not the solution for these uses cases. We will be recommending the use of [mutations](/docs/app/building-your-application/data-fetching/server-actions) for this when ready.
 
-## [Examples](#examples)
-
-### [Revalidating Static Data](#revalidating-static-data)
-
-You can [revalidate static data](https://beta.nextjs.org/docs/data-fetching/revalidating) fetches using the [`next.revalidate`](/docs/app/building-your-application/data-fetching/fetching#revalidating-data) option:
-
-app/items/route.ts
-
-```ts
-import { NextResponse } from 'next/server';
-
-export async function GET() {
-  const res = await fetch('https://data.mongodb-api.com/...', {
-    next: { revalidate: 60 }, // Revalidate every 60 seconds
-  });
-  const data = await res.json();
-
-  return NextResponse.json(data);
-}
-```
-
-Alternatively, you can use the [`revalidate` segment config option](/docs/app/api-reference/file-conventions/route-segment-config#revalidate):
-
-```ts
-export const revalidate = 60;
-```
-
-#### [Cookies](#cookies)
-
-This `cookies` instance is read-only. To set cookies, you need to return a new `Response` using the [`Set-Cookie`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie) header.
-
-app/api/route.ts
-
-```ts
-import { cookies } from 'next/headers';
-
-export async function GET(request: Request) {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token');
-
-  return new Response('Hello, Next.js!', {
-    status: 200,
-    headers: { 'Set-Cookie': `token=${token}` },
-  });
-}
-```
-
-#### [Headers](#headers)
-
-This `headers` instance is read-only. To set headers, you need to return a new `Response` with new `headers`.
-
-app/api/route.ts
-
-```ts
-import { headers } from 'next/headers';
-
-export async function GET(request: Request) {
-  const headersList = headers();
-  const referer = headersList.get('referer');
-
-  return new Response('Hello, Next.js!', {
-    status: 200,
-    headers: { referer: referer },
-  });
-}
-```
-
-### [Redirects](#redirects)
-
-app/api/route.ts
-
-```ts
-import { redirect } from 'next/navigation';
-
-export async function GET(request: Request) {
-  redirect('https://nextjs.org/');
-}
-```
-
-### [Dynamic Route Segments](#dynamic-route-segments)
-
-Route Handlers can use [Dynamic Segments](/docs/app/building-your-application/routing/defining-routes#dynamic-segments) to create request handlers from dynamic data.
-
-app/items/\[slug\]/route.js
-
-```ts
-export async function GET(
-  request: Request,
-  {
-    params,
-  }: {
-    params: { slug: string };
-  },
-) {
-  const slug = params.slug; // 'a', 'b', or 'c'
-}
-```
-
-<table><thead><tr><th>Route</th><th>Example URL</th><th><code>params</code></th></tr></thead><tbody><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/a</code></td><td><code>`{ slug: 'a' }`</code></td></tr><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/b</code></td><td><code>`{ slug: 'b' }`</code></td></tr><tr><td><code>app/items/[slug]/route.js</code></td><td><code>/items/c</code></td><td><code>`{ slug: 'c' }`</code></td></tr></tbody></table>
-
-### [Request Body](#request-body)
-
-You can read the `Request` body using the standard Web API methods:
-
-app/items/route.ts
-
-```ts
-import { NextResponse } from 'next/server';
-
-export async function POST(request: Request) {
-  const res = await request.json();
-  return NextResponse.json({ res });
-}
-```
-
-### [CORS](#cors)
-
-You can set CORS headers on a `Response` using the standard Web API methods:
-
-app/api/route.ts
-
-```ts
-export async function GET(request: Request) {
-  return new Response('Hello, Next.js!', {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
-}
-```
-
 ### [Edge and Node.js Runtimes](#edge-and-nodejs-runtimes)
 
 Route Handlers have an isomorphic Web API to support both Edge and Node.js runtimes seamlessly, including support for streaming. Since Route Handlers use the same route segment configuration as pages and layouts, they support long-awaited features like general-purpose [statically regenerated](/docs/app/building-your-application/data-fetching/revalidating) Route Handlers.
@@ -299,45 +168,9 @@ You can use the `runtime` segment config option to specify the runtime:
 export const runtime = 'edge'; // 'nodejs' is the default
 ```
 
-### [Non-UI Responses](#non-ui-responses)
-
-You can use Route Handlers to return non-UI content. Note that [`sitemap.xml`](/docs/app/api-reference/file-conventions/metadata#sitemap), [`robots.txt`](/docs/app/api-reference/file-conventions/metadata#robots=file), [`favicon.ico`](/docs/app/api-reference/file-conventions/metadata#app-icons), and [open graph images](/docs/app/api-reference/file-conventions/metadata#open-graph-images) all have built-in SEO support.
-
-app/rss.xml/route.ts
-
-```ts
-export async function GET() {
-  return new Response(`<?xml version="1.0" encoding="UTF-8" ?>
-    <rss version="2.0">
-
-    <channel>
-      <title>Next.js Documentation</title>
-      <link>https://nextjs.org/docs</link>
-      <description>The React Framework for the Web</description>
-    </channel>
-
-    </rss>`);
-}
-```
-
-### [Segment Config Options](#segment-config-options)
-
-Route Handlers use the same route segment configuration as pages and layouts.
-
-app/items/route.ts
-
-```ts
-export const dynamic = 'auto';
-export const dynamicParams = true;
-export const revalidate = false;
-export const fetchCache = 'auto';
-export const runtime = 'nodejs';
-export const preferredRegion = 'auto';
-```
-
 # New Functions
 
-## useSelectedLayoutSegment
+### useSelectedLayoutSegment
 
 `useSelectedLayoutSegment` is a **Client Component** hook that lets you read the active route segment **one level below** the Layout it is called from.
 
@@ -355,7 +188,7 @@ export default function ExampleClientComponent() {
 }
 ```
 
-### [Returns](#returns)
+#### [Returns](#returns)
 
 `useSelectedLayoutSegment` returns a string of the active segment or `null` if one doesn't exist.
 
@@ -437,11 +270,11 @@ export default function ExampleClientComponent() {
   </tbody>
 </table>
 
-## useSelectedLayoutSegments
+### useSelectedLayoutSegments
 
 `useSelectedLayoutSegments` is a **Client Component** hook that lets you read the active route segments below the Layout it is called from.
 
-### [Returns](#returns)
+#### [Returns](#returns)
 
 `useSelectedLayoutSegments` returns an array of strings containing the active segments one level down from the layout the hook was called from. Or an empty array if none exist.
 
@@ -512,7 +345,7 @@ export default function ExampleClientComponent() {
   </tbody>
 </table>
 
-## usePathname
+### usePathname
 
 `usePathname` is a **Client Component** hook that lets you read the current URL's **pathname**.
 
@@ -533,7 +366,7 @@ export default function ExampleClientComponent() {
 
 - `usePathname` can return `null` when a [fallback route](/docs/pages/building-your-application/data-fetching/get-static-paths#fallback-pages) is being rendered or when a `pages` directory page has been [automatically statically optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) by Next.js and the router is not ready.
 
-### [Returns](#returns)
+#### [Returns](#returns)
 
 <table>
   <thead>

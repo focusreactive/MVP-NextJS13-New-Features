@@ -15,6 +15,16 @@ const NavLink = ({
   const pathName = usePathname();
   const segment = useSelectedLayoutSegment();
 
+  if (!segment && href === 'https://nextjs.org/') {
+    return null;
+  } else if (href === 'https://nextjs.org/') {
+    return (
+      <Link href={href} className={styles.navLogo}>
+        {children}
+      </Link>
+    );
+  }
+
   if (
     (segment && (href.endsWith(segment) || href.includes(`/${segment}/`))) ||
     (!segment && href === '/')

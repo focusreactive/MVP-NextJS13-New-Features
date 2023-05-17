@@ -1,10 +1,12 @@
 import '@picocss/pico/css/pico.min.css';
 import './globals.css';
 import React from 'react';
+import Image from 'next/image';
 
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import NavLink from '@/components/NavLink/NavLink';
+import styles from './page.module.css';
 
 export const metadata = {
   title: 'Homepage layout',
@@ -56,8 +58,27 @@ export default function RootLayout({
                 </NavLink>
               </li>
               <li>
-                <NavLink href={'/api-routes'}>
-                  API Routes
+                <NavLink href={'/api-routes'}>API Routes</NavLink>
+              </li>
+              <li className={styles.navLogo}>
+                <NavLink href={'https://nextjs.org/'}>
+                  <Image
+                    className={styles.logo}
+                    src="/next.svg"
+                    alt="Next.js Logo"
+                    width={180}
+                    height={37}
+                    priority
+                  />
+                  <div className={styles.thirteen}>
+                    <Image
+                      src="/thirteen.svg"
+                      alt="13"
+                      width={40}
+                      height={31}
+                      priority
+                    />
+                  </div>
                 </NavLink>
               </li>
             </ul>
