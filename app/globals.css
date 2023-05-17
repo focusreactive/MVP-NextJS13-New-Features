@@ -186,6 +186,7 @@ ul ul li {
 }
 
 ul {
+  min-height: 75px;
   width: 100%;
 }
 

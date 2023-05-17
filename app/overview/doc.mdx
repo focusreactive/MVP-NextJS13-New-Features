@@ -10,6 +10,7 @@
 - segments are wrapped in error boundary and suspense
 - new routes: parallel routes, intercepting routes
 - can use `pages` and `app` alongside with priority to `app`
+- routing on server, navigation on client
 
 ### [Roles of Folders and Files](#roles-of-folders-and-files)
 
@@ -411,33 +412,11 @@ export default function ExampleClientComponent() {
   </tbody>
 </table>
 
-## [Examples](#examples)
-
-### [Do something in response to a route change](#do-something-in-response-to-a-route-change)
-
-app/example-client-component.tsx
-
-```ts
-'use client';
-
-import { usePathname, useSearchParams } from 'next/navigation';
-
-function ExampleClientComponent() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    // Do something here...
-  }, [pathname, searchParams]);
-}
-```
-
 # fetch
 
 Next.js extends the native [Web `fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to allow each request on the server to set its own persistent caching semantics.
 
-In the browser, the `cache` option indicates how a fetch request will interact with the _browser's_ HTTP cache. With this extension, `cache` indicates how a _server-side_ fetch request will interact with the framework's persistent HTTP cache.
-
-You can call `fetch` with `async` and `await` directly within Server Components.
+Can call `fetch` with `async` and `await` directly within Server Components.
 
 app/page.tsx
 
@@ -463,10 +442,6 @@ export default async function Page() {
 ```
 
 ## [`fetch(url, options)`](#fetchurl-options)
-
-Since Next.js extends the [Web `fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), you can use any of the [native options available](https://developer.mozilla.org/en-US/docs/Web/API/fetch#parameters).
-
-Further, Next.js polyfills `fetch` on both the client and the server, so you can use fetch in both [Server and Client Components](/docs/getting-started/react-essentials).
 
 ### [`options.cache`](#optionscache)
 
@@ -664,30 +639,3 @@ const headersList = headers();
 - [`Headers.has()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has): Returns a boolean stating whether a `Headers` object contains a certain header.
 - [`Headers.keys()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/keys): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing you to go through all keys of the key/value pairs contained in this object.
 - [`Headers.values()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/values): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing you to go through all values of the key/value pairs contained in this object.
-
-### [Examples](#examples)
-
-#### [Usage with Data Fetching](#usage-with-data-fetching)
-
-`headers()` can be used in combination with [Suspense for Data Fetching](/docs/app/building-your-application/data-fetching/fetching).
-
-app/page.js
-
-```ts
-import { headers } from 'next/headers';
-
-async function getUser() {
-  const headersInstance = headers();
-  const authorization = headersInstance.get('authorization');
-  // Forward the authorization header
-  const res = await fetch('...', {
-    headers: { authorization },
-  });
-  return res.json();
-}
-
-export default async function UserPage() {
-  const user = await getUser();
-  return <h1>{user.name}</h1>;
-}
-```
