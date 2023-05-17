@@ -25,12 +25,6 @@ export default async function RootLayout({
           <li>
             <NavLink href={'/static/config'}>Config</NavLink>
           </li>
-          <li>
-            <NavLink href={'/static/revalidate'}>Revalidate</NavLink>
-          </li>
-          <li>
-            <NavLink href={'/static/no-cache'}>No cache</NavLink>
-          </li>
         </ul>
       </nav>
 

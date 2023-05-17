@@ -26,7 +26,8 @@ const NavLink = ({
   }
 
   if (
-    (segment && (href.endsWith(segment) || href.includes(`/${segment}/`))) ||
+    (segment &&
+      (href.endsWith(`/${segment}`) || href.includes(`/${segment}/`))) ||
     (!segment && href === '/')
   ) {
     if (pathName === href) {
