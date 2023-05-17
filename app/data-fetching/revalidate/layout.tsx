@@ -22,6 +22,11 @@ export default async function RootLayout({
           <li>
             <NavLink href={`/data-fetching/revalidate/60`}>60</NavLink>
           </li>
+          <li>
+            <NavLink href={`/data-fetching/revalidate/on-demand`}>
+              On demand
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
