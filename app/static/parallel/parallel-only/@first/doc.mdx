@@ -1,12 +1,14 @@
-static/parallel/doubled/[id].tsx
+Dynamic route `[id]`, should be cached by default and static as static/simple but instead SSR is used
+
+dynamic route is nested in @left
 
 ```ts
+import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import NavLink from '@/components/NavLink/NavLink';
-
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic post',
+  title: 'Dynamic parallel only page',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
@@ -16,8 +18,8 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <article>
+        <BuildInfo />
         <h2>{post.title}</h2>
-        <div>ROOT</div>
         <p>{post.body}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
@@ -35,7 +37,7 @@ export default PostPage;
 export async function generateStaticParams() {
   const [posts] = await api.posts();
 
-  return posts.slice(0, 10).map((post) => {
+  return posts.slice(10, 20).map((post) => {
     return {
       id: String(post.id),
     };

@@ -1,5 +1,6 @@
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import Doc from './doc.mdx';
+import RevalidateButton from '@/components/RevalidateButton/RevalidateButon';
 
 const PostPage = async () => {
   const page = await fetch('https://gapi.storyblok.com/v1/api', {
@@ -27,6 +28,7 @@ const PostPage = async () => {
       <article>
         <BuildInfo />
         {JSON.stringify(data)}
+        <RevalidateButton />
       </article>
     </div>
   );

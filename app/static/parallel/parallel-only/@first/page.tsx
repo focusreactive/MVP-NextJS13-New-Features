@@ -1,9 +1,11 @@
+import Doc from './doc.mdx';
+
 export const metadata = {
-  title: 'Parallel page',
+  title: 'Left',
 };
 
-const HomePage = () => {
-  return <h1>FIRST</h1>;
+const Page = () => {
+  return <Doc />;
 };
 
-export default HomePage;
+export default Page;

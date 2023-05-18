@@ -1,30 +1,34 @@
-static/parallel/doubled/[id].tsx
+Dynamic route `[id]`
+
+the dynamic route is nested in @parallel, but there is also a dynamic route in the root folder so it is working as SSG now
+
+static/parallel/doubled/@first/[id].tsx
 
 ```ts
+import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import NavLink from '@/components/NavLink/NavLink';
-
 import { api } from '@/utils/api';
 
 export const metadata = {
-  title: 'Dynamic post',
+  title: 'Doubled dynamic page',
 };
 
 const PostPage = async ({ params }: { params: { id: string } }) => {
-  const [post] = await api.post(params.id);
+  const [user] = await api.user(params.id);
   const [image] = await api.images();
+  const site = user.website;
 
   return (
     <div>
       <article>
-        <h2>{post.title}</h2>
-        <div>ROOT</div>
-        <p>{post.body}</p>
+        <BuildInfo />
+        <h2>{user.name}</h2>
+        <div>FIRST</div>
+        <p>{user.username}</p>
         <div className="grid">
           <img src={image} alt="dog" width={400} />
         </div>
-        <NavLink href={`/users/${post.userId}`} className={'secondary'}>
-          Author Page
-        </NavLink>
+        {site && <NavLink href={user.website}>Site</NavLink>}
       </article>
     </div>
   );
@@ -35,7 +39,7 @@ export default PostPage;
 export async function generateStaticParams() {
   const [posts] = await api.posts();
 
-  return posts.slice(0, 10).map((post) => {
+  return posts.slice(10, 20).map((post) => {
     return {
       id: String(post.id),
     };
