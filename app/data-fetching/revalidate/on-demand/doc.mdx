@@ -3,6 +3,7 @@ import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 import Doc from './doc.mdx';
+import RevalidateButton from '@/components/RevalidateButton/RevalidateButon';
 
 export const metadata = {
   title: 'Dynamic revalidate page',
@@ -10,13 +11,14 @@ export const metadata = {
 
 const PostPage = async () => {
   const [post] = await api.post('99');
-  const [image] = await api.images({ next: { tags: ['new-tag'] } });
+  const [image] = await api.images();
 
   return (
     <div className="blog">
       <Doc />
       <article>
         <BuildInfo />
+        <RevalidateButton />
         <h2>{post.title}</h2>
         <p>{post.body}</p>
         <div className="grid">
@@ -31,4 +33,19 @@ const PostPage = async () => {
 };
 
 export default PostPage;
+```
+
+```ts
+import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
+
+import type { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const path = request.nextUrl.searchParams.get('path') || '/';
+
+  revalidatePath(path);
+
+  return NextResponse.json({ revalidated: true, now: Date.now() });
+}
 ```
