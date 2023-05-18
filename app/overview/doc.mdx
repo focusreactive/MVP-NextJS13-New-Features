@@ -17,6 +17,32 @@
 - **Folders** are used to define routes. A route is a single path of nested folders, following the hierarchy from the **root folder** down to a final **leaf folder** that includes a `page.js` file.
 - **Files** are used to create UI that is shown for the route segment.
 
+### Dynamic Routes
+
+<table><thead><tr><th>Route</th><th>Example URL</th><th><code>params</code></th></tr></thead><tbody><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/a</code></td><td><code>`{ slug: 'a' }`</code></td></tr><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/b</code></td><td><code>`{ slug: 'b' }`</code></td></tr><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/c</code></td><td><code>`{ slug: 'c' }`</code></td></tr></tbody></table>
+
+### Catch-all Segments
+
+<table><thead><tr><th>Route</th><th>Example URL</th><th><code>params</code></th></tr></thead><tbody><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/a</code></td><td><code>`{ slug: 'a' }`</code></td></tr><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/b</code></td><td><code>`{ slug: 'b' }`</code></td></tr><tr><td><code>app/blog/[slug]/page.js</code></td><td><code>/blog/c</code></td><td><code>`{ slug: 'c' }`</code></td></tr></tbody></table>
+
+### Optional Catch-all Segments
+
+<table><thead><tr><th>Route</th><th>Example URL</th><th><code>params</code></th></tr></thead><tbody><tr><td><code>app/shop/[[...slug]]/page.js</code></td><td><code>/shop</code></td><td><code>`{}`</code></td></tr><tr><td><code>app/shop/[[...slug]]/page.js</code></td><td><code>/shop/a</code></td><td><code>`{ slug: ['a'] }`</code></td></tr><tr><td><code>app/shop/[[...slug]]/page.js</code></td><td><code>/shop/a/b</code></td><td><code>`{ slug: ['a', 'b'] }`</code></td></tr><tr><td><code>app/shop/[[...slug]]/page.js</code></td><td><code>/shop/a/b/c</code></td><td><code>`{ slug: ['a', 'b', 'c'] }`</code></td></tr></tbody></table>
+
+# Route Groups
+
+The hierarchy of the `app` folder maps directly to URL paths. However, it’s possible to break out of this pattern by creating a **route group**. Route groups can be used to:
+
+- Organize routes without affecting the URL structure.
+- Opting-in specific route segments into a [layout](/docs/app/building-your-application/routing/pages-and-layouts).
+- Create multiple [root layouts](/docs/app/building-your-application/routing/pages-and-layouts#root-layout) by splitting your application.
+
+![](/assets/route-group-organisation.avif)
+
+Even though routes inside `(marketing)` and `(shop)` share the same URL hierarchy, you can create a different layout for each group by adding a `layout.js` file inside their folders.
+
+![](/assets/route-group-multiple-layouts.avif)
+
 ### [File Conventions](#file-conventions)
 
 - [page.js](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#pages): Create the unique UI of a route and make the path publicly accessible.
