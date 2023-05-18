@@ -1,28 +1,33 @@
 ```ts
-'use client';
-
-import { useEffect, useState } from 'react';
-
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import Doc from './doc.mdx';
 
 const PostPage = async () => {
-  const [state, setState] = useState({ random: '' });
+  const page = await fetch('https://gapi.storyblok.com/v1/api', {
+    method: 'post',
+    headers: { token: 'BjrSi2XTl43hcISQpKSwxgtt', version: 'draft' },
+    body: JSON.stringify({
+      query: `query {
+        DynamicpageItem(id: "308604460") {
+        name
+        content {
+           _uid
+           component
+           components
+        }
+      }
+    }`,
+    }),
+  });
 
-  useEffect(() => {
-    fetch(`${window.location.origin}/api/check-post`, {
-      method: 'POST',
-    })
-      .then((r) => r.json())
-      .then(setState);
-  }, []);
+  const data = await page.json();
 
   return (
     <div className="blog">
       <Doc />
       <article>
         <BuildInfo />
-        <strong>DATA FROM SERVER {state?.random}</strong>
+        {JSON.stringify(data)}
       </article>
     </div>
   );

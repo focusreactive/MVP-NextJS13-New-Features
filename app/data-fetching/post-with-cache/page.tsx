@@ -1,62 +1,33 @@
-'use client';
-import { cache } from 'react';
-import { useEffect, useState } from 'react';
-
 import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import Doc from './doc.mdx';
 
-const getData = cache(async () =>
-  fetch('https://countries.trevorblades.com/', {
-    method: 'POST',
-    cache: 'force-cache',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      query: `query GetCountry {
-    country(code: "BR") {
-      name
-      native
-      capital
-      emoji
-      currency
-      languages {
-        code
-        name
-      }
-    }
-  }`,
-    }),
-  }).then((r) => r.json()),
-);
-
 const PostPage = async () => {
-  const [state, setState] = useState({
-    data: {
-      country: {
-        name: '',
-        native: '',
-        capital: '',
-        emoji: '',
-        currency: '',
-        languages: [
-          {
-            code: '',
-            name: '',
-          },
-        ],
-      },
-    },
+  const page = await fetch('https://gapi.storyblok.com/v1/api', {
+    cache: 'force-cache',
+    method: 'post',
+    headers: { token: 'BjrSi2XTl43hcISQpKSwxgtt', version: 'draft' },
+    body: JSON.stringify({
+      query: `query {
+        DynamicpageItem(id: "308604460") {
+        name
+        content {
+           _uid
+           component
+           components
+        }
+      }
+    }`,
+    }),
   });
 
-  useEffect(() => {
-    getData().then(setState);
-  }, []);
+  const data = await page.json();
 
   return (
     <div className="blog">
       <Doc />
       <article>
         <BuildInfo />
-        <strong>Country name {state?.data.country.name}</strong>
+        {JSON.stringify(data)}
       </article>
     </div>
   );
