@@ -27,7 +27,7 @@ const PostPage = async () => {
       <Doc />
       <article>
         <BuildInfo />
-        {JSON.stringify(data)}
+        <pre>{JSON.stringify(data, null, 2)}</pre>
         <RevalidateButton />
       </article>
     </div>
