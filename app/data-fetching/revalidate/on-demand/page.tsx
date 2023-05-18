@@ -9,8 +9,8 @@ export const metadata = {
 };
 
 const PostPage = async () => {
-  const [post] = await api.post(String(Math.round(Math.random() * 100)));
-  const [image] = await api.images({ cache: 'no-store' });
+  const [post] = await api.post('99');
+  const [image] = await api.images();
 
   return (
     <div className="blog">
