@@ -3,11 +3,7 @@ export const metadata = {
 };
 
 const Page = () => {
-  return (
-    <div className={'rerender-indicator'}>
-      <h1>Examples with parallel routes</h1>
-    </div>
-  );
+  return <h1>Examples with parallel routes</h1>;
 };
 
 export default Page;

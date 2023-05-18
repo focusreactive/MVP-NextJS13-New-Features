@@ -1,3 +1,4 @@
+import BuildInfo from '@/components/BuildInfo/BuildInfo';
 import NavLink from '@/components/NavLink/NavLink';
 import { api } from '@/utils/api';
 
@@ -12,6 +13,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <article>
+        <BuildInfo />
         <h2>{post.title}</h2>
         <div>ROOT</div>
         <p>{post.body}</p>

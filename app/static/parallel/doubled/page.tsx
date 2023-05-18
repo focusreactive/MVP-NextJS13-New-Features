@@ -5,11 +5,7 @@ export const metadata = {
 };
 
 const Page = () => {
-  return (
-    <div className={'rerender-indicator'}>
-      <Doc />
-    </div>
-  );
+  return <Doc />;
 };
 
 export default Page;
