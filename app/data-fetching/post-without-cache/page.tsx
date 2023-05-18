@@ -3,7 +3,7 @@ import Doc from './doc.mdx';
 
 const PostPage = async () => {
   const page = await fetch('https://gapi.storyblok.com/v1/api', {
-    cache: 'force-cache',
+    cache: 'no-cache',
     method: 'post',
     headers: { token: 'BjrSi2XTl43hcISQpKSwxgtt', version: 'draft' },
     body: JSON.stringify({
