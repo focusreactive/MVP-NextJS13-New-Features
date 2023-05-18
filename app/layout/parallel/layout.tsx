@@ -34,7 +34,7 @@ export default async function RootLayout({
 
       <section className="main-container">
         <div className="examples">{examples}</div>
-        <div className="docs" style={{ fontSize: 14 }}>
+        <div className="blog" style={{ fontSize: 14 }}>
           {docs}
         </div>
       </section>

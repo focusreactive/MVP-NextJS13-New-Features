@@ -522,55 +522,9 @@ The `cookies` function allows you to read the HTTP incoming request cookies from
 
 ## [`cookies().get(name)`](#cookiesgetname)
 
-A method that takes a cookie name and returns an object with name and value. If a cookie with `name` isn't found, it returns `undefined`. If multiple cookies match, it will only return the first match.
-
-app/page.js
-
-```ts
-import { cookies } from 'next/headers';
-
-export default function Page() {
-  const cookieStore = cookies();
-  const theme = cookieStore.get('theme');
-  return '...';
-}
-```
-
 ## [`cookies().getAll()`](#cookiesgetall)
 
-A method that is similar to `get`, but returns a list of all the cookies with a matching `name`. If `name` is unspecified, it returns all the available cookies.
-
-app/page.js
-
-```ts
-import { cookies } from 'next/headers';
-
-export default function Page() {
-  const cookieStore = cookies();
-  return cookieStore.getAll().map((cookie) => (
-    <div key={cookie.name}>
-      <p>Name: {cookie.name}</p>
-      <p>Value: {cookie.value}</p>
-    </div>
-  ));
-}
-```
-
 ## [`cookies().has(name)`](#cookieshasname)
-
-A method that takes a cookie name and returns a `boolean` based on if the cookie exists (`true`) or not (`false`).
-
-app/page.js
-
-```ts
-import { cookies } from 'next/headers';
-
-export default function Page() {
-  const cookiesList = cookies();
-  const hasCookie = cookiesList.has('theme');
-  return '...';
-}
-```
 
 ## [`cookies().set(name, value, options)`](#cookiessetname-value-options)
 
@@ -619,19 +573,7 @@ export default function Page() {
 
 - `headers()` is a **[Dynamic Function](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#using-dynamic-functions)** whose returned values cannot be known ahead of time. Using it in a layout or page will opt a route into **[dynamic rendering](/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-rendering)** at request time.
 
-### [API Reference](#api-reference)
-
-```ts
-const headersList = headers();
-```
-
-#### [Parameters](#parameters)
-
-`headers` does not take any parameters.
-
 #### [Returns](#returns)
-
-`headers` returns a **read-only** [Web Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
 
 - [`Headers.entries()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/entries): Returns an [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) allowing to go through all key/value pairs contained in this object.
 - [`Headers.forEach()`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/forEach): Executes a provided function once for each key/value pair in this `Headers` object.

@@ -8,6 +8,8 @@ export const metadata = {
   title: 'Dynamic no cache page',
 };
 
+export const dynamic = 'force-static';
+
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const [post] = await api.post(params.id);
   const [image] = await api.images({ cache: 'no-cache' });

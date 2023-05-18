@@ -11,7 +11,7 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
   const [image] = await api.images();
 
   return (
-    <div>
+    <div className="blog">
       <article>
         <BuildInfo />
         <h2>{post.title}</h2>

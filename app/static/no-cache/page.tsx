@@ -1,15 +1,11 @@
 import Doc from './doc.mdx';
 
 export const metadata = {
-  title: 'Default static page',
+  title: 'No cache page',
 };
 
 const Page = () => {
-  return (
-    <div className="blog">
-      <Doc />
-    </div>
-  );
+  return <Doc />;
 };
 
 export default Page;
