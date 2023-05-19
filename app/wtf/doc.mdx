@@ -1,3 +1,25 @@
+Mistakes in docs
+[no props](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment)
+[with props](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#useselectedlayoutsegments)
+
+---
+
+- Using the [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) [Pages](/docs/app/api-reference/file-conventions/page) prop will opt the page into dynamic rendering at request time.
+
+---
+
+unstable cache
+
+---
+
+build information can show it's static when it's actually SSR, `no-cache`, `no-store` can make a page SSR even with `force-static`
+
+---
+
+POST is cached by default
+
+---
+
 [Not-found page does not work in next.js 13](https://stackoverflow.com/questions/75302340/not-found-page-does-not-work-in-next-js-13)
 
 app/layout/[...not_found]/page.tsx
@@ -51,23 +73,3 @@ export default function NotFound() {
 `not-found.js` components do not accept any props.
 
 ---
-
-Mistakes in docs
-[no props](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment)
-[with props](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#useselectedlayoutsegments)
-
----
-
-- Using the [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) [Pages](/docs/app/api-reference/file-conventions/page) prop will opt the page into dynamic rendering at request time.
-
----
-
-unstable cache
-
----
-
-build information can show it's static when it's actually SSR
-
----
-
-POST is cached by default
