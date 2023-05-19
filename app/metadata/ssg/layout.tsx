@@ -15,7 +15,7 @@ const Layout = ({ children }: PropsWithChildren) => {
     <div>
       <hr />
 
-      <ul>
+      <ul className={'nav'}>
         <li>
           <NavLink href={'/metadata/ssg/page-1'}>Page 1</NavLink>
         </li>
