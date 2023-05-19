@@ -4,7 +4,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 export const metadata = {
-  title: 'Static layout',
+  title: 'WTF layout',
 };
 
 export default async function RootLayout({
@@ -17,13 +17,16 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <NavLink href={'/static/default'}>Default</NavLink>
+            <NavLink href={'/wtf/default'}>Default</NavLink>
           </li>
           <li>
-            <NavLink href={'/static/config'}>Config</NavLink>
+            <NavLink href={'/wtf/parallel'}>Parallel</NavLink>
           </li>
           <li>
-            <NavLink href={'/static/no-cache'}>No cache</NavLink>
+            <NavLink href={'/wtf/config'}>Config</NavLink>
+          </li>
+          <li>
+            <NavLink href={'/wtf/no-cache'}>No cache</NavLink>
           </li>
         </ul>
       </nav>
