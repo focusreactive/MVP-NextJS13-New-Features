@@ -6,10 +6,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateStaticParams() {
-  return [{ segment: 'page-1' }, { segment: 'page-2' }, { segment: 'page-3' }];
-}
-
 export async function generateMetadata(
   { searchParams }: Props,
   parent: ResolvingMetadata,

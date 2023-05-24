@@ -52,6 +52,9 @@ export const logout = async () => {
 ```tsx
 'use client';
 
+import { register } from '@/app/server-actions/client/_actions/register';
+import { logout } from '@/app/server-actions/client/_actions/logout';
+
 export const Form = ({ user }: { user: { name: string } }) => {
   if (!user?.name) {
     return (

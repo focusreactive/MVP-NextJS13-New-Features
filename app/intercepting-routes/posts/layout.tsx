@@ -7,7 +7,6 @@ const PostsLayout = async ({
   return (
     <div>
       {children}
-
       {modal}
     </div>
   );

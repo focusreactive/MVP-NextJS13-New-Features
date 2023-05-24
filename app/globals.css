@@ -210,6 +210,10 @@ body {
   padding: 10px 14px;
 }
 
+ul ul {
+  padding-left: 40px;
+}
+
 ul ul li {
   list-style-type: circle;
 }

@@ -23,7 +23,7 @@ const Page = () => {
           </li>
           <li>
             File-based Metadata. We can generate <code>robots.txt</code>,{' '}
-            <code>sitemap</code> and images dynamically, defining them in
+            <code>sitemap.xml</code> and images dynamically, defining them in
             separate files. See: <Link href={'/metadata/sitemap'}>Sitemap</Link>
             , <Link href={'/metadata/robots'}>Robots</Link> and{' '}
             <Link href={'/metadata/image-generation'}>Image Generation</Link>

@@ -1,3 +1,21 @@
+`app/intercepting-routes/posts/layout.tsx`
+
+```tsx
+const PostsLayout = async ({
+  children,
+  modal,
+}: React.PropsWithChildren & { modal: React.ReactNode }) => {
+  return (
+    <div>
+      {children}
+      {modal}
+    </div>
+  );
+};
+```
+
+#
+
 `app/intercepting-routes/users/[id]/page.tsx`
 
 ```tsx
