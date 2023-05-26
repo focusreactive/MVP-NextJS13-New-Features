@@ -7,7 +7,7 @@ import type { PropsWithChildren } from 'react';
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className={'content-container'}>
-      <h1>Metadata examples</h1>
+      <h1>Metadata</h1>
       <p>
         <Link
           target={'_blank'}

@@ -24,6 +24,18 @@ const Page = () => {
         >
           Unstable (alpha)
         </Link>
+
+        <br />
+        <br />
+
+        <Link
+          target={'_blank'}
+          href={
+            'https://nextjs.org/docs/app/api-reference/functions/revalidateTag#parameters'
+          }
+        >
+          Revalidate Tag
+        </Link>
       </p>
 
       <div>

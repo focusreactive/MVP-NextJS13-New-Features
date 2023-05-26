@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 const Page = () => {
   return (
     <div>

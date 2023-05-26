@@ -10,7 +10,9 @@ const Layout = ({ children }: PropsWithChildren) => {
       <p className={'nav'}>
         <NavLink href={'/server-actions/server'}>Server-only form</NavLink>
         <NavLink href={'/server-actions/client'}>Client form</NavLink>
-        <NavLink href={'/server-actions/client-optimistic'}>Client Optimistic</NavLink>
+        <NavLink href={'/server-actions/client-optimistic'}>
+          Client Optimistic
+        </NavLink>
       </p>
 
       <hr />
