@@ -26,7 +26,7 @@ export default async function RootLayout({
 
             return (
               <li key={id}>
-                <NavLink href={`/static/parallel/parallel-only/${id}`}>
+                <NavLink href={`/wtf/parallel/parallel-only/${id}`}>
                   {id}
                 </NavLink>
               </li>

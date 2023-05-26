@@ -17,16 +17,7 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <NavLink href={'/wtf/default'}>Default</NavLink>
-          </li>
-          <li>
             <NavLink href={'/wtf/parallel'}>Parallel</NavLink>
-          </li>
-          <li>
-            <NavLink href={'/wtf/config'}>Config</NavLink>
-          </li>
-          <li>
-            <NavLink href={'/wtf/no-cache'}>No cache</NavLink>
           </li>
         </ul>
       </nav>

@@ -17,12 +17,12 @@ export default async function RootLayout({
       <nav>
         <ul>
           <li>
-            <NavLink href={'/static/parallel/parallel-only'}>
+            <NavLink href={'/wtf/parallel/parallel-only'}>
               Parallel only
             </NavLink>
           </li>
           <li>
-            <NavLink href={'/static/parallel/doubled'}>Doubled</NavLink>
+            <NavLink href={'/wtf/parallel/doubled'}>Doubled</NavLink>
           </li>
         </ul>
       </nav>
