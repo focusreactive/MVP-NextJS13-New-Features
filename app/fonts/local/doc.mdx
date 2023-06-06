@@ -1,0 +1,30 @@
+```tsx
+import localFont from 'next/font/local';
+
+const righteousRegular = localFont({
+  src: './fonts/Righteous-Regular.ttf',
+  display: 'swap',
+});
+
+// const righteousRegular = localFont({
+//   src: [
+//     {
+//       path: '../../../public/fonts/Righteous-Regular.ttf',
+//       style: 'normal',
+//       weight: '400',
+//     },
+//   ],
+//   display: 'swap',
+// });
+
+const Page = () => {
+  return (
+    <div>
+      <div className={righteousRegular.className}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pulvinar dui
+        eget augue lacinia, sed feugiat lorem sodales.
+      </div>
+    </div>
+  );
+};
+```

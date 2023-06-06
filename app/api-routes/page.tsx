@@ -27,8 +27,8 @@ const Page = () => {
       </p>
       <ul>
         <li>
-          There's can't be either <code>route.ts</code> or <code>page.ts</code>{' '}
-          in the same time
+          Segment can contain either <code>route.ts</code> or{' '}
+          <code>page.ts</code>, but not both
         </li>
         <li>
           Available methods: <code>GET</code>, <code>POST</code>,{' '}
