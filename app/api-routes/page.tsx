@@ -10,6 +10,7 @@ const Page = () => {
           href={
             'https://nextjs.org/docs/app/building-your-application/routing/router-handlers'
           }
+          target={'_blank'}
         >
           Docs
         </Link>

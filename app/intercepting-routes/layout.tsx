@@ -12,6 +12,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           href={
             'https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes'
           }
+          target={'_blank'}
         >
           Docs
         </Link>
