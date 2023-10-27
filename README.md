@@ -106,6 +106,7 @@ This project was created at **FocusReactive** - the expert consultancy for the m
 
 If you're looking for expertise in headless CMS, NextJS, or eCommerce, get in touch with **FocusReactive** today. Visit our website at [focusreactive.com](https://focusreactive.com/) to learn more about how we can help you accelerate your business growth.
 
-![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/e159cff0-0db0-453d-92bc-e221a7b30b3e)
+![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/90f4fb25-1010-4693-a822-df4a352279e1)
+
 
 2023
