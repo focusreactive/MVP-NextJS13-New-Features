@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MVP-Next13-Readme
+
+This repository contains a MVP project for testing new features in NextJS v13.
+
+## Project Description
+
+The purpose of this project is to explore and test the latest features of NextJS. It is a web application consisting of different sections, each dedicated to a specific NextJS 13 feature. The menu navigation allows easy switching between sections, and each section includes detailed descriptions and documentation related to the implemented feature.
+
+![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/3991d5a3-8b52-4376-a354-ad9bc36b678e)
+
 
 ## Getting Started
 
-First, run the development server:
+To run the development server, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+1. Install dependencies by running the command:
+
+```
+npm install
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Start the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000](http://localhost:3000/) in your browser to see the application.
 
-## Learn More
+## Features Explored
 
-To learn more about Next.js, take a look at the following resources:
+The project explores the following features:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### App Router Overview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+https://nextjs13-mvp.vercel.app/overview
 
-## Deploy on Vercel
+Learn about the new app router in NextJS 13, including its key points and advantages.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://nextjs13-mvp.vercel.app/layout
+
+Understand how layouts are used to define shared user interfaces for nested routes. Learn about layout nesting, state preservation, and avoiding unnecessary re-renders.
+
+### Data Fetching
+
+https://nextjs13-mvp.vercel.app/data-fetching
+
+Explore the new data fetching model being developed by the React team. Note that this feature is still in development and may not be stable yet.
+
+### Static and Dynamic Rendering
+
+https://nextjs13-mvp.vercel.app/static
+
+Learn about the differences between static and dynamic rendering in Next.js. Understand when to use each approach and their implications.
+
+### Metadata
+
+https://nextjs13-mvp.vercel.app/metadata
+
+Discover how to define metadata in layouts and pages. Explore advanced features such as generating robots.txt, sitemap.xml, and dynamic images.
+
+### Preview URL (Draft Mode)
+
+https://nextjs13-mvp.vercel.app/preview
+
+Learn how to enable draft mode for previewing URLs before they are published.
+
+### Server Actions
+
+https://nextjs13-mvp.vercel.app/rsc
+
+Understand how server actions work in NextJS 13. Learn about calling server functions, implementing optimistic updates, and revalidating pages.
+
+### Intercepting Routes
+
+https://nextjs13-mvp.vercel.app/intercepting-routes/posts
+
+Explore how to intercept routes in NextJS 13 and handle different HTTP methods. Learn about dynamic API routes and their configuration.
+
+### API Routes
+
+https://nextjs13-mvp.vercel.app/api-routes
+
+### Fonts
+
+https://nextjs13-mvp.vercel.app/fonts
+
+Learn how to use custom fonts in your NextJS 13 project.
+
+## Credits
+
+Licensed under the MIT License.
+
+This project was created at FocusReactive ⚛ 2023
+
+![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/c9994b69-40be-42e4-a8fb-301dfbde0499)
