@@ -6,7 +6,7 @@ This repository contains a MVP project for testing new features in NextJS v13.
 
 The purpose of this project is to explore and test the latest features of NextJS. It is a web application consisting of different sections, each dedicated to a specific NextJS 13 feature. The menu navigation allows easy switching between sections, and each section includes detailed descriptions and documentation related to the implemented feature.
 
-![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/3991d5a3-8b52-4376-a354-ad9bc36b678e)
+![image](https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/ce008274-92af-42a1-a4ad-9cb08a19e935)
 
 
 ## Getting Started
