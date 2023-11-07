@@ -93,8 +93,6 @@ Learn how to use custom fonts in your NextJS 13 project.
 
 ## Credits
 
-Licensed under the MIT License.
-
 This project was created at **FocusReactive** - the expert consultancy for the modern web. We specialize in helping clients beat the competition and accelerate business growth. With a deep expertise in headless CMS, NextJS, and eCommerce, we deliver cutting-edge solutions that prioritize your business goals.
 
 ### Our Expertise
