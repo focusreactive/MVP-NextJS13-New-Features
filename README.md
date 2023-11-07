@@ -108,4 +108,7 @@ If you're looking for expertise in headless CMS, NextJS, or eCommerce, get in to
 
 <image src="https://github.com/focusreactive/MVP-NextJS13-New-Features/assets/14885189/7c67e385-3f79-43e3-ba27-bada1ebddf03" width="500px"/>
 
-2023
+
+---
+
+*This project is licensed under the MIT License. © 2023 FocusReactive.*
